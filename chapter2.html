@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 2 ・・逕滓・AI縺ｮ繧｢繝ｼ繧ｭ繝・け繝√Ε</title>
+<title>Chapter 2 ｜ 生成AIのアーキテクチャ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
@@ -27,24 +27,24 @@
   <div class="hero-bg-text">Architecture</div>
   <div class="hero-inner">
     <div class="eng">Chapter 02</div>
-    <h1>逕滓・AI縺ｮ繧｢繝ｼ繧ｭ繝・け繝√Ε</h1>
-    <p>逕ｻ蜒上ｒ隕九ｋAI縺九ｉ縲∵枚遶繧貞卸繧帰I縺ｾ縺ｧ縲・br>縺ｲ縺ｨ縺､縺ｮ謚陦薙′谺｡縺ｮ謚陦薙ｒ逕溘・縲・ｲ蛹悶・騾｣骼悶ｒ縺溘←繧翫∪縺吶・/p>
+    <h1>生成AIのアーキテクチャ</h1>
+    <p>画像を見るAIから、文章を創るAIまで。<br>ひとつの技術が次の技術を生む、進化の連鎖をたどります。</p>
   </div>
 </section>
 
 <div class="section">
 
   <div class="chara-block reveal">
-    <div class="chara-img"><img src="assets/character-bust.png" alt="繝ｦ繝斐ユ繝ｫ蜈育函"></div>
+    <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
     <div class="speech">
-      <div class="name">繝ｦ繝斐ユ繝ｫ蜈育函</div>
-      縺薙・遶縺ｮ繧ｭ繝ｼ繝ｯ繝ｼ繝峨・<strong>縲梧隼蝟・・騾｣骼悶・/strong>縲・NN縺後≠縺｣縺ｦ縲√◎縺ｮ髯千阜縺九ｉRNN縺後√＆繧峨↓縺昴・髯千阜縺九ｉ<span class="term">Transformer<span class="tip">繝医Λ繝ｳ繧ｹ繝輔か繝ｼ繝槭・・壽枚遶蜈ｨ菴薙ｒ荳蠎ｦ縺ｫ隕九ｋ縲∫樟莉｣AI縺ｮ荳ｭ譬ｸ縺ｨ縺ｪ繧区ｧ矩</span></span>縺檎函縺ｾ繧後∪縺吶ゅ後〒縺阪◆・√〒繧や雷笳九′雜ｳ繧翫↑縺・阪・郢ｰ繧願ｿ斐＠縺後・ｲ蛹悶ｒ逕溘・繧薙〒縺吶・
+      <div class="name">ユピテル先生</div>
+      この章のキーワードは<strong>「改善の連鎖」</strong>。CNNがあって、その限界からRNNが、さらにその限界から<span class="term">Transformer<span class="tip">トランスフォーマー：文章全体を一度に見る、現代AIの中核となる構造</span></span>が生まれます。「できた！でも○○が足りない」の繰り返しが、進化を生むんです。
     </div>
   </div>
 
-  <!-- 蜈ｨ菴薙・繝・・ -->
+  <!-- 全体マップ -->
   <div class="content-block reveal">
-    <h3><span class="idx">00</span> 騾ｲ蛹悶・蝨ｰ蝗ｳ</h3>
+    <h3><span class="idx">00</span> 進化の地図</h3>
     <div class="flow">
       <span class="step">CNN</span><span class="arrow">&rarr;</span>
       <span class="step">RNN / LSTM</span><span class="arrow">&rarr;</span>
@@ -52,130 +52,130 @@
       <span class="step">GPT / BERT</span><span class="arrow">&rarr;</span>
       <span class="step">ChatGPT</span>
     </div>
-    <p class="lead" style="text-align:center;">縺昴＠縺ｦVAE繝ｻGAN縺ｨ縺・≧縲悟卸繧帰I縲阪・邉ｻ隴懊ｂ縲√％縺ｮ豬√ｌ縺ｨ蜷域ｵ√＠縺ｦ縺・″縺ｾ縺吶・/p>
+    <p class="lead" style="text-align:center;">そしてVAE・GANという「創るAI」の系譜も、この流れと合流していきます。</p>
   </div>
 
   <!-- 1. CNN -->
   <div class="content-block reveal">
-    <h3><span class="idx">01</span> CNN 窶・逕ｻ蜒上ｒ隕九ｋAI</h3>
-    <p class="lead"><span class="term">CNN<span class="tip">逡ｳ縺ｿ霎ｼ縺ｿ繝九Η繝ｼ繝ｩ繝ｫ繝阪ャ繝医Ρ繝ｼ繧ｯ縲ら判蜒剰ｪ崎ｭ倥↓迚ｹ蛹・/span></span>縺ｯ縲∬勠逵ｼ髀｡・医ヵ繧｣繝ｫ繧ｿ繝ｼ・峨〒逕ｻ蜒上・髫・・ｒ隱ｿ縺ｹ縲∫ｷ壹ｄ隗偵→縺・▲縺溷ｱ謇逧・↑繝代ち繝ｼ繝ｳ繧定ｦ九▽縺代※縺・￥莉慕ｵ・∩縺ｧ縺吶・/p>
+    <h3><span class="idx">01</span> CNN — 画像を見るAI</h3>
+    <p class="lead"><span class="term">CNN<span class="tip">畳み込みニューラルネットワーク。画像認識に特化</span></span>は、虫眼鏡（フィルター）で画像の隅々を調べ、線や角といった局所的なパターンを見つけていく仕組みです。</p>
     <div class="chara-block right">
-      <div class="chara-img"><img src="assets/character-bust.png" alt="繝ｦ繝斐ユ繝ｫ蜈育函"></div>
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
       <div class="speech">
-        <div class="name">縺ゅ↑縺溘・豌励▼縺・/div>
-        縲梧｣ｮ繧定ｦ九ｋ蜑阪↓譛ｨ繧定ｦ九ｋ諢溘§縲坂披斐∪縺輔↓縺昴ｌ縲ょｰ上＆縺ｪ繝代・繝・°繧蛾・↓縲√□繧薙□繧捺歓雎｡逧・↑迚ｹ蠕ｴ縺ｸ縺ｨ遨阪∩荳翫￡縲∵怙蠕後↓繝九Η繝ｼ繝ｩ繝ｫ繝阪ャ繝医Ρ繝ｼ繧ｯ縺檎炊隗｣縺励ｄ縺吶＞蠖｢縺ｾ縺ｧ蝨ｧ邵ｮ縺励※縺・″縺ｾ縺吶・
+        <div class="name">あなたの気づき</div>
+        「森を見る前に木を見る感じ」——まさにそれ。小さなパーツから順に、だんだん抽象的な特徴へと積み上げ、最後にニューラルネットワークが理解しやすい形まで圧縮していきます。
       </div>
     </div>
     <div class="flow">
-      <span class="step">逡ｳ縺ｿ霎ｼ縺ｿ螻､</span><span class="arrow">&rarr;</span>
-      <span class="step">繝励・繝ｪ繝ｳ繧ｰ螻､・亥悸邵ｮ・・/span><span class="arrow">&rarr;</span>
-      <span class="step">蜈ｨ邨仙粋螻､・亥愛譁ｭ・・/span>
+      <span class="step">畳み込み層</span><span class="arrow">&rarr;</span>
+      <span class="step">プーリング層（圧縮）</span><span class="arrow">&rarr;</span>
+      <span class="step">全結合層（判断）</span>
     </div>
   </div>
 
   <!-- 2. RNN -->
   <div class="content-block reveal">
-    <h3><span class="idx">02</span> RNN / LSTM 窶・險俶・繧呈戟縺､AI</h3>
-    <p class="lead"><span class="term">RNN<span class="tip">蜀榊ｸｰ蝙九ル繝･繝ｼ繝ｩ繝ｫ繝阪ャ繝医Ρ繝ｼ繧ｯ縲よ凾邉ｻ蛻励・譁・ｫ縺ｫ迚ｹ蛹・/span></span>縺ｯ縲∝燕縺ｮ險俶・繧貞ｼ輔″縺壹ｊ縺ｪ縺後ｉ鬆・分縺ｫ蜃ｦ逅・＠縺ｾ縺吶りｪｭ譖ｸ縺ｧ蜑阪・繝壹・繧ｸ繧定ｦ壹∴縺ｦ縺・ｋ縺九ｉ迚ｩ隱槭′蛻・°繧九√≠縺ｮ諢溯ｦ壹〒縺吶・/p>
+    <h3><span class="idx">02</span> RNN / LSTM — 記憶を持つAI</h3>
+    <p class="lead"><span class="term">RNN<span class="tip">再帰型ニューラルネットワーク。時系列・文章に特化</span></span>は、前の記憶を引きずりながら順番に処理します。読書で前のページを覚えているから物語が分かる、あの感覚です。</p>
     <div class="cards c3">
-      <div class="mini-card acc-teal"><div class="mc-label">RNN莉･蜑・/div><h4>險俶・縺ｪ縺・/h4><p>豈主屓縺ｶ縺｣縺､縺第悽逡ｪ縲ょ燕繧貞ｮ悟・縺ｫ蠢倥ｌ繧九・縺ｧ譁・ｫ縺梧桶縺医↑縺・/p></div>
-      <div class="mini-card acc-teal"><div class="mc-label">RNN / LSTM</div><h4>遏ｭ譛溯ｨ俶・</h4><p>逶ｴ蜑阪・隕壹∴繧九′縲・聞縺上↑繧九→譛蛻昴ｒ蠢倥ｌ繧九る≦縺・・繧る屮轤ｹ</p></div>
-      <div class="mini-card acc-purple"><div class="mc-label">縺薙・髯千阜縺娯ｦ</div><h4>Transformer繧堤函繧</h4><p>縲悟・驛ｨ繧剃ｸ蠎ｦ縺ｫ隕九◆縺・阪→縺・≧鬘倥＞縺梧ｬ｡縺ｮ髱ｩ蜻ｽ縺ｸ</p></div>
+      <div class="mini-card acc-teal"><div class="mc-label">RNN以前</div><h4>記憶なし</h4><p>毎回ぶっつけ本番。前を完全に忘れるので文章が扱えない</p></div>
+      <div class="mini-card acc-teal"><div class="mc-label">RNN / LSTM</div><h4>短期記憶</h4><p>直前は覚えるが、長くなると最初を忘れる。遅いのも難点</p></div>
+      <div class="mini-card acc-purple"><div class="mc-label">この限界が…</div><h4>Transformerを生む</h4><p>「全部を一度に見たい」という願いが次の革命へ</p></div>
     </div>
   </div>
 
   <!-- 3. Transformer -->
   <div class="content-block reveal">
-    <h3><span class="idx">03</span> Transformer 窶・譎ゆｻ｣縺ｮ謚倥ｊ逶ｮ</h3>
-    <p class="lead">2017蟷ｴ縺ｮ隲匁枚縲窟ttention Is All You Need縲阪よ枚遶蜈ｨ菴薙ｒ荳蠎ｦ縺ｫ隕九※縲∝腰隱槫酔螢ｫ縺ｮ髢｢菫ゅｒ蜷梧凾縺ｫ險育ｮ励☆繧九ら樟莉｣AI縺ｮ蠢・∮驛ｨ縺ｧ縺吶・/p>
+    <h3><span class="idx">03</span> Transformer — 時代の折り目</h3>
+    <p class="lead">2017年の論文「Attention Is All You Need」。文章全体を一度に見て、単語同士の関係を同時に計算する。現代AIの心臓部です。</p>
     <div class="chara-block">
-      <div class="chara-img"><img src="assets/character-bust.png" alt="繝ｦ繝斐ユ繝ｫ蜈育函"></div>
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
       <div class="speech">
-        <div class="name">縺ゅ↑縺溘・豌励▼縺・/div>
-        縲碁㍾縺ｿ縺ｮ雉ｪ縺碁＆縺・坂披秘強縺・ｼ・譏斐・驥阪∩縺ｯ蟄ｦ鄙貞ｾ後↓蝗ｺ螳夲ｼ磯撕逧・ｼ峨ゅ〒繧・span class="term">Attention<span class="tip">繧｢繝・Φ繧ｷ繝ｧ繝ｳ・壹←縺ｮ蜊倩ｪ槭↓豕ｨ逶ｮ縺吶ｋ縺九ｒ豎ｺ繧√ｋ莉慕ｵ・∩</span></span>縺ｮ驥阪∩縺ｯ縲∝・蜉帙・縺溘・縺ｫAI閾ｪ霄ｫ縺悟虚逧・↓豎ｺ繧√ｋ縲・strong>繧ｵ繝・き繝ｼ縺ｧ縲∬ｩｦ蜷井ｸｭ縺ｫ繝ｪ繧｢繝ｫ繧ｿ繧､繝縺ｧ豕ｨ逶ｮ縺吶ｋ逶ｸ謇九ｒ螟峨∴繧・/strong>繧､繝｡繝ｼ繧ｸ縺ｧ縺吶・縲・
+        <div class="name">あなたの気づき</div>
+        「重みの質が違う」——鋭い！ 昔の重みは学習後に固定（静的）。でも<span class="term">Attention<span class="tip">アテンション：どの単語に注目するかを決める仕組み</span></span>の重みは、入力のたびにAI自身が動的に決める。<strong>サッカーで、試合中にリアルタイムで注目する相手を変える</strong>イメージですね。
       </div>
     </div>
     <div class="accordion">
       <div class="acc-item">
-        <div class="acc-head" onclick="toggleAcc(this)"><span>Attention・域ｳｨ諢乗ｩ滓ｧ具ｼ・/span><span class="icon">+</span></div>
-        <div class="acc-body"><div class="acc-body-inner">縲悟ｽｼ螂ｳ縺ｯ繝ｪ繝ｳ繧ｴ繧帝｣溘∋縺溘ゅ◎繧後・鄒主袖縺励°縺｣縺溘阪・縲後◎繧後阪′菴輔ｒ謖・☆縺銀披疲枚遶荳ｭ縺ｮ蜈ｨ蜊倩ｪ槭ｒ隕九※縲後Μ繝ｳ繧ｴ縲阪→縺ｮ髢｢菫ゅ′蠑ｷ縺・→蛻､譁ｭ縺吶ｋ縲ゅ◎縺ｮ豕ｨ逶ｮ蠎ｦ縺薙◎縺後∝虚逧・↓逕滓・縺輔ｌ繧矩㍾縺ｿ縺ｧ縺吶・/div></div>
+        <div class="acc-head" onclick="toggleAcc(this)"><span>Attention（注意機構）</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">「彼女はリンゴを食べた。それは美味しかった」の「それ」が何を指すか——文章中の全単語を見て「リンゴ」との関係が強いと判断する。その注目度こそが、動的に生成される重みです。</div></div>
       </div>
       <div class="acc-item">
-        <div class="acc-head" onclick="toggleAcc(this)"><span>菴咲ｽｮ繧ｨ繝ｳ繧ｳ繝ｼ繝・ぅ繝ｳ繧ｰ</span><span class="icon">+</span></div>
-        <div class="acc-body"><div class="acc-body-inner">蜈ｨ驛ｨ繧剃ｸ蠎ｦ縺ｫ隕九ｋ縺ｨ縲∝腰隱槭・鬆・分諠・ｱ縺梧ｶ医∴縺ｦ縺励∪縺・ゅ◎縺薙〒蜷・腰隱槭↓縲御ｽ慕分逶ｮ縺九阪→縺・≧繝壹・繧ｸ逡ｪ蜿ｷ繧剃ｻ倥￠縺ｦ縲・・分繧堤炊隗｣縺ｧ縺阪ｋ繧医≧縺ｫ縺吶ｋ莉慕ｵ・∩縺ｧ縺吶・/div></div>
+        <div class="acc-head" onclick="toggleAcc(this)"><span>位置エンコーディング</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">全部を一度に見ると、単語の順番情報が消えてしまう。そこで各単語に「何番目か」というページ番号を付けて、順番を理解できるようにする仕組みです。</div></div>
       </div>
       <div class="acc-item">
-        <div class="acc-head" onclick="toggleAcc(this)"><span>Encoder 縺ｨ Decoder</span><span class="icon">+</span></div>
-        <div class="acc-body"><div class="acc-body-inner">Encoder縺ｯ譁・ｫ繧偵檎炊隗｣縺吶ｋ縲埼Κ蛻・．ecoder縺ｯ縲檎函謌舌☆繧九埼Κ蛻・・ERT縺ｯEncoder縺縺代；PT繝ｻClaude縺ｯDecoder縺縺代ｒ菴ｿ縺・∪縺吶・/div></div>
+        <div class="acc-head" onclick="toggleAcc(this)"><span>Encoder と Decoder</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">Encoderは文章を「理解する」部分、Decoderは「生成する」部分。BERTはEncoderだけ、GPT・ClaudeはDecoderだけを使います。</div></div>
       </div>
     </div>
   </div>
 
-  <!-- 4. 蜑ｵ繧帰I -->
+  <!-- 4. 創るAI -->
   <div class="content-block reveal">
-    <h3><span class="idx">04</span> 蜑ｵ繧帰I 窶・VAE 縺ｨ GAN</h3>
-    <p class="lead">逅・ｧ｣縺吶ｋAI縺縺代〒縺ｪ縺上∵眠縺励＞繧ゅ・繧偵悟卸繧九喉I縺ｮ邉ｻ隴懊・/p>
+    <h3><span class="idx">04</span> 創るAI — VAE と GAN</h3>
+    <p class="lead">理解するAIだけでなく、新しいものを「創る」AIの系譜。</p>
 
     <div class="chara-block right">
-      <div class="chara-img"><img src="assets/character-bust.png" alt="繝ｦ繝斐ユ繝ｫ蜈育函"></div>
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
       <div class="speech">
-        <div class="name">縺ゅ↑縺溘・豌励▼縺搾ｼ・AE・・/div>
-        縲梧ｸｸ繧ｴ繧ｷ繝・け繧よ嶌驕薙ｂ縲・｣幄｡梧ｩ滄峇縺ｮ縲弱≠縲上ｂ逕滓・縺ｧ縺阪ｋ縲坂披泌ｮ檎挑縺ｪ逅・ｧ｣縺ｧ縺吶・span class="term">VAE<span class="tip">螟牙・繧ｪ繝ｼ繝医お繝ｳ繧ｳ繝ｼ繝繝ｼ縲ゅョ繝ｼ繧ｿ繧貞悸邵ｮ縺励※譁ｰ縺励＞繧ゅ・繧堤函謌・/span></span>縺ｯ縲√ョ繝ｼ繧ｿ繧・轤ｹ縺ｧ縺ｯ縺ｪ縺上後・繧上▲縺ｨ縺励◆遽・峇縲阪〒隕壹∴繧九ゅ□縺九ｉ<strong>縲後≠縲阪ｉ縺励＆繧呈ｮ九＠縺､縺､縲∫┌髯舌・繝舌Μ繧ｨ繝ｼ繧ｷ繝ｧ繝ｳ繧貞卸繧後ｋ</strong>繧薙〒縺吶・
+        <div class="name">あなたの気づき（VAE）</div>
+        「游ゴシックも書道も、飛行機雲の『あ』も生成できる」——完璧な理解です。<span class="term">VAE<span class="tip">変分オートエンコーダー。データを圧縮して新しいものを生成</span></span>は、データを1点ではなく「ふわっとした範囲」で覚える。だから<strong>「あ」らしさを残しつつ、無限のバリエーションを創れる</strong>んです。
       </div>
     </div>
 
     <div class="chara-block">
-      <div class="chara-img"><img src="assets/character-bust.png" alt="繝ｦ繝斐ユ繝ｫ蜈育函"></div>
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
       <div class="speech">
-        <div class="name">縺ゅ↑縺溘・豌励▼縺搾ｼ・AN・・/div>
-        縲後ヰ繝ｬ繝ｼ繝懊・繝ｫ縺ｮ繧ｹ繝代う繧ｯ縺ｨ繝悶Ο繝・け縺ｮ霆肴僑遶ｶ莠峨坂披斐％縺ｮ豈泌湊縺ｯ譛ｬ雉ｪ縺昴・繧ゅ・縲・span class="term">GAN<span class="tip">謨ｵ蟇ｾ逧・函謌舌ロ繝・ヨ繝ｯ繝ｼ繧ｯ縲ょ⊃迚ｩ繧剃ｽ懊ｋAI縺ｨ隕狗ｴ繧帰I縺檎ｫｶ莠・/span></span>縺ｯ縲∫函謌仙勣・域判謦・ｼ峨→隴伜挨蝎ｨ・亥ｮ亥ｙ・峨′遶ｶ縺・粋縺・％縺ｨ縺ｧ縲∽ｺ偵＞縺ｫ莠ｺ髢薙ｒ雜・∴繧九Ξ繝吶Ν縺ｾ縺ｧ荳企＃縺励∪縺吶・
+        <div class="name">あなたの気づき（GAN）</div>
+        「バレーボールのスパイクとブロックの軍拡競争」——この比喩は本質そのもの。<span class="term">GAN<span class="tip">敵対的生成ネットワーク。偽物を作るAIと見破るAIが競争</span></span>は、生成器（攻撃）と識別器（守備）が競い合うことで、互いに人間を超えるレベルまで上達します。
       </div>
     </div>
 
     <div class="cards c2">
-      <div class="mini-card acc-teal"><div class="mc-label">2013蟷ｴ</div><h4>VAE</h4><p>縲後・繧上▲縺ｨ縺励◆遽・峇縲阪〒貎懷惠遨ｺ髢薙↓陦ｨ迴ｾ縲ょ悸邵ｮ縺吶ｋ縺ｨ繝弱う繧ｺ縺梧ｶ医∴縲∵眠縺励＞繝・・繧ｿ繧堤函謌舌〒縺阪ｋ縲ら函謌植I縺ｮ逾門・縺ｮ縺ｲ縺ｨ縺､縲・/p></div>
-      <div class="mini-card acc-pink"><div class="mc-label">2014蟷ｴ</div><h4>GAN</h4><p>蛛ｽ騾迥ｯ縺ｨ隴ｦ蟇溘・霑ｽ縺・°縺代▲縺薙らｫｶ莠峨〒譛ｬ迚ｩ縺昴▲縺上ｊ縺ｮ逕滓・繧貞ｮ溽樟縲ゅ□縺後Δ繝ｼ繝牙ｴｩ螢翫・蟄ｦ鄙偵・荳榊ｮ牙ｮ壹＆縺ｨ縺・≧蠑ｱ轤ｹ繧ゅ・/p></div>
+      <div class="mini-card acc-teal"><div class="mc-label">2013年</div><h4>VAE</h4><p>「ふわっとした範囲」で潜在空間に表現。圧縮するとノイズが消え、新しいデータを生成できる。生成AIの祖先のひとつ。</p></div>
+      <div class="mini-card acc-pink"><div class="mc-label">2014年</div><h4>GAN</h4><p>偽造犯と警察の追いかけっこ。競争で本物そっくりの生成を実現。だがモード崩壊・学習の不安定さという弱点も。</p></div>
     </div>
   </div>
 
   <!-- 5. BERT vs GPT -->
   <div class="content-block reveal">
-    <h3><span class="idx">05</span> BERT 縺ｨ GPT 窶・蜷後§隕ｪ縺九ｉ逕溘∪繧後◆蜈・ｼ・/h3>
-    <p class="lead">縺ｩ縺｡繧峨ｂTransformer縺九ｉ逕溘∪繧後◆縺後∝ｾ玲э蛻・㍽縺檎悄騾・・ncoder繧剃ｽｿ縺・°縲．ecoder繧剃ｽｿ縺・°縺ｮ驕輔＞縺ｧ縺吶・/p>
+    <h3><span class="idx">05</span> BERT と GPT — 同じ親から生まれた兄弟</h3>
+    <p class="lead">どちらもTransformerから生まれたが、得意分野が真逆。Encoderを使うか、Decoderを使うかの違いです。</p>
     <table class="cmp-table">
       <tr><th></th><th>GPT</th><th>BERT</th></tr>
-      <tr><td>菴ｿ縺・Κ蛻・/td><td>Decoder縺ｮ縺ｿ</td><td>Encoder縺ｮ縺ｿ</td></tr>
-      <tr><td>譁ｹ蜷・/td><td>荳譁ｹ蜷托ｼ亥燕縺縺托ｼ・/td><td>蜿梧婿蜷托ｼ亥燕蠕鯉ｼ・/td></tr>
-      <tr><td>蟄ｦ鄙呈ｳ・/td><td>CLM・域ｬ｡縺ｮ蜊倩ｪ樔ｺ域ｸｬ・・/td><td>MLM・育ｩｴ蝓九ａ・・/td></tr>
-      <tr><td>蠕玲э</td><td>譁・ｫ繧堤函謌舌☆繧・/td><td>譁・ｫ繧堤炊隗｣縺吶ｋ</td></tr>
+      <tr><td>使う部分</td><td>Decoderのみ</td><td>Encoderのみ</td></tr>
+      <tr><td>方向</td><td>一方向（前だけ）</td><td>双方向（前後）</td></tr>
+      <tr><td>学習法</td><td>CLM（次の単語予測）</td><td>MLM（穴埋め）</td></tr>
+      <tr><td>得意</td><td>文章を生成する</td><td>文章を理解する</td></tr>
     </table>
     <div class="cards c2" style="margin-top:18px;">
-      <div class="mini-card acc-blue"><h4>RoBERTa</h4><p>BERT縺ｮ蠑ｷ蛹也沿・・eta・峨・SP蟒・ｭ｢繝ｻ繝・・繧ｿ蠅鈴㍼縺ｧ縲沓ERT縺ｯ蟄ｦ鄙剃ｸ崎ｶｳ縺縺｣縺溘阪ｒ險ｼ譏弱・/p></div>
-      <div class="mini-card acc-blue"><h4>ALBERT</h4><p>BERT縺ｮ霆ｽ驥冗沿・・oogle・峨ゅヱ繝ｩ繝｡繝ｼ繧ｿ蜈ｱ譛峨〒1/18縺ｫ蜑頑ｸ帙・SP繧担OP縺ｫ謾ｹ濶ｯ縲・/p></div>
+      <div class="mini-card acc-blue"><h4>RoBERTa</h4><p>BERTの強化版（Meta）。NSP廃止・データ増量で「BERTは学習不足だった」を証明。</p></div>
+      <div class="mini-card acc-blue"><h4>ALBERT</h4><p>BERTの軽量版（Google）。パラメータ共有で1/18に削減。NSPをSOPに改良。</p></div>
     </div>
   </div>
 
-  <!-- 6. GPT縺ｮ騾ｲ蛹・-->
+  <!-- 6. GPTの進化 -->
   <div class="content-block reveal">
-    <h3><span class="idx">06</span> GPT縺ｮ騾ｲ蛹悶→ ChatGPT</h3>
+    <h3><span class="idx">06</span> GPTの進化と ChatGPT</h3>
     <div class="timeline">
-      <div class="tl-item"><div class="tl-year">2018 ・・GPT-1</div><h4>莠句燕蟄ｦ鄙抵ｼ九ヵ繧｡繧､繝ｳ繝√Η繝ｼ繝九Φ繧ｰ繧堤｢ｺ遶・/h4><p>螟ｧ驥上ユ繧ｭ繧ｹ繝医〒蝨溷床繧貞ｭｦ縺ｳ縲∝ｰ鷹㍼繝・・繧ｿ縺ｧ蜷・ち繧ｹ繧ｯ縺ｫ蠢懃畑縺吶ｋ2谿ｵ髫取婿蠑上・/p></div>
-      <div class="tl-item"><div class="tl-year">2019 ・・GPT-2</div><h4>Zero-shot蟄ｦ鄙偵′蜃ｺ迴ｾ</h4><p>隕乗ｨ｡繧呈僑螟ｧ縺励◆繧牙卸逋ｺ縺檎匱逕溘ょ些髯ｺ縺吶℃縺ｦ谿ｵ髫守噪縺ｫ縺励°蜈ｬ髢九＆繧後↑縺九▲縺溘・/p></div>
-      <div class="tl-item"><div class="tl-year">2020 ・・GPT-3</div><h4>Few-shot繝ｻ繧ｹ繧ｱ繝ｼ繝ｪ繝ｳ繧ｰ蜑・/h4><p>謨ｰ萓玖ｦ九○繧九□縺代〒譁ｰ繧ｿ繧ｹ繧ｯ縺ｫ蟇ｾ蠢懊ょ､ｧ縺阪￥縺吶ｌ縺ｰ雉｢縺上↑繧九→蛻､譏弱・/p></div>
-      <div class="tl-item hl"><div class="tl-year">2022 ・・ChatGPT</div><h4>RLHF縺ｧ莠ｺ髢薙↓蜆ｪ縺励￥</h4><p>莠ｺ髢薙・繝輔ぅ繝ｼ繝峨ヰ繝・け縺ｧ蠑ｷ蛹門ｭｦ鄙偵・繝ｶ譛医〒1蜆・Θ繝ｼ繧ｶ繝ｼ縺ｨ縺・≧蜿ｲ荳頑怙騾溘・譎ｮ蜿翫・/p></div>
+      <div class="tl-item"><div class="tl-year">2018 ｜ GPT-1</div><h4>事前学習＋ファインチューニングを確立</h4><p>大量テキストで土台を学び、少量データで各タスクに応用する2段階方式。</p></div>
+      <div class="tl-item"><div class="tl-year">2019 ｜ GPT-2</div><h4>Zero-shot学習が出現</h4><p>規模を拡大したら創発が発生。危険すぎて段階的にしか公開されなかった。</p></div>
+      <div class="tl-item"><div class="tl-year">2020 ｜ GPT-3</div><h4>Few-shot・スケーリング則</h4><p>数例見せるだけで新タスクに対応。大きくすれば賢くなると判明。</p></div>
+      <div class="tl-item hl"><div class="tl-year">2022 ｜ ChatGPT</div><h4>RLHFで人間に優しく</h4><p>人間のフィードバックで強化学習。2ヶ月で1億ユーザーという史上最速の普及。</p></div>
     </div>
     <div class="chara-block right">
-      <div class="chara-img"><img src="assets/character-bust.png" alt="繝ｦ繝斐ユ繝ｫ蜈育函"></div>
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
       <div class="speech">
-        <div class="name">縺ゅ↑縺溘・豌励▼縺・/div>
-        縲隈PT縺ｯ繝励Ξ・・re-trained・峨□縺九ｉ縲ゝransformer縺ｧ蟄ｦ鄙呈ｸ医∩縺ｮ繧ゅ・繧偵ゝransformer縺ｧ逕滓・縺吶ｋ縲坂披斐◎縺ｮ騾壹ｊ・・<strong>G</strong>enerative繝ｻ<strong>P</strong>re-trained繝ｻ<strong>T</strong>ransformer縲ょ錐蜑阪↓莉慕ｵ・∩縺悟・驛ｨ隧ｰ縺ｾ縺｣縺ｦ縺・ｋ繧薙〒縺吶・
+        <div class="name">あなたの気づき</div>
+        「GPTはプレ（Pre-trained）だから、Transformerで学習済みのものを、Transformerで生成する」——その通り！ <strong>G</strong>enerative・<strong>P</strong>re-trained・<strong>T</strong>ransformer。名前に仕組みが全部詰まっているんです。
       </div>
     </div>
   </div>
 
-  <!-- 7. 迴ｾ莉｣縺ｮAI豈碑ｼ・-->
+  <!-- 7. 現代のAI比較 -->
   <div class="content-block reveal">
-    <h3><span class="idx">07</span> 迴ｾ莉｣縺ｮAI縺溘■</h3>
+    <h3><span class="idx">07</span> 現代のAIたち</h3>
     <div class="tabs">
       <div class="tab-btns">
         <button class="tab-btn active" onclick="switchTab(this,'g-gemini')">Gemini</button>
@@ -183,39 +183,39 @@
         <button class="tab-btn" onclick="switchTab(this,'g-copilot')">Copilot</button>
       </div>
       <div class="tab-panel active" id="g-gemini">
-        <div class="mini-card acc-blue"><div class="mc-label">Google</div><h4>Gemini ・・讀懃ｴ｢縺ｮ蟾ｨ莠ｺ</h4><p>繝槭Ν繝√Δ繝ｼ繝繝ｫ繧呈怙蛻昴°繧芽ｨｭ險医・oogle讀懃ｴ｢繝ｻ蜷・ｨｮ繧ｵ繝ｼ繝薙せ縺ｨ邨ｱ蜷医＆繧後∵怙譁ｰ諠・ｱ縺ｫ蠑ｷ縺・・/p></div>
+        <div class="mini-card acc-blue"><div class="mc-label">Google</div><h4>Gemini ｜ 検索の巨人</h4><p>マルチモーダルを最初から設計。Google検索・各種サービスと統合され、最新情報に強い。</p></div>
       </div>
       <div class="tab-panel" id="g-claude">
-        <div class="mini-card acc-teal"><div class="mc-label">Anthropic</div><h4>Claude ・・隱螳溘↑雉｢閠・/h4><p>Constitutional AI・域・豕柊I・峨〒螳牙・諤ｧ繝ｻ隱螳溘＆繧呈怙蜆ｪ蜈医る聞譁・・逅・→譁・ｫ縺ｮ雉ｪ縺悟ｼｷ縺ｿ縲ゅ％縺ｮ繝弱・繝医・蝓ｷ遲・・〒繧ゅ≠繧翫∪縺吶・/p></div>
+        <div class="mini-card acc-teal"><div class="mc-label">Anthropic</div><h4>Claude ｜ 誠実な賢者</h4><p>Constitutional AI（憲法AI）で安全性・誠実さを最優先。長文処理と文章の質が強み。このノートの執筆者でもあります。</p></div>
       </div>
       <div class="tab-panel" id="g-copilot">
-        <div class="mini-card acc-gold"><div class="mc-label">Microsoft・・PT-4繝吶・繧ｹ・・/div><h4>Copilot ・・讌ｭ蜍吶・逶ｸ譽・/h4><p>Word繝ｻExcel繝ｻTeams縺ｫ貅ｶ縺題ｾｼ繧縲よ･ｭ蜍吶・豬√ｌ繧貞､峨∴縺壹↓AI縺御ｽｿ縺医ｋ轤ｹ縺梧怙螟ｧ縺ｮ蠑ｷ縺ｿ縲・/p></div>
+        <div class="mini-card acc-gold"><div class="mc-label">Microsoft（GPT-4ベース）</div><h4>Copilot ｜ 業務の相棒</h4><p>Word・Excel・Teamsに溶け込む。業務の流れを変えずにAIが使える点が最大の強み。</p></div>
       </div>
     </div>
   </div>
 
-  <!-- 隧ｦ鬨薙・繧､繝ｳ繝・-->
+  <!-- 試験ポイント -->
   <div class="exam-box reveal">
-    <h3>&#127919; 2遶縺ｮ隧ｦ鬨馴ｻ蜃ｺ繝昴う繝ｳ繝・/h3>
+    <h3>&#127919; 2章の試験頻出ポイント</h3>
     <ul class="exam-list">
-      <li>CNN ・・逡ｳ縺ｿ霎ｼ縺ｿ螻､ 竊・繝励・繝ｪ繝ｳ繧ｰ螻､ 竊・蜈ｨ邨仙粋螻､縲・strong>逕ｻ蜒剰ｪ崎ｭ倥↓迚ｹ蛹・/strong></li>
-      <li>Transformer ・・2017蟷ｴ繝ｻ譁・ｫ蜈ｨ菴薙ｒ荳蠎ｦ縺ｫ蜃ｦ逅・・<strong>Attention・亥虚逧・↑驥阪∩・・/strong></li>
-      <li>BERT ・・Encoder縺ｮ縺ｿ繝ｻMLM繝ｻ蜿梧婿蜷代・<strong>逅・ｧ｣縺悟ｾ玲э</strong></li>
-      <li>GPT ・・Decoder縺ｮ縺ｿ繝ｻCLM繝ｻ荳譁ｹ蜷代・<strong>逕滓・縺悟ｾ玲э</strong></li>
-      <li>ChatGPT ・・GPT-3.5 ・・RLHF繝ｻ2繝ｶ譛医〒1蜆・Θ繝ｼ繧ｶ繝ｼ</li>
-      <li>繝輔ぃ繧､繝ｳ繝√Η繝ｼ繝九Φ繧ｰ ・・莠句燕蟄ｦ鄙呈ｸ医∩繝｢繝・Ν繧堤音螳壹ち繧ｹ繧ｯ縺ｫ蠕ｮ隱ｿ謨ｴ</li>
-      <li>RLHF ・・莠ｺ髢薙・繝輔ぅ繝ｼ繝峨ヰ繝・け縺ｧ蠑ｷ蛹門ｭｦ鄙偵・I繧偵御ｺｺ髢薙↓蜆ｪ縺励￥縲阪＠縺・/li>
+      <li>CNN ＝ 畳み込み層 → プーリング層 → 全結合層。<strong>画像認識に特化</strong></li>
+      <li>Transformer ＝ 2017年・文章全体を一度に処理・<strong>Attention（動的な重み）</strong></li>
+      <li>BERT ＝ Encoderのみ・MLM・双方向・<strong>理解が得意</strong></li>
+      <li>GPT ＝ Decoderのみ・CLM・一方向・<strong>生成が得意</strong></li>
+      <li>ChatGPT ＝ GPT-3.5 ＋ RLHF・2ヶ月で1億ユーザー</li>
+      <li>ファインチューニング ＝ 事前学習済みモデルを特定タスクに微調整</li>
+      <li>RLHF ＝ 人間のフィードバックで強化学習。AIを「人間に優しく」した</li>
     </ul>
   </div>
 
   <div class="page-nav">
     <a href="chapter1.html" class="prev">
       <div class="dir">&larr; PREV</div>
-      <div class="ttl">Chapter 1 ・・AI縺ｮ蝓ｺ遉弱→蜈ｨ菴灘ワ</div>
+      <div class="ttl">Chapter 1 ｜ AIの基礎と全体像</div>
     </a>
     <a href="chapter3.html" class="next">
       <div class="dir">NEXT &rarr;</div>
-      <div class="ttl">Chapter 3 ・・迴ｾ蝨ｨ縺ｮ逕滓・AI縺ｮ蜍募髄</div>
+      <div class="ttl">Chapter 3 ｜ 現在の生成AIの動向</div>
     </a>
   </div>
 
@@ -223,11 +223,10 @@
 
 <footer class="site-footer">
   <div class="logo">AI<span>.</span>note</div>
-  <p>逕滓・AI繝代せ繝昴・繝郁ｩｦ鬨灘ｯｾ遲厄ｽ懈悽雉ｪ繧堤炊隗｣縺吶ｋ縺溘ａ縺ｮ蟄ｦ鄙偵ヮ繝ｼ繝・/p>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
   <p class="copy">&copy; 2026 My AI Study Note</p>
 </footer>
 
 <script src="script.js"></script>
 </body>
 </html>
-
