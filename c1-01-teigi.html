@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIの定義 ｜ Chapter 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html" class="active">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 1 ｜ 01</span>
+    <h1>AIの定義</h1>
+    <div class="reading">そもそもAIとは何か。専門家でも割れる理由と、知っておくべき3つの軸</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「AIって何ですか？」と問われたとき、スラスラ答えられる人は少ないはずです。SF映画のロボット？スマートスピーカー？チェスの王者？——じつは専門家の間でも定義が割れる、難しい問いです。この記事では、AIの定義をめぐる混乱の正体を整理し、試験と実務に使える3つの軸で捉え直します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">「知能」とは何か——定義が難しい本当の理由</a></li>
+        <li><a href="#s2">AIとロボットは何が違うのか</a></li>
+        <li><a href="#s3">AIを整理する3つの軸</a></li>
+        <li><a href="#s4">特徴量という概念——AIが「見ている」もの</a></li>
+        <li><a href="#s5">AI効果と「ゴールポスト問題」</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1.「知能」とは何か——定義が難しい本当の理由</h2>
+    <p>AIは「Artificial Intelligence」、人工知能の略です。ところが「知能」の定義が、実は今も確定していません。</p>
+
+    <p>研究者の間でよく引き合いに出されるのが<strong>チューリングテスト</strong>です。1950年にアラン・チューリングが提案したもので、「人間が文字でやりとりして、相手が機械だと気づかなければ、そのコンピュータは知能を持つといえる」という考え方です。会話能力に着目したシンプルな基準ですが、「中国語の部屋」反論（中身を理解せず記号を並べるだけでも合格できる）など、批判も多く、完全な定義とは見なされていません。</p>
+
+    <p>現在の主流な見方は、「知能とは、<strong>環境から情報を取り込み、学習し、目的を達成するための行動を選択する能力</strong>の総称」とするものです。この定義なら、チェスに特化したAIも、会話するAIも、画像を認識するAIも「知能を持つ」と言えます。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>「運動能力」という言葉が、足の速さ・腕力・柔軟性・持久力のどれを指すかが文脈で変わるように、「知能」も記憶力・論理力・言語力・創造力など多面的な概念です。「AI＝知能を持つもの」というとき、どの知能を指しているか、常に問い直す必要があります。</p>
+    </div>
+
+    <h2 id="s2">2. AIとロボットは何が違うのか</h2>
+    <p>混同されやすいのが「AI」と「ロボット」です。整理すると、この2つは<strong>まったく別の概念</strong>で、たまたま組み合わさることもある、という関係です。</p>
+
+    <div class="cmp-table">
+      <table>
+        <thead>
+          <tr><th></th><th>AI</th><th>ロボット</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>本質</td><td>ソフトウェア（知能）</td><td>ハードウェア（身体）</td></tr>
+          <tr><td>形</td><td>形はない</td><td>物理的な機械</td></tr>
+          <tr><td>例</td><td>ChatGPT・画像生成AI</td><td>工場の溶接ロボット</td></tr>
+          <tr><td>組み合わせ</td><td colspan="2">AIが搭載されたロボット（AIロボット）も存在する</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>工場の溶接ロボットはプログラム通りに動く「機械」であり、AIではありません。一方、ChatGPTは画面の中だけに存在するソフトウェアです。「手足を持つかどうか」ではなく、「<strong>学習して判断するか</strong>」がAIかどうかの境界線です。</p>
+
+    <!-- SVG：AIとロボットの関係図 -->
+    <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;display:block;margin:24px auto;">
+      <rect width="600" height="260" fill="#faf8f5" rx="12"/>
+      <!-- AIの円 -->
+      <circle cx="200" cy="130" r="100" fill="#c9a14a" fill-opacity="0.15" stroke="#c9a14a" stroke-width="2"/>
+      <text x="200" y="95" text-anchor="middle" font-size="15" font-family="sans-serif" fill="#7a6020" font-weight="bold">AI</text>
+      <text x="200" y="115" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#555">ChatGPT</text>
+      <text x="200" y="133" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#555">画像認識AI</text>
+      <text x="200" y="151" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#555">迷惑メールフィルター</text>
+      <!-- ロボットの円 -->
+      <circle cx="400" cy="130" r="100" fill="#4a7fc9" fill-opacity="0.12" stroke="#4a7fc9" stroke-width="2"/>
+      <text x="400" y="95" text-anchor="middle" font-size="15" font-family="sans-serif" fill="#1a3a6a" font-weight="bold">ロボット</text>
+      <text x="400" y="115" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#555">溶接ロボット</text>
+      <text x="400" y="133" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#555">組立ロボット</text>
+      <text x="400" y="151" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#555">（AIなし）</text>
+      <!-- 交差部分 -->
+      <text x="300" y="122" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#333" font-weight="bold">AI</text>
+      <text x="300" y="138" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#333" font-weight="bold">ロボット</text>
+      <!-- キャプション -->
+      <text x="300" y="228" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#888">AIとロボットは別概念。交差部分がAI搭載ロボット。</text>
+    </svg>
+
+    <h2 id="s3">3. AIを整理する3つの軸</h2>
+    <p>AIを語るとき、話が噛み合わない原因の多くは「どの軸で語っているか」のズレです。大きく3つの軸で整理しましょう。</p>
+
+    <h3>軸① 強いAI vs 弱いAI</h3>
+    <p>哲学者ジョン・サールが提唱した区分です。<strong>強いAI</strong>は「人間と同等以上の汎用的な知能を持つAI」、<strong>弱いAI</strong>は「特定のタスクだけが得意なAI」。2026年現在、存在するすべてのAIは「弱いAI」です。ChatGPTは文章が得意ですが、ゼロから身体を動かして自転車には乗れません。</p>
+
+    <h3>軸② 汎用AI（AGI）vs 特化AI（ANI）</h3>
+    <p>現在のAI研究で最も重要な区分です。詳細は03「AIの種類」で扱いますが、<strong>ANI（Artificial Narrow Intelligence）</strong>は囲碁・翻訳・画像認識など特定タスクのみ。<strong>AGI（Artificial General Intelligence）</strong>はあらゆる知的タスクを人間並みにこなす夢のAIで、まだ実現していません。</p>
+
+    <h3>軸③ 記号AIvs機械学習AI</h3>
+    <p>AIには「人間がルールを書く古典的なアプローチ（記号AI・ルールベース）」と「データから自ら学ぶ機械学習」の2系統があります。詳細は02「AIに知能をもたらす仕組み」で扱います。</p>
+
+    <div class="point">
+      <div class="label">&#9889; 試験ポイント</div>
+      <p>「強いAI」「弱いAI」という言葉は哲学的な分類で、現存するAIはすべて「弱いAI」という認識が重要。「強い＝性能が高い」ではなく「強い＝人間と同等の汎用知能がある」という意味なので混同しないこと。</p>
+    </div>
+
+    <h2 id="s4">4. 特徴量という概念——AIが「見ている」もの</h2>
+    <p>AIが学習するとき、データをそのまま丸ごと処理しているわけではありません。データから取り出した<strong>特徴量</strong>（Feature）という「着目ポイントの数値」を処理しています。</p>
+
+    <p>たとえば猫を認識するなら、「耳の角度」「毛並みの方向」「目の形の比率」といった数値が特徴量です。昔のAI（機械学習初期）は、この特徴量を人間が手作業で選ぶ必要がありました。深層学習の革命は、「<strong>どの特徴量を使うかまでAIが自動で学ぶ</strong>」ようにした点にあります。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>特徴量って「何に着目するか」の設計そのものですよね。人間も、犬と猫を見分けるとき、「耳の形」や「ひげの有無」に無意識に着目している。AIが自動で特徴量を見つけられるようになったのは、「観察眼を人間が教えなくていい」ということで、ここに大きな飛躍があったわけです。</p>
+    </div>
+
+    <h3>AIの4つのレベル分類</h3>
+    <p>AIを機能レベルで分類する方法もあります。松尾豊教授らが提唱する4段階分類が代表的です。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-gold"><h4>レベル1：単純制御</h4><p>センサー情報に反応して動くだけ。エアコンの自動温度調節など。学習はしない。</p></div>
+      <div class="mini-card acc-gold"><h4>レベル2：古典的AI</h4><p>探索・推論・知識ベース。将棋の初期プログラムなど。ルールは人間が書く。</p></div>
+      <div class="mini-card acc-gold"><h4>レベル3：機械学習AI</h4><p>データからパターンを学習。特徴量は人間が設計。迷惑メールフィルターなど。</p></div>
+      <div class="mini-card acc-gold"><h4>レベル4：深層学習AI</h4><p>特徴量の抽出まで自動。現在のChatGPT・画像生成AIはここ。</p></div>
+    </div>
+
+    <h2 id="s5">5. AI効果と「ゴールポスト問題」</h2>
+    <p>面白い現象があります。AIが何かを達成するたびに、「それは知能ではない」と言われてしまう——これを<strong>AI効果（AIエフェクト）</strong>といいます。</p>
+
+    <p>チェスで人間を超えたとき「それはただの計算だ」、囲碁で名人を倒したとき「本当の知能ではない」、文章を書けるようになったとき「理解はしていない」——常にゴールポストが動き続けます。これは「知能」の定義が曖昧なまま、人間が直感的に「自分たちだけが持つもの」として守りたがるからとも言われます。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>AI効果って、「できた！の直後に、でもそれは本当の知能じゃない、が見つかる」の繰り返しですよね。技術は改善の連続と同じ構造で、人間が知能の定義を更新し続ける限り、AIは永遠に「本物の知能」に届かないことになる。これは哲学的な問いでもあります。</p>
+    </div>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li>チューリングテスト ＝ <strong>会話で人間と区別できなければ知能とみなす</strong> 基準（1950年提案）</li>
+        <li>AIとロボットは別概念。AIはソフトウェア、ロボットはハードウェア</li>
+        <li>強いAI（汎用知能）vs 弱いAI（特定タスク）——現存するAIはすべて<strong>弱いAI</strong></li>
+        <li>特徴量 ＝ <strong>AIが学習に使う「着目ポイントの数値」</strong></li>
+        <li>深層学習の革命 ＝ <strong>特徴量の抽出まで自動化</strong> されたこと</li>
+        <li>AI効果 ＝ AIが達成するたびに<strong>「それは知能ではない」とゴールポストが動く</strong>現象</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        「AIとは何か」は、実は今も答えが定まっていない問いです。でもだからこそ、自分なりの定義を持てるかどうかが問われます。次は02「AIに知能をもたらす仕組み」で、機械学習の具体的な中身に踏み込みましょう。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="chapter1.html" class="prev"><div class="dir">&larr; 章トップ</div><div class="ttl">Chapter 1 目次</div></a>
+      <a href="c1-02-shikumi.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">02 ｜ AIに知能をもたらす仕組み</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

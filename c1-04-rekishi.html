@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIの歴史 ｜ Chapter 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html" class="active">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 1 ｜ 04</span>
+    <h1>AIの歴史</h1>
+    <div class="reading">3度のブームと冬の時代、そして技術革新の3原則</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>AIは突然現れたわけではありません。70年以上の試行錯誤の末に、今の姿があります。なぜ盛り上がっては失敗し、また盛り上がるのか——その繰り返しのパターンを知ると、今起きていることの意味が見えてきます。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">第1次AIブーム（1950〜60年代）——探索と推論の時代</a></li>
+        <li><a href="#s2">第1次冬の時代（1970年代）——現実の壁</a></li>
+        <li><a href="#s3">第2次AIブーム（1980年代）——知識を与える</a></li>
+        <li><a href="#s4">第2次冬の時代（1990年代）——知識は無限</a></li>
+        <li><a href="#s5">第3次AIブーム（2006年〜現在）——深層学習の革命</a></li>
+        <li><a href="#s6">技術革新の3原則——なぜあの時に爆発したのか</a></li>
+      </ol>
+    </div>
+
+    <!-- タイムラインSVG -->
+    <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;display:block;margin:28px auto;">
+      <rect width="640" height="200" fill="#faf8f5" rx="10"/>
+      <!-- 軸線 -->
+      <line x1="40" y1="100" x2="610" y2="100" stroke="#ccc" stroke-width="2"/>
+      <!-- ブーム1 -->
+      <rect x="50" y="60" width="80" height="40" rx="6" fill="#c9a14a" fill-opacity="0.7"/>
+      <text x="90" y="84" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#fff" font-weight="bold">第1次</text>
+      <text x="90" y="115" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#888">1950-60年代</text>
+      <!-- 冬1 -->
+      <rect x="145" y="95" width="65" height="15" rx="4" fill="#aaa" fill-opacity="0.5"/>
+      <text x="178" y="106" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#666">冬の時代</text>
+      <!-- ブーム2 -->
+      <rect x="220" y="65" width="80" height="35" rx="6" fill="#c9a14a" fill-opacity="0.7"/>
+      <text x="260" y="87" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#fff" font-weight="bold">第2次</text>
+      <text x="260" y="115" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#888">1980年代</text>
+      <!-- 冬2 -->
+      <rect x="310" y="95" width="65" height="15" rx="4" fill="#aaa" fill-opacity="0.5"/>
+      <text x="343" y="106" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#666">冬の時代</text>
+      <!-- ブーム3 -->
+      <rect x="385" y="30" width="120" height="70" rx="6" fill="#c9a14a"/>
+      <text x="445" y="65" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#fff" font-weight="bold">第3次（現在）</text>
+      <text x="445" y="80" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#ffe9b0">深層学習の革命</text>
+      <text x="445" y="115" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#888">2006年〜</text>
+      <!-- 年表ライン下テキスト -->
+      <text x="320" y="155" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#aaa">→ 時間軸（1950年代〜現在）</text>
+    </svg>
+
+    <h2 id="s1">1. 第1次AIブーム（1950〜60年代）——探索と推論の時代</h2>
+    <p>1950年、アラン・チューリングが「機械は考えることができるか」という問いを立てました。その6年後の1956年、ダートマス会議でジョン・マッカーシーが初めて「Artificial Intelligence（人工知能）」という言葉を使います。これがAIの誕生とされています。</p>
+
+    <p>この時代のAIは<strong>探索と推論</strong>が得意でした。チェスの最善手を探したり、数学の定理を自動証明したり。「迷路の全ルートを探して最短を見つける」という処理は、コンピュータが人間より圧倒的に速い。「AIが人間を超えた！」という興奮が広がりました。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>第1次ブームのAIは「地図を使って目的地まで全ルートを試せる速さ」を持っていました。でも「地図がない道」「予想外の渋滞」には対応できない。ルールが明確な閉じた世界では無敵でも、現実の複雑さには歯が立たなかった。</p>
+    </div>
+
+    <h2 id="s2">2. 第1次冬の時代（1970年代）——現実の壁</h2>
+    <p>熱狂はすぐ冷めました。現実の問題は「答えの候補が天文学的に多すぎる」のです。チェスは64マスという閉じた世界ですが、現実世界のあらゆる問題をルールで書き尽くすことは不可能でした。</p>
+
+    <p>研究への資金が打ち切られ、<strong>AIの冬</strong>が訪れます。「AIは使い物にならない」という失望感が社会に広がりました。</p>
+
+    <h2 id="s3">3. 第2次AIブーム（1980年代）——知識を与える</h2>
+    <p>「ルールを網羅するのが難しいなら、知識を与えよう」という発想の転換が第2次ブームです。<strong>エキスパートシステム</strong>と呼ばれる、特定分野の専門知識をデータベース化したAIが登場しました。</p>
+
+    <p>医療診断AIや法律相談AIが作られ、「ついにAIが専門家を超える」と注目を集めます。日本でも国家プロジェクト「第五世代コンピュータプロジェクト」が始まり、世界中で研究投資が急増しました。</p>
+
+    <h2 id="s4">4. 第2次冬の時代（1990年代）——知識は無限</h2>
+    <p>またも壁に当たります。知識のデータベースを作ることは想像以上に大変で、コストが膨大でした。そして何より、「常識」が書けない。「熱いものに触ると痛い」「雨が降ったら傘を持つ」——人間が当たり前に知っていることを、すべてルールとして書き尽くすことは不可能だと分かったのです。</p>
+
+    <p>再び冬の時代が訪れます。しかしこの時期、静かに機械学習の研究が続いていました。</p>
+
+    <h2 id="s5">5. 第3次AIブーム（2006年〜現在）——深層学習の革命</h2>
+    <p>転機は2006年。ジェフリー・ヒントンが<strong>深層学習（ディープラーニング）</strong>の効果的な学習方法を発表しました。多層のニューラルネットワークをうまく学習させる「事前学習」の発見です。</p>
+
+    <p>そして2012年、画像認識コンテスト「ImageNet」で深層学習モデルが他を圧倒し、世界が驚きます。それまで26%だったエラー率が一気に16%へ。この「ImageNetの衝撃」が第3次ブームの号砲でした。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>「技術って改善の連続だな。できた！の直後に、でも○○が足りないが見つかる」——AI史はまさにその繰り返しです。第1次は「ルールが足りない」、第2次は「知識が足りない」、第3次はデータと計算力と理論が揃って初めて爆発した。改善の連続の先に今がある。</p>
+    </div>
+
+    <h2 id="s6">6. 技術革新の3原則——なぜあの時に爆発したのか</h2>
+    <p>なぜ2010年代に深層学習が突然爆発したのか。それを一言で説明するのが<strong>技術革新の3原則</strong>です。</p>
+
+    <div class="cards c3">
+      <div class="mini-card acc-gold">
+        <div class="mc-label">原則 01</div>
+        <h4>理論</h4>
+        <p>ディープラーニングの数学的基礎はすでにあった。ヒントンの事前学習発見（2006年）が最後のピースに。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <div class="mc-label">原則 02</div>
+        <h4>計算力</h4>
+        <p>ゲーム用GPU（NVIDIA）が機械学習に転用された。並列計算が一気に安価・高速になった。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <div class="mc-label">原則 03</div>
+        <h4>資源（データ）</h4>
+        <p>インターネットの普及で、学習に使える画像・テキストが無限に手に入るようになった。</p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>「理論・計算・資源が揃ったとき爆発する」——これは技術革新全般に当てはまります。スマホも電気自動車も、技術の種は昔からあった。あるタイミングで3つが揃ったとき、突然「今がその時」になる。ChatGPTも同じ。理論は2017年のTransformer、計算力はGPUクラウド、データはインターネット全体。2022年末に揃った。</p>
+    </div>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li>AI誕生 ＝ 1956年 <strong>ダートマス会議</strong>（マッカーシーが命名）</li>
+        <li>第1次ブーム ＝ <strong>探索・推論</strong>（閉じた世界は得意、現実は苦手）</li>
+        <li>第2次ブーム ＝ <strong>エキスパートシステム</strong>（知識のDB化、常識が書けず挫折）</li>
+        <li>第3次ブーム ＝ <strong>深層学習</strong>（2006年ヒントン、2012年ImageNetの衝撃）</li>
+        <li>技術革新の3原則 ＝ <strong>理論・計算力・データ（資源）</strong>が揃ったとき爆発</li>
+        <li>冬の時代は2回。過度な期待→失望→技術進歩→再ブームのサイクル</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        AIの歴史は「壮大な試行錯誤」の歴史です。冬の時代があったから今がある、とも言えます。次は05「シンギュラリティ」で、AIの未来について考えます。「2045年問題」とは何なのか、一緒に整理しましょう。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c1-03-shurui.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">03 ｜ AIの種類</div></a>
+      <a href="c1-05-singularity.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">05 ｜ シンギュラリティ</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

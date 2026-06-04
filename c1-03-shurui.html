@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIの種類 ｜ Chapter 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html" class="active">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 1 ｜ 03</span>
+    <h1>AIの種類</h1>
+    <div class="reading">ANI・AGI・ASIの違いと、今のAIはどこにいるのか</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「AIが人間を超える」「AIが仕事を奪う」——そんな言葉を聞くたびに、どのAIの話をしているのかが曖昧なまま議論が進みます。ANI・AGI・ASIという3段階の区分を知ると、この混乱が一気に整理されます。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">ANI——今存在するすべてのAI</a></li>
+        <li><a href="#s2">AGI——まだ誰も作っていない汎用AI</a></li>
+        <li><a href="#s3">ASI——AGIの先にある超知能</a></li>
+        <li><a href="#s4">3段階を図で整理する</a></li>
+        <li><a href="#s5">「今のAIはどこにいるのか」という問い</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. ANI——今存在するすべてのAI</h2>
+    <p><strong>ANI（Artificial Narrow Intelligence：特化型人工知能）</strong>は、特定のタスクだけが得意なAIです。2026年現在、地球上に存在するすべてのAIはANIです。</p>
+
+    <p>囲碁でトップ棋士を打ち負かした「AlphaGo」は、囲碁だけが得意です。将棋はできません。ChatGPTは文章の生成・翻訳・要約が得意ですが、ゼロから身体を動かして料理を作ることはできません。それぞれ「自分の得意フィールド」しか持っていない——これがANIの本質です。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>ANIは「一芸に秀でた職人」です。日本一の寿司職人はどんな魚も握れますが、医療診断はできません。AIの各モデルも同じで、どれだけ高性能であっても、設計された領域の外には出られません。</p>
+    </div>
+
+    <h2 id="s2">2. AGI——まだ誰も作っていない汎用AI</h2>
+    <p><strong>AGI（Artificial General Intelligence：汎用人工知能）</strong>は、人間と同等以上のあらゆる知的タスクをこなせるAIです。現時点では<strong>存在しません</strong>。</p>
+
+    <p>AGIが実現すると、何が変わるのか。「囲碁もやって、料理のレシピを考えて、病気を診断して、詩も書ける」——つまり、知的な作業であれば何でもこなせる汎用性が生まれます。SF映画の「考えるロボット」のイメージに近いのはAGIです。</p>
+
+    <p>OpenAI・Google DeepMind・Anthropicなど主要AI企業はAGIの実現を目標に掲げていますが、実現の時期については「10年以内」から「100年以上かかる」まで、研究者の間で意見が大きく分かれます。</p>
+
+    <div class="point">
+      <div class="label">&#9889; ポイント</div>
+      <p>ChatGPTがどれだけ賢く見えても、AGIではありません。複数の分野にまたがって見えるのは、「大量のテキストで事前学習した超高性能なANI」だからです。「ちょっと何でもできそう」に見えますが、本質的にはテキスト処理に特化した存在です。</p>
+    </div>
+
+    <h2 id="s3">3. ASI——AGIの先にある超知能</h2>
+    <p><strong>ASI（Artificial Super Intelligence：人工超知能）</strong>は、あらゆる面で人間の知能をはるかに超えたAIです。AGIが「人間並み」なら、ASIは「人間をはるかに凌駕する」段階です。</p>
+
+    <p>哲学者ニック・ボストロムが著書『スーパーインテリジェンス』で詳細に論じたこのシナリオでは、AGIが一度実現すると、自分自身をより賢く改造・改良していく「知能爆発」が起きる可能性があると議論されています。ASIはシンギュラリティ（05記事で詳述）と深く関係しています。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>ANI→AGI→ASIって、「記憶のない選手→短期記憶の選手→試合全体を覚える選手」みたいな段階的な進化に似てますよね。RNNからLSTM、TransformerへのAI技術の進化（2章で詳述）と同じ構造——「できた！の直後に、でも○○が足りないが見つかる」の繰り返しです。</p>
+    </div>
+
+    <h2 id="s4">4. 3段階を図で整理する</h2>
+
+    <!-- SVG：ANI/AGI/ASIの段階図 -->
+    <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;display:block;margin:24px auto;">
+      <rect width="600" height="280" fill="#faf8f5" rx="12"/>
+
+      <!-- ASIの大円 -->
+      <ellipse cx="300" cy="155" rx="270" ry="110" fill="#e8d5f0" fill-opacity="0.5" stroke="#9b59b6" stroke-width="1.5" stroke-dasharray="6,3"/>
+      <!-- AGIの中円 -->
+      <ellipse cx="300" cy="165" rx="185" ry="75" fill="#d6eaf8" fill-opacity="0.6" stroke="#2980b9" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <!-- ANIの小円 -->
+      <ellipse cx="300" cy="175" rx="100" ry="45" fill="#c9a14a" fill-opacity="0.2" stroke="#c9a14a" stroke-width="2"/>
+
+      <!-- ラベル -->
+      <text x="300" y="173" text-anchor="middle" font-size="14" font-family="sans-serif" fill="#7a6020" font-weight="bold">ANI（特化型）</text>
+      <text x="300" y="190" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#7a6020">現在のすべてのAI</text>
+
+      <text x="470" y="152" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#1a5a8a" font-weight="bold">AGI</text>
+      <text x="470" y="167" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#1a5a8a">汎用AI（未実現）</text>
+
+      <text x="545" y="115" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#6c3483" font-weight="bold">ASI</text>
+      <text x="545" y="130" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#6c3483">超知能（仮想）</text>
+
+      <!-- 現在地マーカー -->
+      <circle cx="300" cy="175" r="6" fill="#c9a14a"/>
+      <text x="300" y="240" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#888">← 現在のAIはANIの範囲内。AGI・ASIはまだ実現していない →</text>
+    </svg>
+
+    <h2 id="s5">5.「今のAIはどこにいるのか」という問い</h2>
+    <p>GPT-4やGeminiのような最新モデルは、ANIとAGIの中間的な存在として語られることがあります。複数分野を横断しているように見えるからです。しかしこれは「大量かつ多様なテキストで学習した、非常に広範な特化型AI」であり、研究者の多くはまだAGIとは認めていません。</p>
+
+    <div class="cmp-table">
+      <table>
+        <thead>
+          <tr><th></th><th>ANI</th><th>AGI</th><th>ASI</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>知能の範囲</td><td>特定タスクのみ</td><td>人間と同等・汎用</td><td>人間をはるかに超える</td></tr>
+          <tr><td>現状</td><td>✅ 存在する</td><td>❌ 未実現</td><td>❌ 仮想</td></tr>
+          <tr><td>例</td><td>ChatGPT・AlphaGo</td><td>—</td><td>—</td></tr>
+          <tr><td>試験でのキーワード</td><td>特化型・弱いAI</td><td>汎用AI</td><td>超知能・シンギュラリティ</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li>ANI ＝ <strong>特化型AI</strong>。現在存在するすべてのAIはANI</li>
+        <li>AGI ＝ <strong>汎用AI</strong>。人間と同等の知能。2026年現在まだ実現していない</li>
+        <li>ASI ＝ <strong>超知能</strong>。人間をはるかに超える。理論上の概念</li>
+        <li>ChatGPTなど最新モデルは「高性能なANI」であり、AGIではない</li>
+        <li>ANI→AGI→ASIの順で「知能の汎用性・水準」が上がる</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        「今のAIはANIに過ぎない」——これを知っているだけで、AIに関するニュースの読み方が変わります。次は04「AIの歴史」で、なぜ今この場所にいるのかを時間軸で追いましょう。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c1-02-shikumi.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">02 ｜ AIに知能をもたらす仕組み</div></a>
+      <a href="c1-04-rekishi.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">04 ｜ AIの歴史</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
