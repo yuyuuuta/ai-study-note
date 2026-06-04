@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI学習ノート｜生成AIパスポート対策</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="chapter1.html">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-bg-text">Artificial Intelligence</div>
+  <div class="hero-inner">
+    <div class="eng">My Study Note</div>
+    <h1>「なぜ？」から学ぶ、<br><span class="accent">わたしだけ</span>のAIの教科書</h1>
+    <p>暗記ではなく、本質を理解する。<br>自分の言葉とたとえで紡いだ、生成AIパスポート学習の記録。</p>
+    <div class="btn-group">
+      <a href="chapter1.html" class="btn">1章を読む &rarr;</a>
+      <a href="chapter2.html" class="btn ghost">2章を読む &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- キャラクター紹介 -->
+<section class="section" style="padding-top:40px;">
+  <div class="chara-block reveal">
+    <div class="chara-img"><img src="assets/character-full.png" alt="ナビゲーターキャラクター"></div>
+    <div class="speech">
+      <div class="name">ユピテル先生</div>
+      このノートの案内役を務めます。むずかしい言葉も、ひとつずつ、たとえ話でほどいていきましょう。あなた自身が見つけた「気づき」を、ここに残していきますよ。
+    </div>
+  </div>
+</section>
+
+<!-- チャプター一覧 -->
+<section class="section" style="padding-top:20px;">
+  <div class="section-head reveal">
+    <span class="eng">Chapters</span>
+    <h2>学習の章</h2>
+    <p>これまでに学んだ内容を、章ごとに整理しています。</p>
+  </div>
+  <div class="chapter-grid">
+    <a href="chapter1.html" class="chapter-card reveal">
+      <span class="num">CHAPTER 01</span>
+      <h3>AIの基礎と全体像</h3>
+      <p>5種類の学習方法、ニューラルネットワークの仕組み、AIの歴史、そして限界まで。AIとは何かを根っこから理解する章。</p>
+      <div class="tags">
+        <span class="tag">5種類の学習</span>
+        <span class="tag">重み</span>
+        <span class="tag">過学習</span>
+        <span class="tag">AIの歴史</span>
+        <span class="tag">シンギュラリティ</span>
+      </div>
+      <span class="go">読む &rarr;</span>
+    </a>
+    <a href="chapter2.html" class="chapter-card reveal">
+      <span class="num">CHAPTER 02</span>
+      <h3>生成AIのアーキテクチャ</h3>
+      <p>CNN・RNNから、VAE・GAN・Transformerまで。そしてGPT・BERTがどう進化し、ChatGPTに至ったのか。生成AIの心臓部に迫る章。</p>
+      <div class="tags">
+        <span class="tag">CNN / RNN</span>
+        <span class="tag">VAE / GAN</span>
+        <span class="tag">Transformer</span>
+        <span class="tag">GPT / BERT</span>
+        <span class="tag">ChatGPT</span>
+      </div>
+      <span class="go">読む &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<!-- このノートについて -->
+<section class="section" id="about">
+  <div class="section-head reveal">
+    <span class="eng">About</span>
+    <h2>このノートについて</h2>
+  </div>
+  <div class="cards c3">
+    <div class="mini-card acc-gold reveal">
+      <div class="mc-label">CONCEPT 01</div>
+      <h4>本質から理解する</h4>
+      <p>用語の暗記ではなく「なぜそうなるのか」を起点に。資格はあくまで理解の証明にすぎない、という姿勢で学びます。</p>
+    </div>
+    <div class="mini-card acc-gold reveal">
+      <div class="mc-label">CONCEPT 02</div>
+      <h4>自分のたとえで覚える</h4>
+      <p>飛行機雲の「あ」、バレーボールの軍拡競争。自分で見つけたたとえこそ、いちばん忘れにくい記憶になります。</p>
+    </div>
+    <div class="mini-card acc-gold reveal">
+      <div class="mc-label">CONCEPT 03</div>
+      <h4>つながりで捉える</h4>
+      <p>知識を点ではなく線で。ひとつの技術が次の技術を生む。その因果の鎖をたどることで、深く定着させます。</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

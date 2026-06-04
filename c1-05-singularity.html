@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>シンギュラリティ ｜ Chapter 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html" class="active">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 1 ｜ 05</span>
+    <h1>シンギュラリティ</h1>
+    <div class="reading">2045年問題・AI効果・「AIを誰が監督するのか」という問い</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「2045年にAIが人間の知能を超える」——この予測を聞いたことがある人は多いはずです。でも、これは何を根拠にした話で、どう受け止めるべきなのか。シンギュラリティをめぐる議論を整理します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">シンギュラリティとは何か</a></li>
+        <li><a href="#s2">2045年問題——カーツワイルの予測</a></li>
+        <li><a href="#s3">知能爆発というシナリオ</a></li>
+        <li><a href="#s4">AI効果——ゴールポストは動き続ける</a></li>
+        <li><a href="#s5">ラプラスの悪魔と予測の限界</a></li>
+        <li><a href="#s6">「AIを誰が監督するのか」</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. シンギュラリティとは何か</h2>
+    <p><strong>シンギュラリティ（技術的特異点）</strong>とは、AIが人間の知能を超え、そこから先の未来が予測不可能になる転換点のことです。数学の「特異点」（通常の計算が成り立たなくなる点）から取られた言葉です。</p>
+
+    <p>重要なのは、「AIが人間より賢くなる」という話ではなく、「<strong>AIが自分自身をより賢く改良し始め、改良が加速し続けることで、人間の理解を超えた速度で進化していく</strong>」というシナリオです。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>複利の爆発に似ています。最初はゆっくりでも、「利子が利子を生む」構造が始まると、ある時点から急激に増加します。AIが「自分をより賢くする知能」を持った瞬間、改善速度が人間の手を離れる——それがシンギュラリティです。</p>
+    </div>
+
+    <h2 id="s2">2. 2045年問題——カーツワイルの予測</h2>
+    <p>「2045年」という具体的な年数を提示したのは、Googleのエンジニアリングディレクター、<strong>レイ・カーツワイル</strong>です。2005年の著書『The Singularity Is Near』で、技術の指数関数的な進化を根拠に「2045年頃にAIが人間の知能を超える」と予測しました。</p>
+
+    <!-- SVG：指数関数的成長のグラフ -->
+    <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block;margin:24px auto;">
+      <rect width="560" height="220" fill="#faf8f5" rx="10"/>
+      <!-- 軸 -->
+      <line x1="60" y1="170" x2="520" y2="170" stroke="#bbb" stroke-width="1.5"/>
+      <line x1="60" y1="20" x2="60" y2="170" stroke="#bbb" stroke-width="1.5"/>
+      <!-- 線形成長（グレー） -->
+      <polyline points="60,170 520,80" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5,3"/>
+      <!-- 指数成長（金） -->
+      <path d="M60,168 C150,165 280,155 360,130 S460,70 520,18" fill="none" stroke="#c9a14a" stroke-width="2.5"/>
+      <!-- シンギュラリティ点 -->
+      <circle cx="460" cy="55" r="6" fill="#e74c3c"/>
+      <text x="465" y="48" font-size="10" font-family="sans-serif" fill="#e74c3c">シンギュラリティ</text>
+      <text x="465" y="60" font-size="9" font-family="sans-serif" fill="#e74c3c">（2045年頃？）</text>
+      <!-- ラベル -->
+      <text x="290" y="195" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#888">時間 →</text>
+      <text x="30" y="100" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#888" transform="rotate(-90,30,100)">AI能力</text>
+      <text x="400" y="155" font-size="10" font-family="sans-serif" fill="#bbb">線形成長</text>
+      <text x="390" y="110" font-size="10" font-family="sans-serif" fill="#c9a14a">指数的成長</text>
+    </svg>
+
+    <p>カーツワイルの論拠は「ムーアの法則」（半導体の性能は18ヶ月ごとに2倍になる）に代表される技術の指数関数的成長です。ただしこれはあくまで予測であり、多くの研究者が「その時期は過大評価」「そもそもAGIは実現しない可能性もある」と異議を唱えています。</p>
+
+    <div class="point">
+      <div class="label">&#9889; ポイント</div>
+      <p>「2045年」は科学的に確定した事実ではなく、カーツワイルの予測モデルに基づく一つの見解です。試験では「シンギュラリティとは何か」の概念を問われることが多く、「2045年に必ずなる」と断言することは正確ではありません。</p>
+    </div>
+
+    <h2 id="s3">3. 知能爆発というシナリオ</h2>
+    <p>シンギュラリティが起きる仕組みとして語られるのが<strong>知能爆発</strong>です。</p>
+
+    <p>AGI（汎用AI）が実現すると、そのAIは「自分自身をより賢く設計する」ことができます。より賢くなったAIはさらに賢いAIを設計し……この連鎖が始まると、人間の理解をはるかに超えた速度で知能が向上し続ける。これが知能爆発です。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>生き残ることの話と繋がります。変化し続けられたものが生き残ってきた——シンギュラリティが起きたとき、人間に求められるのも「変化に乗れるか」です。固執して思考が固まった人と、本質を掴んで変化できる人とでは、AIとの関係がまったく変わってくるはず。</p>
+    </div>
+
+    <h2 id="s4">4. AI効果——ゴールポストは動き続ける</h2>
+    <p>AIの歴史に繰り返し現れるパターンがあります。AIが何かを達成するたびに「それは本当の知能ではない」と言われる——<strong>AI効果（AIエフェクト）</strong>です。</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1997年</div>
+        <div class="tl-body">Deep Blueがチェス世界王者を破る → 「チェスは計算に過ぎない。本当の知能ではない」</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2011年</div>
+        <div class="tl-body">WatsonがクイズでChampionを破る → 「検索と統計だ。理解していない」</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2016年</div>
+        <div class="tl-body">AlphaGoが囲碁でトップ棋士に勝つ → 「直感がない。パターンマッチングだ」</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2022年</div>
+        <div class="tl-body">ChatGPTが人間並みの文章を生成 → 「確率的な文字の並びに過ぎない。思考ではない」</div>
+      </div>
+    </div>
+
+    <p>このゴールポストの移動は、シンギュラリティの定義にも影響します。「知能を超えた」かどうかを判断するのが人間である限り、基準は常に移動し続けます。</p>
+
+    <h2 id="s5">5. ラプラスの悪魔と予測の限界</h2>
+    <p><strong>ラプラスの悪魔</strong>とは、19世紀の数学者ラプラスが提唱した思考実験です。「もしある瞬間の宇宙のすべての粒子の位置と速度を知っている存在がいれば、未来も過去も完全に計算できる」という考えです。</p>
+
+    <p>これはAIへの夢想に似ています。「すべてのデータがあれば、未来を完全に予測できる」——しかし量子力学の不確定性原理によって、粒子レベルでの完全な予測は物理的に不可能と証明されています。「完全な予測AI」は原理的に存在できません。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>天気予報がいくら精度を上げても「3ヶ月後の東京の気温を1度単位で当てる」ことはできません。カオス理論でいう「バタフライ効果」——初期条件のわずかなズレが、長期では巨大な差になる。予測の限界は、AIがどれだけ賢くなっても原理的に存在します。</p>
+    </div>
+
+    <h2 id="s6">6.「AIを誰が監督するのか」</h2>
+    <p>シンギュラリティ議論の核心にある問いは「<strong>AGIやASIが生まれたとき、それを誰がコントロールするのか</strong>」です。</p>
+
+    <p>人間より賢いAIに対して、人間が「ちゃんと動いているか」を確認することができるのか。この問題を<strong>AIアライメント問題</strong>といいます。Anthropic（Claudeを作っている会社）が最も力を入れている研究テーマのひとつです。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>監督できるかどうかは「賢さの差」だけの問題じゃないですよね。賢い部下を持つ上司が、信頼関係と目標の共有で組織を動かすように、AIとの関係も「命令と服従」ではなく「目的の共有と信頼設計」になっていくのかもしれない。Anthropicの「Constitutional AI」はその一つの答えを模索しているように見えます。</p>
+    </div>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li>シンギュラリティ ＝ AIが人間を超え、<strong>未来が予測不可能になる転換点</strong></li>
+        <li>2045年問題 ＝ <strong>カーツワイルの予測</strong>。科学的確定事実ではない</li>
+        <li>知能爆発 ＝ AGIが自分自身をより賢く改良し続ける連鎖</li>
+        <li>AI効果 ＝ AIが達成するたびに<strong>「それは知能ではない」とゴールポストが動く</strong>現象</li>
+        <li>ラプラスの悪魔 ＝ 完全予測の思考実験。量子論で<strong>原理的に不可能</strong>と証明</li>
+        <li>AIアライメント問題 ＝ <strong>人間を超えたAIをどう制御するか</strong>という課題</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        Chapter 1、完走おめでとうございます！AIの定義から歴史、そして未来への問いまで。土台がしっかり固まったところで、Chapter 2では「生成AIの心臓部」に踏み込みます。CNNからTransformer、GPTへの進化の必然を、一緒に追いましょう。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c1-04-rekishi.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">04 ｜ AIの歴史</div></a>
+      <a href="chapter2.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">Chapter 2 ｜ 生成AIのアーキテクチャ</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
