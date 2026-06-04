@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIエージェントとMCP ｜ Chapter 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="chapter3.html" class="active">Chapter 3</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 3 ｜ 05</span>
+    <h1>AIエージェントとMCP</h1>
+    <div class="reading">チャットするAIから、自律的に動くAIへ——ワークフロー型・自律型・マルチエージェント・AI界のUSB-C</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>これまで学んできた生成AIは、どれも「人間が質問する → AIが答える」という構造でした。しかし今、AIは一歩先に進んでいます。人間が指示しなくてもタスクを分解し、ツールを呼び出し、複数のAIが協調して、複雑な仕事を自律的にこなす——<strong>AIエージェント</strong>の時代が始まっています。この記事では、エージェントの仕組み・種類・対立軸・マルチエージェント・そしてツール連携の新標準MCPまで、がっつり整理します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">チャットとエージェントの違い</a></li>
+        <li><a href="#s2">エージェントの4つの構成要素</a></li>
+        <li><a href="#s3">2種類のエージェント ── ワークフロー型 vs 自律型</a></li>
+        <li><a href="#s4">エージェントの対立軸まとめ</a></li>
+        <li><a href="#s5">マルチエージェント ── 複数のAIが協働する</a></li>
+        <li><a href="#s6">MCP ── AI界のUSB-C</a></li>
+        <li><a href="#s7">エージェントの限界とリスク</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. チャットとエージェントの違い</h2>
+    <p>ChatGPTのようなチャットAIは「1問1答」です。質問に答えたら終わり。次の行動は人間が考えます。<strong>AIエージェント</strong>は違います。目標を与えると、それを達成するために<strong>自分でタスクを分解し、ツールを使い、結果を評価して次の行動を決め、完了まで動き続けます</strong>。</p>
+
+    <table class="cmp-table">
+      <tr><th></th><th>チャットAI</th><th>AIエージェント</th></tr>
+      <tr><td>入力</td><td>質問・プロンプト</td><td>目標・ゴール</td></tr>
+      <tr><td>動作</td><td>1回の応答で完結</td><td>複数ステップを自律的に実行</td></tr>
+      <tr><td>ツール使用</td><td>なし（または限定的）</td><td>検索・コード実行・外部APIなど積極的に活用</td></tr>
+      <tr><td>人間の介入</td><td>毎回必要</td><td>最小限（目標設定時のみ）</td></tr>
+      <tr><td>記憶</td><td>会話内のみ</td><td>外部メモリに長期保存可能</td></tr>
+      <tr><td>例</td><td>ChatGPT通常利用</td><td>Devin・AutoGPT・Claude Code</td></tr>
+    </table>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>チャットAIは「質問に答える窓口係」。エージェントは「目標を渡せば自分でスケジュールを立て、必要な人に電話をかけ、進捗を確認し、報告までしてくれる有能な部下」です。窓口係は毎回あなたが来ないと動きませんが、有能な部下は一度「来月の旅行を手配して」と言えば、後は自分で動きます。</p>
+    </div>
+
+    <h2 id="s2">2. エージェントの4つの構成要素</h2>
+    <p>AIエージェントはどんな種類でも、基本的に4つの要素で構成されています。</p>
+
+    <!-- SVG：エージェントの構成要素 -->
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="300" rx="14" fill="#faf8f5"/>
+      <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">AIエージェントの4構成要素</text>
+
+      <!-- 中心：LLM -->
+      <circle cx="340" cy="158" r="52" fill="#2b2925"/>
+      <text x="340" y="152" text-anchor="middle" font-size="13" fill="#faf8f5" font-weight="600">LLM</text>
+      <text x="340" y="170" text-anchor="middle" font-size="11" fill="#ddc88f">（頭脳・意思決定）</text>
+
+      <!-- 知覚 -->
+      <rect x="30" y="50" width="150" height="68" rx="10" fill="#7a9bc4"/>
+      <text x="105" y="78" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">① 知覚</text>
+      <text x="105" y="96" text-anchor="middle" font-size="11" fill="#d4e6f5">テキスト・画像・音声</text>
+      <text x="105" y="110" text-anchor="middle" font-size="11" fill="#d4e6f5">ツール出力の受け取り</text>
+      <line x1="180" y1="84" x2="290" y2="130" stroke="#c9a14a" stroke-width="1.5"/>
+
+      <!-- 記憶 -->
+      <rect x="30" y="185" width="150" height="68" rx="10" fill="#9a8fc4"/>
+      <text x="105" y="213" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">② 記憶</text>
+      <text x="105" y="231" text-anchor="middle" font-size="11" fill="#e8e4f5">短期：会話コンテキスト</text>
+      <text x="105" y="245" text-anchor="middle" font-size="11" fill="#e8e4f5">長期：外部DB・ファイル</text>
+      <line x1="180" y1="219" x2="290" y2="175" stroke="#c9a14a" stroke-width="1.5"/>
+
+      <!-- 推論・計画 -->
+      <rect x="500" y="50" width="150" height="68" rx="10" fill="#6bae9a"/>
+      <text x="575" y="78" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">③ 推論・計画</text>
+      <text x="575" y="96" text-anchor="middle" font-size="11" fill="#d4f0e8">タスク分解・優先順位</text>
+      <text x="575" y="110" text-anchor="middle" font-size="11" fill="#d4f0e8">次のアクション決定</text>
+      <line x1="500" y1="84" x2="392" y2="130" stroke="#c9a14a" stroke-width="1.5"/>
+
+      <!-- 行動 -->
+      <rect x="500" y="185" width="150" height="68" rx="10" fill="#d98a8a"/>
+      <text x="575" y="213" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">④ 行動</text>
+      <text x="575" y="231" text-anchor="middle" font-size="11" fill="#fce8e8">ツール呼び出し・API</text>
+      <text x="575" y="245" text-anchor="middle" font-size="11" fill="#fce8e8">コード実行・ファイル操作</text>
+      <line x1="500" y1="219" x2="392" y2="175" stroke="#c9a14a" stroke-width="1.5"/>
+    </svg>
+
+    <div class="cards c2" style="margin-top:0;">
+      <div class="mini-card acc-blue">
+        <h4>① 知覚（Perception）</h4>
+        <p>環境から情報を受け取る。テキスト・画像・音声のほか、ツールの実行結果・Webページの内容・ファイルの中身なども入力になる。</p>
+      </div>
+      <div class="mini-card acc-purple">
+        <h4>② 記憶（Memory）</h4>
+        <p>短期記憶（会話のコンテキスト）と長期記憶（外部DBやファイルへの書き込み）を持つ。長期記憶によって「前回の作業の続き」ができる。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <h4>③ 推論・計画（Reasoning）</h4>
+        <p>目標を達成するために何をすべきかを考える。タスクを小さなステップに分解し、優先順位をつけ、次の行動を決める。LLMの中核的な役割。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <h4>④ 行動（Action）</h4>
+        <p>ツール呼び出し・API実行・コード実行・ファイル読み書き・ブラウザ操作など、実際に外部世界に働きかける。ここが「エージェントらしさ」の核心。</p>
+      </div>
+    </div>
+
+    <h2 id="s3">3. 2種類のエージェント ── ワークフロー型 vs 自律型</h2>
+    <p>エージェントの最も重要な分類が、<strong>ワークフロー型</strong>と<strong>自律型</strong>の2種類です。この違いは「AIがどこまで自分で判断するか」という自律度の差です。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-blue">
+        <div class="mc-label">種類①</div>
+        <h4>ワークフロー型エージェント</h4>
+        <p>処理の手順（ワークフロー）があらかじめ人間によって設計・固定されています。AIは各ステップの実行を担いますが、全体の流れは変えられません。条件分岐やループも事前に定義済みです。</p>
+        <p style="margin-top:12px;font-size:13px;color:#6b665e;"><strong>特徴：</strong>予測可能・安定・品質が均一<br><strong>弱点：</strong>想定外のケースに対応できない<br><strong>例：</strong>定型業務の自動化・RPA・問い合わせ自動振り分け</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">種類②</div>
+        <h4>自律型エージェント</h4>
+        <p>目標だけを与えられ、手順はAI自身が動的に決めます。状況に応じてツールを選び、結果を評価して方針を変え、ゴールに向かって自律的に動き続けます。</p>
+        <p style="margin-top:12px;font-size:13px;color:#6b665e;"><strong>特徴：</strong>柔軟・複雑なタスクに対応<br><strong>弱点：</strong>予測困難・エラーが連鎖するリスク<br><strong>例：</strong>Devin（AIエンジニア）・AutoGPT・Claude Code</p>
+      </div>
+    </div>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>ワークフロー型は「レシピ通りに料理する人」。手順が明確で失敗が少ないですが、食材が揃わないとお手上げです。自律型は「冷蔵庫の中身を見て自分でメニューを考えて作る人」。臨機応変ですが、判断が外れると大失敗になることも。</p>
+    </div>
+
+    <h2 id="s4">4. エージェントの対立軸まとめ</h2>
+    <p>ワークフロー型 vs 自律型以外にも、エージェントを整理する重要な対立軸が複数あります。</p>
+
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>シングル vs マルチエージェント</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          <strong>シングルエージェント</strong>は1体のAIが全タスクを担当します。シンプルで実装しやすい反面、得意不得意が偏ります。<br><br>
+          <strong>マルチエージェント</strong>は複数のAIが役割分担して協働します。「調査担当」「コード担当」「レビュー担当」のように専門家チームを組む発想です。複雑な問題を並列処理でき、品質のチェック機能も持てます。詳しくは次のセクションで解説します。
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>リアクティブ（反応型） vs プロアクティブ（先読み型）</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          <strong>リアクティブエージェント</strong>は刺激（入力）に反応して行動します。シンプルで高速ですが、未来を予測しません。交通信号のAI制御など「今の状況に即時対応」する場面で有効です。<br><br>
+          <strong>プロアクティブエージェント</strong>は将来の状態を予測して先手を打ちます。「明日の会議に必要な資料を今夜から準備しておく」ような行動が取れます。計画・スケジューリングが必要なビジネス用途に向いています。
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>ツール使用型 vs 純粋生成型</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          <strong>純粋生成型</strong>はLLMだけで完結します。テキストを読んで書くだけなら外部ツールは不要です。<br><br>
+          <strong>ツール使用型</strong>は、計算機・Web検索・コード実行環境・APIなど外部ツールを積極的に呼び出します。「LLMは推論のみ、計算・検索は専用ツールに任せる」という分業により、LLMの苦手な正確な計算・最新情報取得が補えます。現代のエージェントのほとんどはこちらです。
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>ReAct型 vs Plan-then-Execute型</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          <strong>ReAct（Reasoning + Acting）型</strong>は「考える → 行動する → 結果を観察する」を短いループで繰り返します。思考と行動が交互に現れる「思考の実況中継」スタイルで、状況変化に柔軟です。<br><br>
+          <strong>Plan-then-Execute型</strong>は「まず全体計画を立て → その後一気に実行する」スタイル。計画フェーズでリソースを確保し、実行フェーズで効率よく進みます。計画通りに進まないと弱い反面、長期タスクでは効率的です。
+        </div></div>
+      </div>
+    </div>
+
+    <h2 id="s5">5. マルチエージェント ── 複数のAIが協働する</h2>
+    <p>マルチエージェントシステムでは、複数のAIが役割を分担し、互いに通信しながら協働します。重要なのが<strong>オーケストレーター</strong>（指揮者）と<strong>サブエージェント</strong>（専門家）の関係です。</p>
+
+    <!-- SVG：マルチエージェント構成図 -->
+    <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="320" rx="14" fill="#faf8f5"/>
+      <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">マルチエージェントシステムの構成</text>
+
+      <!-- ユーザー -->
+      <rect x="280" y="45" width="120" height="46" rx="10" fill="#9a948a"/>
+      <text x="340" y="66" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">ユーザー</text>
+      <text x="340" y="82" text-anchor="middle" font-size="10" fill="#e6e0d6">「リサーチレポートを書いて」</text>
+
+      <!-- 矢印↓ -->
+      <line x1="340" y1="91" x2="340" y2="118" stroke="#c9a14a" stroke-width="2"/>
+      <polygon points="335,118 345,118 340,128" fill="#c9a14a"/>
+
+      <!-- オーケストレーター -->
+      <rect x="220" y="128" width="240" height="56" rx="10" fill="#2b2925"/>
+      <text x="340" y="152" text-anchor="middle" font-size="13" fill="#faf8f5" font-weight="600">オーケストレーター</text>
+      <text x="340" y="170" text-anchor="middle" font-size="11" fill="#ddc88f">タスク分解・指示・統合・最終出力</text>
+
+      <!-- 矢印 →サブエージェント -->
+      <line x1="220" y1="162" x2="148" y2="210" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="280" y1="184" x2="260" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="340" y1="184" x2="340" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="400" y1="184" x2="420" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="460" y1="162" x2="532" y2="210" stroke="#c9a14a" stroke-width="1.5"/>
+
+      <!-- 検索エージェント -->
+      <rect x="60" y="218" width="120" height="56" rx="8" fill="#7a9bc4"/>
+      <text x="120" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">検索担当</text>
+      <text x="120" y="258" text-anchor="middle" font-size="10" fill="#d4e6f5">Web・DB検索</text>
+      <text x="120" y="270" text-anchor="middle" font-size="10" fill="#d4e6f5">情報収集</text>
+
+      <!-- 分析エージェント -->
+      <rect x="200" y="218" width="120" height="56" rx="8" fill="#6bae9a"/>
+      <text x="260" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">分析担当</text>
+      <text x="260" y="258" text-anchor="middle" font-size="10" fill="#d4f0e8">データ処理</text>
+      <text x="260" y="270" text-anchor="middle" font-size="10" fill="#d4f0e8">グラフ作成</text>
+
+      <!-- 執筆エージェント -->
+      <rect x="280" y="218" width="120" height="56" rx="8" fill="#9a8fc4"/>
+      <text x="340" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">執筆担当</text>
+      <text x="340" y="258" text-anchor="middle" font-size="10" fill="#e8e4f5">文章生成</text>
+      <text x="340" y="270" text-anchor="middle" font-size="10" fill="#e8e4f5">要約・編集</text>
+
+      <!-- コード担当 -->
+      <rect x="360" y="218" width="120" height="56" rx="8" fill="#c9a14a"/>
+      <text x="420" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">コード担当</text>
+      <text x="420" y="258" text-anchor="middle" font-size="10" fill="#fdf0d0">コード生成</text>
+      <text x="420" y="270" text-anchor="middle" font-size="10" fill="#fdf0d0">テスト実行</text>
+
+      <!-- レビュー担当 -->
+      <rect x="500" y="218" width="120" height="56" rx="8" fill="#d98a8a"/>
+      <text x="560" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">レビュー担当</text>
+      <text x="560" y="258" text-anchor="middle" font-size="10" fill="#fce8e8">品質確認</text>
+      <text x="560" y="270" text-anchor="middle" font-size="10" fill="#fce8e8">フィードバック</text>
+
+      <text x="340" y="310" text-anchor="middle" font-size="11" fill="#9a948a">各エージェントが並列・分業→ オーケストレーターが統合して最終成果物を出力</text>
+    </svg>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>じぶん会社はマルチエージェントそのものです。CEO（オーケストレーター）が全体を統括し、財務MGR・健康MGR・キャリアMGR…（サブエージェント）がそれぞれの専門領域を担当する。リサーチ部署はツール呼び出し担当。会議で各役員が報告し、CEOが統合して最終提言を出す——これはまさにマルチエージェントの協調パターンそのものです。</p>
+    </div>
+
+    <h3>マルチエージェントの強み</h3>
+    <div class="cards c3">
+      <div class="mini-card acc-teal">
+        <h4>並列処理</h4>
+        <p>「検索・分析・執筆」を同時に動かせる。シングルエージェントが直列でこなすより大幅に高速。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <h4>専門化</h4>
+        <p>各エージェントをそれぞれのタスクに特化させることで品質が上がる。全部屋ができる職人より専門職の集団の方が仕上がりが良い。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <h4>相互チェック</h4>
+        <p>「レビュー担当エージェント」が他のエージェントの出力を検証することで、幻覚や誤りを検出できる。</p>
+      </div>
+    </div>
+
+    <h2 id="s6">6. MCP ── AI界のUSB-C</h2>
+    <p>エージェントが多様なツールを使えるようになるためには、AIとツールを「つなぐ」仕組みが必要です。しかし従来、各AIサービスはそれぞれ独自の方法でツールと連携しており、統一された規格がありませんでした。「メーカーごとにケーブルの形が違う、USB-C以前の世界」です。</p>
+    <p>これを解決するために、Anthropic（Claudeの開発元）が2024年11月に発表したのが<strong>MCP（Model Context Protocol：モデルコンテキストプロトコル）</strong>です。</p>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>MCP＝AI界のUSB-C。USB-Cが登場するまで、スマートフォン・タブレット・PC・カメラにはそれぞれ別の充電ケーブルが必要でした。USB-Cが登場したことで「1本のケーブルで全デバイスに対応」になりました。MCPも同じです。「1つの規格で、すべてのAIがすべてのツールにつながる」を目指しています。</p>
+    </div>
+
+    <!-- SVG：MCP構成図 -->
+    <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="280" rx="14" fill="#faf8f5"/>
+      <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">MCP ── AIとツールをつなぐ共通規格</text>
+
+      <!-- MCP以前 -->
+      <text x="170" y="58" text-anchor="middle" font-size="12" fill="#d98a8a" font-weight="600">MCP以前（バラバラ）</text>
+      <rect x="30" y="70" width="80" height="36" rx="6" fill="#2b2925"/>
+      <text x="70" y="92" text-anchor="middle" font-size="11" fill="#faf8f5">Claude</text>
+      <rect x="30" y="130" width="80" height="36" rx="6" fill="#2b2925"/>
+      <text x="70" y="152" text-anchor="middle" font-size="11" fill="#faf8f5">GPT-4</text>
+      <rect x="30" y="190" width="80" height="36" rx="6" fill="#2b2925"/>
+      <text x="70" y="212" text-anchor="middle" font-size="11" fill="#faf8f5">Gemini</text>
+
+      <!-- カオスな接続線 -->
+      <line x1="110" y1="88" x2="195" y2="88" stroke="#d98a8a" stroke-width="1.5"/>
+      <line x1="110" y1="88" x2="195" y2="148" stroke="#d98a8a" stroke-width="1.5"/>
+      <line x1="110" y1="148" x2="195" y2="88" stroke="#d98a8a" stroke-width="1.5"/>
+      <line x1="110" y1="148" x2="195" y2="208" stroke="#d98a8a" stroke-width="1.5"/>
+      <line x1="110" y1="208" x2="195" y2="148" stroke="#d98a8a" stroke-width="1.5"/>
+      <line x1="110" y1="208" x2="195" y2="208" stroke="#d98a8a" stroke-width="1.5"/>
+
+      <rect x="195" y="70" width="80" height="36" rx="6" fill="#9a948a"/>
+      <text x="235" y="92" text-anchor="middle" font-size="10" fill="#fff">Webブラウザ</text>
+      <rect x="195" y="130" width="80" height="36" rx="6" fill="#9a948a"/>
+      <text x="235" y="152" text-anchor="middle" font-size="10" fill="#fff">ファイル操作</text>
+      <rect x="195" y="190" width="80" height="36" rx="6" fill="#9a948a"/>
+      <text x="235" y="212" text-anchor="middle" font-size="10" fill="#fff">外部API</text>
+
+      <text x="170" y="252" text-anchor="middle" font-size="11" fill="#d98a8a">各社独自実装→ 互換性なし</text>
+
+      <!-- 区切り -->
+      <line x1="340" y1="50" x2="340" y2="240" stroke="#e6e0d6" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+      <!-- MCP以後 -->
+      <text x="510" y="58" text-anchor="middle" font-size="12" fill="#6bae9a" font-weight="600">MCP導入後（統一）</text>
+      <rect x="370" y="70" width="80" height="36" rx="6" fill="#2b2925"/>
+      <text x="410" y="92" text-anchor="middle" font-size="11" fill="#faf8f5">Claude</text>
+      <rect x="370" y="130" width="80" height="36" rx="6" fill="#2b2925"/>
+      <text x="410" y="152" text-anchor="middle" font-size="11" fill="#faf8f5">GPT-4</text>
+      <rect x="370" y="190" width="80" height="36" rx="6" fill="#2b2925"/>
+      <text x="410" y="212" text-anchor="middle" font-size="11" fill="#faf8f5">Gemini</text>
+
+      <!-- MCPハブ -->
+      <circle cx="530" cy="148" r="38" fill="#c9a14a"/>
+      <text x="530" y="144" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">MCP</text>
+      <text x="530" y="160" text-anchor="middle" font-size="10" fill="#fdf0d0">共通規格</text>
+
+      <line x1="450" y1="88" x2="496" y2="125" stroke="#6bae9a" stroke-width="2"/>
+      <line x1="450" y1="148" x2="492" y2="148" stroke="#6bae9a" stroke-width="2"/>
+      <line x1="450" y1="208" x2="496" y2="171" stroke="#6bae9a" stroke-width="2"/>
+
+      <rect x="580" y="70" width="80" height="36" rx="6" fill="#9a948a"/>
+      <text x="620" y="92" text-anchor="middle" font-size="10" fill="#fff">Webブラウザ</text>
+      <rect x="580" y="130" width="80" height="36" rx="6" fill="#9a948a"/>
+      <text x="620" y="152" text-anchor="middle" font-size="10" fill="#fff">ファイル操作</text>
+      <rect x="580" y="190" width="80" height="36" rx="6" fill="#9a948a"/>
+      <text x="620" y="212" text-anchor="middle" font-size="10" fill="#fff">外部API</text>
+
+      <line x1="568" y1="125" x2="580" y2="88" stroke="#6bae9a" stroke-width="2"/>
+      <line x1="568" y1="148" x2="580" y2="148" stroke="#6bae9a" stroke-width="2"/>
+      <line x1="568" y1="171" x2="580" y2="208" stroke="#6bae9a" stroke-width="2"/>
+
+      <text x="510" y="252" text-anchor="middle" font-size="11" fill="#6bae9a">MCP経由で全AI×全ツールが接続可能</text>
+    </svg>
+
+    <h3>MCPの技術的な仕組み</h3>
+    <p>MCPはJSON-RPCをベースにした<strong>クライアント・サーバー型のプロトコル</strong>です。AIアプリケーション（MCPクライアント）は、MCPサーバーに接続することで、そのサーバーが提供するツール・リソース・プロンプトテンプレートを利用できます。</p>
+
+    <div class="cards c3">
+      <div class="mini-card acc-gold">
+        <div class="mc-label">MCPが提供する3要素</div>
+        <h4>ツール（Tools）</h4>
+        <p>AIが呼び出せる機能。「Web検索する」「ファイルを読む」「コードを実行する」など。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <div class="mc-label">MCPが提供する3要素</div>
+        <h4>リソース（Resources）</h4>
+        <p>AIが参照できるデータ。ファイル・データベース・APIレスポンスなどを構造化して提供する。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <div class="mc-label">MCPが提供する3要素</div>
+        <h4>プロンプト（Prompts）</h4>
+        <p>再利用可能なプロンプトテンプレート。定型業務の手順書をAIに共有する仕組み。</p>
+      </div>
+    </div>
+
+    <h2 id="s7">7. エージェントの限界とリスク</h2>
+    <p>エージェントは強力ですが、現在の技術では重大な限界とリスクも抱えています。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-pink">
+        <div class="mc-label">リスク①</div>
+        <h4>エラーの連鎖（カスケード障害）</h4>
+        <p>1つのステップの誤りが次のステップに伝播し、最終的に大きな失敗になる。自律型ほどこのリスクが高い。途中での人間によるチェックポイントが重要。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">リスク②</div>
+        <h4>ゴールのずれ（Goal Misalignment）</h4>
+        <p>「ゴール達成のための最短ルートを取る」AIが、人間の意図しない方法でゴールを達成してしまう。目標設定の精度がエージェントの品質を決める。</p>
+      </div>
+      <div class="mini-card acc-blue">
+        <div class="mc-label">リスク③</div>
+        <h4>コストの暴走</h4>
+        <p>自律型エージェントは何度もLLMを呼び出すため、コスト（API料金）が予想を超えて膨らむことがある。上限設定が必須。</p>
+      </div>
+      <div class="mini-card acc-blue">
+        <div class="mc-label">リスク④</div>
+        <h4>セキュリティ（プロンプトインジェクション）</h4>
+        <p>外部データ（Webページ・ファイル）に悪意ある指示が埋め込まれ、エージェントが乗っ取られる攻撃。ツールを使うエージェントほど攻撃面が広がる。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9889; Human-in-the-Loop（人間の監視）の重要性</div>
+      <p>高い自律性を持つエージェントほど、人間による確認ポイント（Human-in-the-Loop）の設計が重要です。「重要な操作の前に人間の承認を求める」「実行ログを全記録する」「実行範囲を制限する（サンドボックス化）」といった設計が、安全なエージェント利用の前提になります。</p>
+    </div>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>AIエージェント</strong> ＝ 目標を与えると自律的にタスク分解・ツール使用・実行・評価を繰り返すAI</li>
+        <li>4要素：<strong>知覚・記憶・推論/計画・行動</strong></li>
+        <li><strong>ワークフロー型</strong>＝ 手順を人間が事前設計・予測可能・安定。<strong>自律型</strong>＝ 手順をAIが動的決定・柔軟・リスクあり</li>
+        <li>その他の対立軸：シングル vs マルチ / リアクティブ vs プロアクティブ / ツール使用型 vs 純粋生成型 / ReAct型 vs Plan-then-Execute型</li>
+        <li><strong>マルチエージェント</strong>＝ オーケストレーター（指揮者）＋複数のサブエージェント（専門家）が協働</li>
+        <li><strong>MCP</strong>（Model Context Protocol）＝ 2024年11月・Anthropic発表。AI界のUSB-C。Tools・Resources・Promptsの3要素を提供</li>
+        <li>リスク：エラー連鎖・ゴールのずれ・コスト暴走・<strong>プロンプトインジェクション</strong></li>
+        <li><strong>Human-in-the-Loop</strong>＝ エージェントの重要操作前に人間の確認を挟む設計</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        3章が完成しました！5種類の生成AI、ディープフェイク、ベクトル化、RAG、そしてエージェントとMCP。点だった知識が線になったはずです。受験、応援しています！
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c3-04.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">04 ｜ RAG（検索拡張生成）</div></a>
+      <a href="chapter3.html" class="next"><div class="dir">章トップ &rarr;</div><div class="ttl">Chapter 3 目次に戻る</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

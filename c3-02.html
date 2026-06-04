@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ディープフェイクとリスク ｜ Chapter 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="chapter3.html" class="active">Chapter 3</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 3 ｜ 02</span>
+    <h1>ディープフェイクとリスク</h1>
+    <div class="reading">生成AIの光と影——百見しても信じてはいけない時代へ</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>生成AIが「本物そっくりの偽物」を作れるようになった。その技術の最前線がディープフェイクです。もともとはGANという技術から生まれ、今や静止画・動画・音声・リアルタイムと進化し続けています。この記事では技術的な仕組みから社会的リスク、検出技術との「軍拡競争」、そして対策まで、がっつり整理します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">ディープフェイクの起源 ── GANから始まった歴史</a></li>
+        <li><a href="#s2">現在の技術水準</a></li>
+        <li><a href="#s3">社会的リスクの全体像</a></li>
+        <li><a href="#s4">「百見しても信じるな」── 情報リテラシーの転換</a></li>
+        <li><a href="#s5">生成AIvs検出AI ── 軍拡競争の構造</a></li>
+        <li><a href="#s6">対策と法整備</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. ディープフェイクの起源 ── GANから始まった歴史</h2>
+    <p><strong>ディープフェイク（Deepfake）</strong>という言葉は「Deep learning（深層学習）」と「Fake（偽物）」を合わせた造語です。2017年頃、Redditのユーザーが有名人の顔を別人の動画に合成して投稿したことで一般に広まりました。</p>
+    <p>技術的な起源は2章で学んだ<strong>GAN（敵対的生成ネットワーク）</strong>です。GANの「生成器（偽物を作る）」と「識別器（本物か見破る）」が競い合うことで、人間には区別できないレベルの偽画像・偽動画が生成できるようになりました。</p>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>GANの「バレーボールのスパイクとブロックの軍拡競争」という比喩は、ディープフェイクにもそのまま当てはまります。「偽物を作るAI」と「偽物を見破るAI」が互いに高め合い、両方が人間の能力を遥かに超えるレベルに達してしまいました。技術の競争が、リスクの競争に変わった瞬間です。</p>
+    </div>
+
+    <h3>GAN以降の技術進化</h3>
+    <p>当初のGANベースのディープフェイクは、特定の人物を「置き換える」フェイススワップが主流でした。しかし2020年代に入り、拡散モデル（Diffusion Model）とTransformerが応用され、精度・速度・汎用性が飛躍的に向上しました。</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2014年</div>
+        <h4>GAN 誕生</h4>
+        <p>Ian Goodfellowが発明。「偽物 vs 見破る」の競争構造が確立。まだ低解像度の画像が限界。</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2017年</div>
+        <h4>「Deepfake」という言葉の誕生</h4>
+        <p>SNSで有名人のフェイススワップ動画が拡散。技術の危険性が初めて社会問題として認識される。</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2019〜2020年</div>
+        <h4>高精度・高速化</h4>
+        <p>DeepFaceLab等のオープンソースツールが登場。一般人でも高品質なディープフェイクを作れる時代に。</p>
+      </div>
+      <div class="tl-item hl">
+        <div class="tl-year">2023年〜現在</div>
+        <h4>リアルタイム化・音声合成の融合</h4>
+        <p>ライブ映像のリアルタイム顔変換、3秒サンプルからの声クローンが実用化。フィッシング詐欺への悪用が急増。</p>
+      </div>
+    </div>
+
+    <h2 id="s2">2. 現在の技術水準</h2>
+    <p>2026年現在、ディープフェイクが対応できる媒体は4種類に広がっています。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-pink">
+        <div class="mc-label">種類①</div>
+        <h4>静止画フェイク</h4>
+        <p>最も成熟した分野。Stable DiffusionやMidjourneyで「存在しない人物の写真」を生成できる。特定人物の顔を別画像に合成するインペインティングも容易。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">種類②</div>
+        <h4>動画フェイク（フェイススワップ）</h4>
+        <p>動画内の人物の顔を別人に置き換える。DeepFaceLabやInsightFaceSwapが代表例。政治家・著名人の「偽演説動画」が世界各地で問題化。</p>
+      </div>
+      <div class="mini-card acc-blue">
+        <div class="mc-label">種類③</div>
+        <h4>音声クローン</h4>
+        <p>ElevenLabsやVALL-Eで声のクローンが3秒で可能。「家族の声でかける詐欺電話」が実際に発生している。電話越しの声は信頼できなくなりつつある。</p>
+      </div>
+      <div class="mini-card acc-blue">
+        <div class="mc-label">種類④</div>
+        <h4>リアルタイム変換</h4>
+        <p>ビデオ通話中にリアルタイムで別人の顔に変換するツールが登場。採用面接のなりすましが実際に報告されている。</p>
+      </div>
+    </div>
+
+    <h2 id="s3">3. 社会的リスクの全体像</h2>
+
+    <!-- SVG：リスクの分類図 -->
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="300" rx="14" fill="#fdf6f6"/>
+      <text x="340" y="30" text-anchor="middle" font-size="14" fill="#d98a8a" font-weight="600">ディープフェイクのリスク分類</text>
+      <!-- 個人 -->
+      <rect x="20" y="50" width="190" height="220" rx="12" fill="#fff" stroke="#e6e0d6" stroke-width="1"/>
+      <rect x="20" y="50" width="190" height="36" rx="12" fill="#d98a8a"/>
+      <rect x="20" y="74" width="190" height="12" rx="0" fill="#d98a8a"/>
+      <text x="115" y="74" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">個人への被害</text>
+      <text x="115" y="108" text-anchor="middle" font-size="12" fill="#2b2925">ポルノ画像の無断生成</text>
+      <text x="115" y="132" text-anchor="middle" font-size="12" fill="#2b2925">なりすまし詐欺</text>
+      <text x="115" y="156" text-anchor="middle" font-size="12" fill="#2b2925">名誉毀損・評判破壊</text>
+      <text x="115" y="180" text-anchor="middle" font-size="12" fill="#2b2925">採用面接の不正</text>
+      <text x="115" y="204" text-anchor="middle" font-size="12" fill="#2b2925">家族への詐欺電話</text>
+      <!-- 社会 -->
+      <rect x="245" y="50" width="190" height="220" rx="12" fill="#fff" stroke="#e6e0d6" stroke-width="1"/>
+      <rect x="245" y="50" width="190" height="36" rx="12" fill="#7a9bc4"/>
+      <rect x="245" y="74" width="190" height="12" rx="0" fill="#7a9bc4"/>
+      <text x="340" y="74" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">社会・政治への影響</text>
+      <text x="340" y="108" text-anchor="middle" font-size="12" fill="#2b2925">政治家の偽演説動画</text>
+      <text x="340" y="132" text-anchor="middle" font-size="12" fill="#2b2925">選挙介入・世論操作</text>
+      <text x="340" y="156" text-anchor="middle" font-size="12" fill="#2b2925">フェイクニュースの拡散</text>
+      <text x="340" y="180" text-anchor="middle" font-size="12" fill="#2b2925">外交的摩擦の引き金</text>
+      <text x="340" y="204" text-anchor="middle" font-size="12" fill="#2b2925">証拠映像への不信</text>
+      <!-- 経済 -->
+      <rect x="470" y="50" width="190" height="220" rx="12" fill="#fff" stroke="#e6e0d6" stroke-width="1"/>
+      <rect x="470" y="50" width="190" height="36" rx="12" fill="#6bae9a"/>
+      <rect x="470" y="74" width="190" height="12" rx="0" fill="#6bae9a"/>
+      <text x="565" y="74" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">経済・ビジネスへの影響</text>
+      <text x="565" y="108" text-anchor="middle" font-size="12" fill="#2b2925">企業CEOの偽声明</text>
+      <text x="565" y="132" text-anchor="middle" font-size="12" fill="#2b2925">株価操作・風評被害</text>
+      <text x="565" y="156" text-anchor="middle" font-size="12" fill="#2b2925">振り込め詐欺の高度化</text>
+      <text x="565" y="180" text-anchor="middle" font-size="12" fill="#2b2925">著作権・肖像権侵害</text>
+      <text x="565" y="204" text-anchor="middle" font-size="12" fill="#2b2925">保険・認証の脆弱化</text>
+    </svg>
+
+    <p>特に深刻なのは<strong>非合意ポルノ（NCII: Non-Consensual Intimate Imagery）</strong>の問題です。実在の人物の顔を使ったポルノ画像・動画を無断で生成・拡散するケースが急増しており、被害者の多くは女性です。韓国や英国ではすでに法規制が始まっています。</p>
+
+    <div class="point">
+      <div class="label">&#9889; 2024年の実例</div>
+      <p>韓国では学校内でAIによる同級生の性的偽画像が拡散する事件が多発し、社会問題化。テイラー・スウィフトの偽画像がSNSで数百万回拡散され、米議会でディープフェイク規制法案の審議が加速しました。</p>
+    </div>
+
+    <h2 id="s4">4. 「百見しても信じるな」── 情報リテラシーの転換</h2>
+    <p>かつて「百聞は一見にしかず」という言葉が示すように、「自分の目で見た映像」は信頼の根拠でした。しかし生成AIの登場により、この前提が崩れつつあります。</p>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>「百聞は一見にしかず」——この言葉が通用しない時代になりました。映像は証拠にならない、声は本人確認にならない、写真は事実を示さない。「百見しても信じてはいけない」という、まったく逆の情報リテラシーが求められる時代です。人類が映像・写真を「事実の証拠」として扱ってきた200年の慣習が、たった数年で崩れようとしています。</p>
+    </div>
+
+    <h3>新しい情報リテラシーの3原則</h3>
+    <div class="cards c3">
+      <div class="mini-card acc-gold">
+        <h4>① ソースを疑う</h4>
+        <p>「どこから来た情報か」を常に確認する。一次ソース（公式サイト・本人SNS）に戻って確認する習慣。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <h4>② 複数で検証する</h4>
+        <p>1つの映像・音声だけで判断しない。複数のソース、複数のメディアが同じ事実を報じているか確認。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <h4>③ 感情を疑う</h4>
+        <p>「衝撃的」「怒りを感じる」コンテンツほどディープフェイクの可能性がある。感情が高まったときこそ立ち止まる。</p>
+      </div>
+    </div>
+
+    <h2 id="s5">5. 生成AIvs検出AI ── 軍拡競争の構造</h2>
+    <p>ディープフェイクに対抗するため、「ディープフェイクを検出するAI」が開発されています。しかしこれは新たな軍拡競争を生んでいます。</p>
+
+    <!-- SVG：軍拡競争の螺旋図 -->
+    <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="320" rx="14" fill="#faf8f5"/>
+      <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">生成AI vs 検出AI ── 軍拡競争の螺旋</text>
+
+      <!-- レベル1 -->
+      <rect x="40" y="50" width="180" height="50" rx="10" fill="#d98a8a"/>
+      <text x="130" y="73" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">生成AI（第1世代）</text>
+      <text x="130" y="90" text-anchor="middle" font-size="11" fill="#fce8e8">低解像度・不自然な目の動き</text>
+
+      <line x1="220" y1="75" x2="280" y2="75" stroke="#c9a14a" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <rect x="280" y="50" width="180" height="50" rx="10" fill="#7a9bc4"/>
+      <text x="370" y="73" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">検出AI（第1世代）</text>
+      <text x="370" y="90" text-anchor="middle" font-size="11" fill="#d4e6f5">まばたきのパターンを検知</text>
+
+      <!-- 矢印下 -->
+      <line x1="370" y1="100" x2="370" y2="130" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="370" y1="130" x2="130" y2="130" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="130" y1="130" x2="130" y2="150" stroke="#c9a14a" stroke-width="2"/>
+
+      <!-- レベル2 -->
+      <rect x="40" y="150" width="180" height="50" rx="10" fill="#c96060"/>
+      <text x="130" y="173" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">生成AI（第2世代）</text>
+      <text x="130" y="190" text-anchor="middle" font-size="11" fill="#fce8e8">自然なまばたき・皮膚質感を学習</text>
+
+      <line x1="220" y1="175" x2="280" y2="175" stroke="#c9a14a" stroke-width="2"/>
+
+      <rect x="280" y="150" width="180" height="50" rx="10" fill="#4a7aac"/>
+      <text x="370" y="173" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">検出AI（第2世代）</text>
+      <text x="370" y="190" text-anchor="middle" font-size="11" fill="#d4e6f5">毛穴レベルの整合性を分析</text>
+
+      <!-- 矢印下 -->
+      <line x1="370" y1="200" x2="370" y2="230" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="370" y1="230" x2="130" y2="230" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="130" y1="230" x2="130" y2="250" stroke="#c9a14a" stroke-width="2"/>
+
+      <!-- レベル3 -->
+      <rect x="40" y="250" width="180" height="50" rx="10" fill="#a04040"/>
+      <text x="130" y="273" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">生成AI（第3世代）</text>
+      <text x="130" y="290" text-anchor="middle" font-size="11" fill="#fce8e8">毛穴・光の反射まで完璧に再現</text>
+
+      <line x1="220" y1="275" x2="280" y2="275" stroke="#c9a14a" stroke-width="2"/>
+
+      <rect x="280" y="250" width="180" height="50" rx="10" fill="#2a5a8c"/>
+      <text x="370" y="273" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">検出AI（第3世代）</text>
+      <text x="370" y="290" text-anchor="middle" font-size="11" fill="#d4e6f5">メタデータ・圧縮痕跡を解析</text>
+
+      <!-- ∞ ラベル -->
+      <text x="560" y="185" text-anchor="middle" font-size="40" fill="#c9a14a" opacity="0.4">∞</text>
+      <text x="560" y="215" text-anchor="middle" font-size="11" fill="#9a948a">終わりなき</text>
+      <text x="560" y="230" text-anchor="middle" font-size="11" fill="#9a948a">競争</text>
+    </svg>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>GANの軍拡競争（生成器 vs 識別器）と同じ構造が、社会スケールで起きています。GANの中では同じモデルの中で競争していましたが、ここでは「ディープフェイク技術者」と「検出研究者」が社会を舞台に競い合っています。そして歴史が示すように、攻撃側が常に防御側より少し先を行く傾向があります。</p>
+    </div>
+
+    <h3>検出技術の現状と限界</h3>
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>生体情報の分析（まばたき・脈拍）</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">顔の血色変化から心拍数を推定するrPPG技術や、まばたきパターンの不自然さを検知する手法。初期のディープフェイクには有効だったが、最新の生成AIはこれらを学習して回避するようになっている。</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>GAN指紋の検出</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">GANが生成した画像には、特徴的なノイズパターン（「GAN指紋」）が残ることがある。しかし拡散モデルベースの生成物にはこのパターンが異なり、新手法への対応が常に必要。</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>メタデータ・圧縮痕跡の解析</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">画像・動画ファイルに残る撮影機器情報やJPEG圧縮パターンの矛盾を検出する方法。SNSでの再圧縮・再投稿でメタデータが消えるため、信頼性が限定的。</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>マルチモーダル整合性チェック</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">映像と音声の口の動きの同期、影の方向と光源の整合性など、複数の情報チャネルの矛盾を検出。現状では最も有望なアプローチのひとつ。</div></div>
+      </div>
+    </div>
+
+    <h2 id="s6">6. 対策と法整備</h2>
+    <p>技術的な検出だけでなく、社会的・法的な対策も整備が進んでいます。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-teal">
+        <div class="mc-label">技術的対策</div>
+        <h4>Cメタデータ（C2PA）</h4>
+        <p>「コンテンツ来歴」の標準規格。撮影機器・編集履歴をコンテンツに埋め込み、AIが生成したか人間が撮ったかを証明する。Adobe・Microsoft・GoogleなどがC2PAを採用中。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">技術的対策</div>
+        <h4>電子透かし（ウォーターマーク）</h4>
+        <p>AI生成コンテンツに人間の目には見えない識別情報を埋め込む技術。EUのAI法では高リスクAI生成物へのウォーターマーク義務付けを検討中。</p>
+      </div>
+      <div class="mini-card acc-purple">
+        <div class="mc-label">法的対策</div>
+        <h4>国内の動向（日本）</h4>
+        <p>2024年に「生成AIと著作権」に関するガイドラインを文化庁が公表。非合意ポルノへの対応は不正競争防止法・名誉毀損で対応するが、専用法の整備は遅れている。</p>
+      </div>
+      <div class="mini-card acc-purple">
+        <div class="mc-label">法的対策</div>
+        <h4>海外の動向</h4>
+        <p>EU AI法（2024年施行）：リアルタイム顔認識の公共利用を原則禁止。米国：DEFIANCE Act等でディープフェイクポルノを規制。韓国：不法ディープフェイク処罰法を施行済み。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9889; 根本的な問いかけ</div>
+      <p>技術と法律の整備は常に「後追い」になります。本質的な対策は、一人ひとりの「疑う力」——つまり情報リテラシーの底上げです。「感動した」「怒りを感じた」映像ほど、いったん立ち止まって出所を確認する習慣が、これからの時代を生きる上で不可欠なスキルになります。</p>
+    </div>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>ディープフェイク</strong> ＝ Deep learning ＋ Fake。GANを起源とする偽コンテンツ生成技術</li>
+        <li>技術の種類：静止画フェイク・動画フェイク・<strong>音声クローン</strong>・リアルタイム変換の4種</li>
+        <li><strong>NCII（非合意ポルノ）</strong> が最も深刻な個人被害として問題化</li>
+        <li>検出vs生成の<strong>軍拡競争</strong> ＝ GANの内部競争が社会スケールで起きている構造</li>
+        <li><strong>C2PA</strong>（コンテンツ来歴規格）・<strong>電子透かし</strong>が技術的対策の主流</li>
+        <li>EU AI法でリアルタイム顔認識の<strong>公共利用を原則禁止</strong></li>
+        <li>新しいリテラシー：「百見しても信じるな」——ソースを疑い・複数で検証し・感情を疑う</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        ディープフェイクは「技術の問題」ではなく「社会の問題」です。次は、このような生成AIを支える検索技術の核心——ベクトル化を学びましょう。RAGとも深く繋がる重要な概念ですよ。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c3-01.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">01 ｜ 5種類の生成AI</div></a>
+      <a href="c3-03.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">03 ｜ ベクトル化と意味の検索</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

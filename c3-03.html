@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ベクトル化と意味の検索 ｜ Chapter 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="chapter3.html" class="active">Chapter 3</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 3 ｜ 03</span>
+    <h1>ベクトル化と意味の検索</h1>
+    <div class="reading">「意味」を数字に変換する——王様－男＋女＝女王の世界</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「AIは言葉の意味を理解している」という言い方をよく聞きます。しかしコンピュータが扱えるのは数字だけです。では「意味を理解する」とはどういうことなのか。その答えが<strong>ベクトル化（Embedding）</strong>という技術です。意味を数字の座標に変換し、「近い意味の言葉は近い座標に置く」——この発想が、現代の検索・生成AIの中核を支えています。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">ベクトルとは何か ── 次元という概念</a></li>
+        <li><a href="#s2">意味の近さ ＝ ベクトルの距離</a></li>
+        <li><a href="#s3">Word2Vec の衝撃 ── 意味が計算できる</a></li>
+        <li><a href="#s4">高次元空間で何が起きているか</a></li>
+        <li><a href="#s5">ベクトルDB ── 意味で検索するデータベース</a></li>
+        <li><a href="#s6">1章の次元削減との深いつながり</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. ベクトルとは何か ── 次元という概念</h2>
+    <p>ベクトルとは、複数の数字を並べたものです。たとえば「(3, 5)」は2次元ベクトル、「(1, 4, 2)」は3次元ベクトルです。中学数学で習う「矢印」のイメージが2次元・3次元では視覚化できます。</p>
+    <p>では「1000次元ベクトル」はどうでしょうか。1000個の数字を並べたもので、空間として想像することは人間には不可能です。しかし<strong>数学的には普通に存在し、計算できます</strong>。「どれだけ近いか（距離）」も、2次元の三平方の定理を1000次元に拡張するだけで求められます。</p>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>次元＝数字の個数。1000次元は物理的に存在しないが、数学的には普通に存在する。「目には見えないが計算できる」——これは1章で学んだ「隠れ層はブラックボックスだが数式では全部見えている」という話と同じ構造です。AIの世界では、人間が視覚化できないことと、数学的に存在することは別の話なんです。</p>
+    </div>
+
+    <!-- SVG：次元の説明 -->
+    <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="200" rx="14" fill="#f3efe9"/>
+      <text x="340" y="28" text-anchor="middle" font-size="13" fill="#6b665e" font-weight="600">次元の増加イメージ</text>
+
+      <!-- 1次元 -->
+      <rect x="30" y="50" width="160" height="110" rx="10" fill="#fff" stroke="#e6e0d6" stroke-width="1"/>
+      <text x="110" y="72" text-anchor="middle" font-size="12" fill="#c9a14a" font-weight="600">1次元</text>
+      <line x1="50" y1="110" x2="170" y2="110" stroke="#2b2925" stroke-width="2"/>
+      <circle cx="95" cy="110" r="5" fill="#d98a8a"/>
+      <text x="95" y="135" text-anchor="middle" font-size="11" fill="#6b665e">(3)</text>
+      <text x="110" y="155" text-anchor="middle" font-size="10" fill="#9a948a">数直線上の1点</text>
+
+      <!-- 2次元 -->
+      <rect x="260" y="50" width="160" height="110" rx="10" fill="#fff" stroke="#e6e0d6" stroke-width="1"/>
+      <text x="340" y="72" text-anchor="middle" font-size="12" fill="#c9a14a" font-weight="600">2次元</text>
+      <line x1="280" y1="145" x2="400" y2="145" stroke="#2b2925" stroke-width="1.5"/>
+      <line x1="320" y1="80" x2="320" y2="150" stroke="#2b2925" stroke-width="1.5"/>
+      <circle cx="360" cy="105" r="5" fill="#7a9bc4"/>
+      <text x="368" y="100" font-size="10" fill="#6b665e">(3, 5)</text>
+      <text x="340" y="172" text-anchor="middle" font-size="10" fill="#9a948a">平面上の1点</text>
+
+      <!-- N次元 -->
+      <rect x="490" y="50" width="160" height="110" rx="10" fill="#2b2925"/>
+      <text x="570" y="72" text-anchor="middle" font-size="12" fill="#ddc88f" font-weight="600">N次元</text>
+      <text x="570" y="100" text-anchor="middle" font-size="11" fill="#faf8f5">(0.8, 0.2, 0.9,</text>
+      <text x="570" y="118" text-anchor="middle" font-size="11" fill="#faf8f5">0.1, 0.7, ...)</text>
+      <text x="570" y="140" text-anchor="middle" font-size="10" fill="#ddc88f">×1000個</text>
+      <text x="570" y="172" text-anchor="middle" font-size="10" fill="#9a948a">想像不可能・計算は可能</text>
+    </svg>
+
+    <h2 id="s2">2. 意味の近さ ＝ ベクトルの距離</h2>
+    <p>ベクトル化の核心的なアイデアは「<strong>意味が似ている言葉は、ベクトル空間の中で近くに置く</strong>」というものです。どれだけ「近い」かを測る主な方法が<strong>コサイン類似度</strong>です。</p>
+    <p>コサイン類似度は2つのベクトルが向いている「方向の近さ」を測ります（−1〜1の値）。「犬」と「猫」は似た方向、「犬」と「民主主義」は全然違う方向を向く——というイメージです。距離ではなく方向で測ることで、文章の長さに関係なく「意味の近さ」を比較できます。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>図書館の棚をイメージしてください。似た内容の本は同じ棚の近くに並んでいます。ベクトル空間は、すべての言葉・文章・概念を「意味の図書館」に並べたものです。「検索」とは「この棚の近くにある本を探して」と指示することに等しいのです。</p>
+    </div>
+
+    <h2 id="s3">3. Word2Vec の衝撃 ── 意味が計算できる</h2>
+    <p>2013年、Googleの研究者Tomas Mikolovが<strong>Word2Vec</strong>を発表し、世界を驚かせました。大量のテキストから単語をベクトルに変換するこの手法が示したのは、<strong>「意味が計算できる」</strong>という事実でした。</p>
+
+    <!-- SVG：王様-男+女=女王の図 -->
+    <svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="360" rx="14" fill="#faf8f5"/>
+      <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">ベクトル空間での意味の演算</text>
+
+      <!-- 座標軸 -->
+      <line x1="80" y1="300" x2="620" y2="300" stroke="#e6e0d6" stroke-width="1.5"/>
+      <line x1="80" y1="60" x2="80" y2="300" stroke="#e6e0d6" stroke-width="1.5"/>
+      <text x="625" y="304" font-size="11" fill="#9a948a">権力・地位</text>
+      <text x="55" y="56" text-anchor="middle" font-size="11" fill="#9a948a">性別</text>
+      <text x="68" y="295" font-size="11" fill="#9a948a">男</text>
+      <text x="68" y="128" font-size="11" fill="#9a948a">女</text>
+
+      <!-- グリッド（薄く） -->
+      <line x1="80" y1="180" x2="620" y2="180" stroke="#e6e0d6" stroke-width="0.5" stroke-dasharray="4,4"/>
+      <line x1="200" y1="60" x2="200" y2="300" stroke="#e6e0d6" stroke-width="0.5" stroke-dasharray="4,4"/>
+      <line x1="360" y1="60" x2="360" y2="300" stroke="#e6e0d6" stroke-width="0.5" stroke-dasharray="4,4"/>
+      <line x1="520" y1="60" x2="520" y2="300" stroke="#e6e0d6" stroke-width="0.5" stroke-dasharray="4,4"/>
+
+      <!-- 男 -->
+      <circle cx="180" cy="280" r="10" fill="#7a9bc4"/>
+      <text x="180" y="274" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">男</text>
+      <text x="180" y="270" text-anchor="middle" font-size="13" fill="#fff" font-weight="600"> </text>
+      <text x="180" y="316" text-anchor="middle" font-size="12" fill="#7a9bc4" font-weight="600">男性</text>
+      <text x="180" y="330" text-anchor="middle" font-size="10" fill="#9a948a">(低地位・男性)</text>
+
+      <!-- 王様 -->
+      <circle cx="480" cy="280" r="10" fill="#c9a14a"/>
+      <text x="480" y="274" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">王</text>
+      <text x="480" y="316" text-anchor="middle" font-size="12" fill="#c9a14a" font-weight="600">王様</text>
+      <text x="480" y="330" text-anchor="middle" font-size="10" fill="#9a948a">(高地位・男性)</text>
+
+      <!-- 女性 -->
+      <circle cx="180" cy="110" r="10" fill="#d98a8a"/>
+      <text x="180" y="104" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">女</text>
+      <text x="180" y="146" text-anchor="middle" font-size="12" fill="#d98a8a" font-weight="600">女性</text>
+      <text x="180" y="160" text-anchor="middle" font-size="10" fill="#9a948a">(低地位・女性)</text>
+
+      <!-- 女王（答え） -->
+      <circle cx="480" cy="110" r="13" fill="#2b2925"/>
+      <text x="480" y="104" text-anchor="middle" font-size="13" fill="#faf8f5" font-weight="600">女王</text>
+      <text x="480" y="146" text-anchor="middle" font-size="12" fill="#2b2925" font-weight="700">女王 ✓</text>
+      <text x="480" y="160" text-anchor="middle" font-size="10" fill="#9a948a">(高地位・女性)</text>
+
+      <!-- 演算の矢印 -->
+      <!-- 王様 - 男 -->
+      <line x1="480" y1="270" x2="480" y2="120" stroke="#c9a14a" stroke-width="2" stroke-dasharray="6,3"/>
+      <text x="500" y="195" font-size="11" fill="#c9a14a">－男　</text>
+      <text x="500" y="208" font-size="11" fill="#c9a14a">＋女　</text>
+
+      <!-- 女王へ -->
+      <line x1="490" y1="110" x2="530" y2="110" stroke="#2b2925" stroke-width="0"/>
+      <text x="340" y="350" text-anchor="middle" font-size="13" fill="#2b2925" font-weight="600">王様 − 男 ＋ 女 ＝ 女王　（ベクトルの足し算・引き算）</text>
+    </svg>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>「王様 − 男 + 女 = 女王」——これは暗記で覚えるものではなく、意味が分かると当然の結果に見えます。「権力・地位が高い」という方向と「女性である」という方向のベクトルを足し合わせると、その座標に「女王」という単語が置かれている。AIは意味を「理解」しているのではなく、<strong>意味の空間的関係を数字で表している</strong>のです。</p>
+    </div>
+
+    <h3>他の演算例</h3>
+    <div class="cards c3">
+      <div class="mini-card acc-teal">
+        <h4>東京 − 日本 ＋ フランス</h4>
+        <p>≈ パリ<br>「国の首都」という関係がベクトルとして表現されている。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <h4>医者 − 男 ＋ 女</h4>
+        <p>≈ 看護師（歴史的バイアス）<br>学習データの偏りが数値に反映される問題＝AIバイアス。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <h4>走る − 速い ＋ 遅い</h4>
+        <p>≈ 歩く<br>動詞の速度関係も数値化されている。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9888; AIバイアスの根源</div>
+      <p>「医者 − 男 + 女 ≈ 看護師」という結果が出ることがあります。これは学習データ（インターネット上のテキスト）に含まれる社会的偏見がそのままベクトルに埋め込まれた結果です。AIが出す回答の偏りは、多くの場合このベクトル空間のバイアスに由来します。</p>
+    </div>
+
+    <h2 id="s4">4. 高次元空間で何が起きているか</h2>
+    <p>現在のLLM（大規模言語モデル）が使うEmbeddingは1,000〜4,096次元が一般的です。この高次元空間では、単語だけでなく<strong>文・段落・文書全体</strong>をひとつのベクトルとして表現できます。</p>
+    <p>高次元にすることで「文法的な正しさ」「感情の極性（ポジティブ/ネガティブ）」「専門分野（医療/法律/IT）」「文体（フォーマル/カジュアル）」など、多くの「意味の軸」を同時に表現できます。2次元の地図が経度・緯度しか表せないのに対し、1000次元の地図は1000種類の「意味の軸」を持てるイメージです。</p>
+
+    <h2 id="s5">5. ベクトルDB ── 意味で検索するデータベース</h2>
+    <p>通常のデータベースは「完全一致」か「キーワード検索」しかできません。「犬」と入力すれば「犬」を含む文書しか出てきません。しかし<strong>ベクトルDB（ベクトルデータベース）</strong>は「意味の近さ」で検索できます。</p>
+    <p>「ペットの健康管理について教えて」という質問でも、「犬の病気」「猫の食事」「動物病院の選び方」といった文書が意味的に近いとして返ってきます。これが<strong>セマンティック検索（意味検索）</strong>です。</p>
+
+    <div class="flow">
+      <span class="step">質問文をベクトル化</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">ベクトルDBで近傍探索</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">意味的に近い文書を返す</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">回答生成に活用</span>
+    </div>
+
+    <p>代表的なベクトルDBには <strong>Pinecone・Weaviate・Chroma・pgvector（PostgreSQL拡張）</strong> などがあります。大量の文書を事前にベクトル化してDBに格納しておき、質問が来るたびに「最も近いベクトルの文書」を瞬時に取り出せます。</p>
+
+    <h2 id="s6">6. 1章の次元削減との深いつながり</h2>
+    <p>1章で学んだ教師なし学習の「<strong>次元削減</strong>」を覚えていますか？「複雑なデータから重要な本質だけを抜き出す」技術です。ベクトル化はこの発想の発展形です。</p>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>1章で学んだ次元削減がここで活きています。1000次元のベクトル空間を人間が視覚化できる2〜3次元に圧縮する際に次元削減（PCA・t-SNEなど）が使われます。「王様・女王・男・女」が2次元上で四角形を形成するように見えるあの図は、1000次元のベクトルを2次元に「投影」した結果なのです。</p>
+    </div>
+
+    <table class="cmp-table">
+      <tr><th>概念</th><th>登場した章</th><th>ベクトル化との関係</th></tr>
+      <tr><td>次元削減</td><td>1章（教師なし学習）</td><td>高次元ベクトルを2〜3次元に圧縮して可視化</td></tr>
+      <tr><td>Embedding層</td><td>2章（ニューラルネットワーク）</td><td>ベクトル化そのもの。入力→高次元ベクトル変換</td></tr>
+      <tr><td>Attention</td><td>2章（Transformer）</td><td>ベクトル同士の「近さ・関係」を動的に計算</td></tr>
+      <tr><td>ベクトルDB</td><td>3章（本記事）</td><td>意味ベクトルを格納・高速近傍探索する仕組み</td></tr>
+      <tr><td>RAG</td><td>3章（次記事）</td><td>ベクトルDBを使って関連文書を取得してから回答</td></tr>
+    </table>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>ベクトル化（Embedding）</strong> ＝ 言葉・文書を数値ベクトルに変換する技術</li>
+        <li>次元 ＝ 数字の個数。<strong>1000次元は数学的に普通に存在する</strong>（視覚化はできない）</li>
+        <li><strong>コサイン類似度</strong> ＝ ベクトルの向きの近さで意味の類似度を測る指標（−1〜1）</li>
+        <li><strong>Word2Vec</strong>（2013年・Google）＝ 単語をベクトルで表現し意味演算を可能にした</li>
+        <li>「王様 − 男 ＋ 女 ＝ 女王」＝ <strong>意味がベクトル演算で表現できる</strong>ことの証明</li>
+        <li><strong>ベクトルDB</strong> ＝ 意味の近さで検索できるデータベース</li>
+        <li><strong>セマンティック検索</strong> ＝ キーワード一致ではなく意味の近さで検索</li>
+        <li>AIバイアスの根源 ＝ 学習データの偏りがベクトル空間に埋め込まれる</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        ベクトル化が分かると、次のRAGが自然に理解できます。「質問をベクトル化 → ベクトルDBで近い文書を探す → その文書をAIに渡して回答させる」——ベクトル化はRAGの心臓部です。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c3-02.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">02 ｜ ディープフェイクとリスク</div></a>
+      <a href="c3-04.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">04 ｜ RAG（検索拡張生成）</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

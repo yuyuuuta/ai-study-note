@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG（検索拡張生成） ｜ Chapter 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="chapter3.html" class="active">Chapter 3</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 3 ｜ 04</span>
+    <h1>RAG（検索拡張生成）</h1>
+    <div class="reading">AIが「知らないこと」を補う仕組み——答える前に調べてから返す</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>ChatGPTに最新ニュースを聞くと「私の知識は〇〇年までです」と答えることがあります。LLM（大規模言語モデル）は学習時点の知識しか持たず、その後の出来事は知りません。また、社内資料や専門データベースのような非公開情報は、そもそも学習データに含まれていません。この「知識の限界」を解決するのが<strong>RAG（Retrieval-Augmented Generation：検索拡張生成）</strong>です。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">LLMの2つの弱点</a></li>
+        <li><a href="#s2">RAGとは何か ── 設計思想</a></li>
+        <li><a href="#s3">RAGの5ステップ処理フロー</a></li>
+        <li><a href="#s4">RAGを支えるベクトル検索</a></li>
+        <li><a href="#s5">RAGの実用例</a></li>
+        <li><a href="#s6">RAGの限界と発展</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. LLMの2つの弱点</h2>
+    <p>RAGが登場した背景には、LLMが抱える2つの根本的な弱点があります。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-pink">
+        <div class="mc-label">弱点①</div>
+        <h4>知識のカットオフ</h4>
+        <p>LLMは学習完了後、知識が更新されません。「今日の株価は？」「昨日起きた事件は？」という質問には原理的に答えられません。最新情報が必要な用途では、そのままでは使えません。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">弱点②</div>
+        <h4>幻覚（ハルシネーション）</h4>
+        <p>知らないことを聞かれたとき、LLMは「知りません」ではなく、もっともらしい嘘を自信満々に答えることがあります。これを幻覚（ハルシネーション）と呼びます。専門知識・固有名詞・数値で特に起きやすいです。</p>
+      </div>
+    </div>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>LLMは「試験前に膨大な教科書を暗記した秀才」です。試験当日（回答時）には何も参照できず、記憶だけで答えます。知っていることは正確ですが、試験範囲外のことを聞かれると、自信満々に作り話をする——これが幻覚です。RAGはこの秀才に「試験中も図書館を使ってOK」にする仕組みです。</p>
+    </div>
+
+    <h2 id="s2">2. RAGとは何か ── 設計思想</h2>
+    <p>RAG（Retrieval-Augmented Generation）は2020年にMeta（当時Facebook）の研究者が発表した手法です。名前の通り、<strong>「検索（Retrieval）」で取得した情報で生成（Generation）を「拡張（Augmented）」する</strong>アーキテクチャです。</p>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>「答える前に図書館で調べてから答える司書」——これがRAGの本質です。図書館員（LLM）は知識があっても、質問を受けたらまず館内（ベクトルDB）を検索し、関連する文献を手に取ってから回答します。丸暗記ではなく「調べて答える」という、人間の知的作業に近い方法です。</p>
+    </div>
+
+    <h2 id="s3">3. RAGの5ステップ処理フロー</h2>
+    <p>RAGの処理は大きく「事前準備フェーズ」と「回答フェーズ」に分かれます。</p>
+
+    <!-- SVG：RAGの処理フロー -->
+    <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="420" rx="14" fill="#faf8f5"/>
+
+      <!-- 事前準備フェーズ -->
+      <rect x="20" y="20" width="640" height="140" rx="10" fill="#f3efe9" stroke="#e6e0d6" stroke-width="1"/>
+      <text x="40" y="44" font-size="12" fill="#9a948a" font-weight="600" letter-spacing="2">事前準備フェーズ（一度だけ実行）</text>
+
+      <rect x="40" y="56" width="140" height="84" rx="8" fill="#2b2925"/>
+      <text x="110" y="90" text-anchor="middle" font-size="12" fill="#faf8f5" font-weight="600">① 文書の収集</text>
+      <text x="110" y="108" text-anchor="middle" font-size="10" fill="#ddc88f">社内マニュアル</text>
+      <text x="110" y="122" text-anchor="middle" font-size="10" fill="#ddc88f">PDF・Web・DB</text>
+
+      <line x1="180" y1="98" x2="215" y2="98" stroke="#c9a14a" stroke-width="2"/>
+      <polygon points="215,93 225,98 215,103" fill="#c9a14a"/>
+
+      <rect x="225" y="56" width="140" height="84" rx="8" fill="#6bae9a"/>
+      <text x="295" y="90" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">② チャンク分割</text>
+      <text x="295" y="108" text-anchor="middle" font-size="10" fill="#d4f0e8">適切なサイズに</text>
+      <text x="295" y="122" text-anchor="middle" font-size="10" fill="#d4f0e8">テキストを分割</text>
+
+      <line x1="365" y1="98" x2="400" y2="98" stroke="#c9a14a" stroke-width="2"/>
+      <polygon points="400,93 410,98 400,103" fill="#c9a14a"/>
+
+      <rect x="410" y="56" width="140" height="84" rx="8" fill="#9a8fc4"/>
+      <text x="480" y="90" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">③ ベクトル化</text>
+      <text x="480" y="108" text-anchor="middle" font-size="10" fill="#e8e4f5">Embeddingモデルで</text>
+      <text x="480" y="122" text-anchor="middle" font-size="10" fill="#e8e4f5">数値ベクトルに変換</text>
+
+      <line x1="550" y1="98" x2="585" y2="98" stroke="#c9a14a" stroke-width="2"/>
+      <polygon points="585,93 595,98 585,103" fill="#c9a14a"/>
+
+      <rect x="595" y="56" width="65" height="84" rx="8" fill="#c9a14a"/>
+      <text x="628" y="90" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">ベクトル</text>
+      <text x="628" y="106" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">DB</text>
+      <text x="628" y="122" text-anchor="middle" font-size="9" fill="#fdf0d0">格納</text>
+
+      <!-- 回答フェーズ -->
+      <rect x="20" y="185" width="640" height="210" rx="10" fill="#fdf6f6" stroke="#e6e0d6" stroke-width="1"/>
+      <text x="40" y="208" font-size="12" fill="#9a948a" font-weight="600" letter-spacing="2">回答フェーズ（質問のたびに実行）</text>
+
+      <!-- ユーザー質問 -->
+      <rect x="40" y="218" width="110" height="60" rx="8" fill="#d98a8a"/>
+      <text x="95" y="244" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">④ 質問入力</text>
+      <text x="95" y="260" text-anchor="middle" font-size="10" fill="#fce8e8">ユーザーの</text>
+      <text x="95" y="272" text-anchor="middle" font-size="10" fill="#fce8e8">質問をベクトル化</text>
+
+      <line x1="150" y1="248" x2="185" y2="248" stroke="#c9a14a" stroke-width="2"/>
+      <polygon points="185,243 195,248 185,253" fill="#c9a14a"/>
+
+      <!-- 検索 -->
+      <rect x="195" y="218" width="130" height="60" rx="8" fill="#7a9bc4"/>
+      <text x="260" y="244" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">⑤ 近傍検索</text>
+      <text x="260" y="260" text-anchor="middle" font-size="10" fill="#d4e6f5">ベクトルDBから</text>
+      <text x="260" y="272" text-anchor="middle" font-size="10" fill="#d4e6f5">類似文書を取得</text>
+
+      <line x1="325" y1="248" x2="360" y2="248" stroke="#c9a14a" stroke-width="2"/>
+      <polygon points="360,243 370,248 360,253" fill="#c9a14a"/>
+
+      <!-- プロンプト生成 -->
+      <rect x="370" y="218" width="130" height="60" rx="8" fill="#6bae9a"/>
+      <text x="435" y="238" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">⑥ プロンプト</text>
+      <text x="435" y="252" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">に挿入</text>
+      <text x="435" y="268" text-anchor="middle" font-size="10" fill="#d4f0e8">質問＋関連文書を</text>
+      <text x="435" y="280" text-anchor="middle" font-size="10" fill="#d4f0e8">LLMに渡す</text>
+
+      <line x1="500" y1="248" x2="535" y2="248" stroke="#c9a14a" stroke-width="2"/>
+      <polygon points="535,243 545,248 535,253" fill="#c9a14a"/>
+
+      <!-- LLM回答 -->
+      <rect x="545" y="218" width="100" height="60" rx="8" fill="#2b2925"/>
+      <text x="595" y="244" text-anchor="middle" font-size="11" fill="#faf8f5" font-weight="600">⑦ LLMが</text>
+      <text x="595" y="260" text-anchor="middle" font-size="11" fill="#faf8f5" font-weight="600">回答生成</text>
+      <text x="595" y="276" text-anchor="middle" font-size="9" fill="#ddc88f">根拠ある回答</text>
+
+      <!-- 補足説明 -->
+      <text x="340" y="325" text-anchor="middle" font-size="12" fill="#6b665e">「この文書を参考に答えてください：〔関連文書〕質問：〔ユーザーの質問〕」</text>
+      <text x="340" y="345" text-anchor="middle" font-size="11" fill="#9a948a">↑ LLMに渡すプロンプトのイメージ（文書をコンテキストとして埋め込む）</text>
+
+      <!-- ベクトルDB からの矢印（事前準備→回答フェーズ） -->
+      <line x1="628" y1="140" x2="628" y2="200" stroke="#c9a14a" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <line x1="628" y1="200" x2="260" y2="200" stroke="#c9a14a" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <line x1="260" y1="200" x2="260" y2="218" stroke="#c9a14a" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="440" y="196" text-anchor="middle" font-size="10" fill="#c9a14a">格納済みベクトルを検索に使用</text>
+    </svg>
+
+    <h3>各ステップの詳細</h3>
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>① 文書収集 ── どんな文書でも対象になる</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">社内マニュアル・契約書・FAQ・メール・製品仕様書・法律文書・Webページなど、あらゆるテキストが対象。PDFやWordからテキストを抽出する前処理（OCRを含む）が必要になる場合も多いです。</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>② チャンク分割 ── 分割の粒度が品質を左右する</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">文書を「チャンク（塊）」に分割します。大きすぎると無関係な情報が混入し、小さすぎると文脈が失われます。一般的に500〜1000トークン程度が目安ですが、文書の性質によって調整が必要です。段落や見出しの境界で分割するのが自然です。</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>③ ベクトル化 ── Embeddingモデルの選択が重要</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">各チャンクをEmbeddingモデル（text-embedding-ada-002など）でベクトルに変換しベクトルDBに格納します。質問時の変換と同じモデルを使う必要があります。日本語文書なら日本語に強いモデルの選択が重要です。</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>⑥ プロンプト挿入 ── 根拠付きで回答させる工夫</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">「以下の文書を参考に、文書に書かれていないことは『分かりません』と答えてください」という指示を合わせて渡すことで、幻覚を大幅に抑制できます。取得した文書と質問を組み合わせたプロンプト設計がRAGの品質を決める重要な要素です。</div></div>
+      </div>
+    </div>
+
+    <h2 id="s4">4. RAGを支えるベクトル検索</h2>
+    <p>前の記事（c3-03）で学んだベクトル化とベクトルDBが、RAGの心臓部です。質問文をベクトルに変換し、ベクトルDB内の数百万〜数億のベクトルの中から「最も近いもの（近傍探索）」を高速に取り出します。</p>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>1章で学んだ次元削減が、ここで活きています。数百万のベクトルを全部計算すると時間がかかりすぎるため、ANN（近似最近傍探索）というアルゴリズムで高速化します。これは高次元空間を効率的にインデックス化する技術で、次元削減の考え方が応用されています。「遠いものはスキップ、近そうなものだけ精密に確認する」という発想です。</p>
+    </div>
+
+    <h2 id="s5">5. RAGの実用例</h2>
+
+    <div class="cards c3">
+      <div class="mini-card acc-teal">
+        <div class="mc-label">企業向け</div>
+        <h4>社内ナレッジ検索</h4>
+        <p>社内規定・過去の提案書・議事録をRAGに登録。「有休の申請方法は？」に社内規定を参照して正確に回答。外部LLMに社内情報を漏らさずに利用できる。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">法律・医療</div>
+        <h4>専門知識の参照</h4>
+        <p>最新の判例集・医療ガイドラインをRAGに格納。LLMの「もっともらしい嘘」リスクを下げ、根拠文書を示しながら回答できる。ハルシネーションが特に危険な分野で効果大。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">カスタマー</div>
+        <h4>サポートチャットボット</h4>
+        <p>製品マニュアル・FAQ・過去の問い合わせ対応をRAGで参照。最新の製品情報に対応した正確な回答が可能。ChatGPTのような汎用回答ではなく、自社製品に特化した回答ができる。</p>
+      </div>
+    </div>
+
+    <h2 id="s6">6. RAGの限界と発展</h2>
+    <p>RAGは強力な手法ですが、万能ではありません。</p>
+
+    <table class="cmp-table">
+      <tr><th>限界・課題</th><th>内容</th><th>対応策</th></tr>
+      <tr><td>検索精度への依存</td><td>関連文書を取り逃すと回答の質が落ちる</td><td>ハイブリッド検索（キーワード＋意味）の併用</td></tr>
+      <tr><td>文書の質への依存</td><td>古い・誤った文書があると誤回答の原因に</td><td>定期的な文書更新・品質管理が必要</td></tr>
+      <tr><td>コンテキスト長の制限</td><td>取得文書が多すぎるとLLMのコンテキスト上限を超える</td><td>リランキング（重要度で絞り込み）</td></tr>
+      <tr><td>マルチホップ推論</td><td>複数の文書をまたいだ複雑な推論が苦手</td><td>GraphRAGなど構造化ナレッジとの組み合わせ</td></tr>
+    </table>
+
+    <div class="point">
+      <div class="label">&#9889; RAGとファインチューニングの違い</div>
+      <p>よく混同されますが、<strong>ファインチューニング</strong>はモデル自体の重みを更新して「知識を体に染み込ませる」手法。<strong>RAG</strong>はモデルを変えず「外部の本棚から毎回調べる」手法です。ファインチューニングはコストと時間がかかり、知識の更新が難しい。RAGは文書を追加するだけで知識を更新できる柔軟さが強みです。</p>
+    </div>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>RAG</strong>＝ Retrieval-Augmented Generation（検索拡張生成）。2020年・Meta発表</li>
+        <li>解決する課題：LLMの<strong>知識カットオフ</strong>と<strong>幻覚（ハルシネーション）</strong></li>
+        <li>処理の流れ：文書収集 → チャンク分割 → <strong>ベクトル化</strong> → ベクトルDB格納 → 質問時に近傍検索 → プロンプト挿入 → LLM回答</li>
+        <li>心臓部は<strong>ベクトルDB</strong>（意味の近さで高速検索）</li>
+        <li>RAG vs ファインチューニング：RAGは<strong>モデルを変えず文書で補完</strong>、ファインチューニングはモデルの重みを更新</li>
+        <li>用途：社内ナレッジ検索・法律医療の専門参照・カスタマーサポート</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        RAGが分かると、AIが「調べながら答える」仕組みが見えてきましたね。最後の記事は、AIがさらに一歩進んで「自分で考えて行動する」エージェントです。じぶん会社との意外な共通点も出てきますよ。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c3-03.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">03 ｜ ベクトル化と意味の検索</div></a>
+      <a href="c3-05.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">05 ｜ AIエージェントとMCP</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

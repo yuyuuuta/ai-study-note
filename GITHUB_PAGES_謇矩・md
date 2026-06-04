@@ -1,0 +1,81 @@
+# GitHub Pages でサイトを公開する手順
+
+このサイトを無料でネット公開する手順です。
+2つの方法があります。**方法Aが一番おすすめ**（Claude Codeに任せられる）。
+
+---
+
+## 方法A：Claude Codeにやってもらう（最も簡単）
+
+Claude Codeを起動して、こう頼むだけ：
+
+```
+このサイトをGitHubにpushして、GitHub Pagesで公開して。
+リポジトリ名は ai-study-note にして。
+```
+
+Claude Codeが以下を自動でやってくれます：
+1. git初期化
+2. GitHubにリポジトリ作成（gh コマンド使用）
+3. ファイルをpush
+4. GitHub Pages設定を有効化
+
+完了すると `https://あなたのユーザー名.github.io/ai-study-note/` で公開されます。
+
+※事前に `gh auth login` でGitHubにログインしておくとスムーズです。
+
+---
+
+## 方法B：手動でやる
+
+### 1. リポジトリを作る
+GitHubにログイン →右上の「+」→「New repository」
+- Repository name: `ai-study-note`
+- Public を選択
+- 「Create repository」
+
+### 2. ファイルをアップロード
+作成後の画面で「uploading an existing file」をクリック
+→ ai-study-site フォルダの中身を全部ドラッグ&ドロップ
+→ 「Commit changes」
+
+### 3. GitHub Pages を有効化
+リポジトリの「Settings」→ 左メニュー「Pages」
+- Source: 「Deploy from a branch」
+- Branch: 「main」/ 「(root)」を選択 → Save
+
+### 4. 数分待つ
+`https://あなたのユーザー名.github.io/ai-study-note/` にアクセス
+→ 公開完了！
+
+---
+
+## コマンドでやる場合（Claude Code内 or ターミナル）
+
+```bash
+cd ai-study-site
+git init
+git add .
+git commit -m "AI学習ノート初版"
+gh repo create ai-study-note --public --source=. --push
+# GitHub Pages有効化
+gh api repos/{owner}/ai-study-note/pages -X POST -f "source[branch]=main" -f "source[path]=/" 2>/dev/null || echo "Settings>Pagesから手動で有効化してください"
+```
+
+---
+
+## 更新のしかた
+記事を追加・修正したら：
+```bash
+git add .
+git commit -m "記事を追加"
+git push
+```
+数分後に公開サイトに自動反映されます。
+
+---
+
+## 注意
+- リポジトリを Public にする必要があります（GitHub Pagesの無料枠の条件）
+- キャラクター画像など、すべてのファイルを忘れずにアップロードしてください
+- index.html がトップページとして表示されます

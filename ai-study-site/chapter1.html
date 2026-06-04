@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 ｜ AIの基礎と全体像</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html" class="active">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<!-- 章ヒーロー -->
+<section class="hero" style="min-height:60vh;">
+  <div class="hero-bg-text">Basics</div>
+  <div class="hero-inner">
+    <div class="eng">Chapter 01</div>
+    <h1>AIの基礎と全体像</h1>
+    <p>AIとは何か。どうやって学び、どう理解し、何ができて何ができないのか。<br>すべての土台となる章です。</p>
+  </div>
+</section>
+
+<div class="section">
+
+  <!-- イントロ吹き出し -->
+  <div class="chara-block reveal">
+    <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+    <div class="speech">
+      <div class="name">ユピテル先生</div>
+      まずはAIの「学び方」から。人間に勉強法がいろいろあるように、AIにも<strong>5つの学習方法</strong>があります。なぜ5つもあるのか——それは「解きたい問題」が違うからなんです。
+    </div>
+  </div>
+
+  <!-- 1. 5種類の学習 -->
+  <div class="content-block reveal">
+    <h3><span class="idx">01</span> AIの5種類の学習方法</h3>
+    <p class="lead">学習方法が複数あるのは「解きたい問題」が異なるから。正解ラベルの有無や、正解の与えられ方で分類されます。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-blue">
+        <div class="mc-label">ラベル：全部あり</div>
+        <h4>教師あり学習</h4>
+        <p>答え付きの問題集で勉強するイメージ。分類や予測が得意。スパム判定、画像認識など。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">ラベル：一部だけ</div>
+        <h4>半教師あり学習</h4>
+        <p>少しの答え＋大量の答えなしデータ。医療画像のように、ラベル付けが大変な分野で活躍。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">ラベル：なし</div>
+        <h4>教師なし学習</h4>
+        <p>答えなしで構造を発見。似たもの同士をまとめる<span class="term">クラスタリング<span class="tip">データを似たグループに自動で分けること</span></span>と、本質を圧縮する<span class="term">次元削減<span class="tip">たくさんの特徴を、重要な少数の特徴に圧縮すること</span></span>。</p>
+      </div>
+      <div class="mini-card acc-purple">
+        <div class="mc-label">結果が正解を教える</div>
+        <h4>強化学習</h4>
+        <p>試行錯誤しながら報酬を最大化。ゲーム攻略のように、結果でしか正解がわからない問題に。AlphaGoが代表例。</p>
+      </div>
+    </div>
+
+    <div class="cards c2" style="margin-top:0;">
+      <div class="mini-card acc-pink" style="grid-column: span 2;">
+        <div class="mc-label">データ自体が正解を作る</div>
+        <h4>自己教師あり学習</h4>
+        <p>「東京は日本の○○です」の穴埋めのように、データ自身が問題と答えを作る。人手のラベル付けが不要で、インターネット全体を学習データにできる。<strong>GPTやClaudeの土台</strong>になっている学習方法です。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. AIの仕組み -->
+  <div class="content-block reveal">
+    <h3><span class="idx">02</span> AIの仕組み — 重みとニューラルネットワーク</h3>
+    <p class="lead">AIの「知識」の正体は、無数の<strong>重み</strong>という数字。学習とは、この数字を調整することそのものです。</p>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        「重み」って、日常の言葉そのまま。「この意見は重みがある」の重みです。<strong>どの入力をどれくらい重要視するか</strong>を表す数字なんですよ。
+      </div>
+    </div>
+
+    <div class="flow">
+      <span class="step">入力</span>
+      <span class="arrow">&times;</span>
+      <span class="step">重み</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">合計</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">活性化関数</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">出力</span>
+    </div>
+
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>人工ニューロンとは？</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">本物の神経細胞（ニューロン）が「信号が一定以上強ければ発火する」仕組みを、数式で模倣したもの。入力に重みをかけて合計し、活性化関数を通して出力します。</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>ニューラルネットワークとは？</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">人工ニューロンを層状にたくさんつなげた構造。入力層 → 中間層（隠れ層）→ 出力層。中間層が深いものを「ディープラーニング」と呼びます。隠れ層では、浅い層が線や角を、深い層が顔全体のような抽象的な特徴を、段階的に捉えていきます。</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>なぜ「隠れ層」は中身がわからない？</span><span class="icon">+</span></div>
+        <div class="acc-body"><div class="acc-body-inner">数式は全部見えるのに、全体として何をしているかは説明できない——これがブラックボックス問題。理由は、人間がルールを書いたのではなく、AIが学習で勝手に重みを決めたから。レシピの一手順は分かっても、完成した料理の「この旨味はどの塩粒のおかげ」と説明できないのと同じです。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 特徴量とレベル -->
+  <div class="content-block reveal">
+    <h3><span class="idx">03</span> 特徴量とAIのレベル</h3>
+    <p class="lead"><span class="term">特徴量<span class="tip">データの特徴を数値化したもの。AIは数字しか扱えない</span></span>を誰が設計するかで、AIのレベルが分かれます。</p>
+    <table class="cmp-table">
+      <tr><th>レベル</th><th>特徴量</th><th>説明</th></tr>
+      <tr><td>レベル3</td><td>人間が設定</td><td>何を重要な特徴とするか、人間が設計して学習させる</td></tr>
+      <tr><td>レベル4</td><td>AIが自動発見</td><td>生データを渡すだけで、AIが自分で特徴を見つける＝ディープラーニング</td></tr>
+    </table>
+  </div>
+
+  <!-- 4. 過学習 -->
+  <div class="content-block reveal">
+    <h3><span class="idx">04</span> 過学習と4つの対応策</h3>
+    <p class="lead"><strong>過学習</strong>とは「勉強しすぎて応用が効かなくなった状態」。過去問を丸暗記して、少し変えた問題が解けない受験生のようなものです。</p>
+    <div class="cards c4">
+      <div class="mini-card acc-pink"><h4>データ拡張</h4><p>データを反転・回転して水増しし、多様にする</p></div>
+      <div class="mini-card acc-pink"><h4>ドロップアウト</h4><p>学習中にランダムでニューロンを無効化し、依存を防ぐ</p></div>
+      <div class="mini-card acc-pink"><h4>正則化</h4><p>大きすぎる重みにペナルティを与え、シンプルさを保つ</p></div>
+      <div class="mini-card acc-pink"><h4>アーリーストッピング</h4><p>検証データの精度が下がり始めたら学習を止める</p></div>
+    </div>
+  </div>
+
+  <!-- 5. AIの歴史 -->
+  <div class="content-block reveal">
+    <h3><span class="idx">05</span> AIの歴史と技術革新の3原則</h3>
+    <div class="chara-block">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        AIの歴史は「期待 → 限界 → 冬の時代 → 別の方法で復活」の繰り返し。そして最大の転換は、<strong>「人間がルールを書く」から「データから学ぶ」へ</strong>の発想の転換でした。
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-year">1950</div><h4>チューリングテスト</h4><p>「機械は考えられるか」を測定可能な問いに変えた</p></div>
+      <div class="tl-item"><div class="tl-year">1956</div><h4>ダートマス会議</h4><p>「人工知能（AI）」という言葉が誕生</p></div>
+      <div class="tl-item"><div class="tl-year">1980s</div><h4>第2次ブーム：エキスパートシステム</h4><p>専門知識をルール化。だがルールが増えすぎて管理不能に</p></div>
+      <div class="tl-item hl"><div class="tl-year">2012</div><h4>ディープラーニング革命（AlexNet）</h4><p>画像認識で圧勝。理論・GPU・大量データの3つが揃った瞬間</p></div>
+    </div>
+
+    <div class="exam-box" style="margin-top:20px;">
+      <h3>&#128161; 技術革新の3原則</h3>
+      <div class="flow" style="background:transparent; padding:10px 0;">
+        <span class="step">理論・アルゴリズム</span>
+        <span class="arrow">+</span>
+        <span class="step">計算インフラ</span>
+        <span class="arrow">+</span>
+        <span class="step">データ・資源</span>
+        <span class="arrow">=</span>
+        <span class="step" style="border-color:var(--accent); color:var(--accent);">爆発的進化</span>
+      </div>
+      <p style="font-size:13px; color:var(--ink-soft); margin-top:14px;">この3つが同時に揃ったとき、技術は爆発する。2012年のAIも、この条件が揃ったから革命が起きました。次の量子コンピュータはまだインフラに大きなギャップがある、という見方もできます。</p>
+    </div>
+  </div>
+
+  <!-- 6. AIの限界 -->
+  <div class="content-block reveal">
+    <h3><span class="idx">06</span> AIの限界と未来</h3>
+    <div class="tabs">
+      <div class="tab-btns">
+        <button class="tab-btn active" onclick="switchTab(this,'t-limit')">限界の概念</button>
+        <button class="tab-btn" onclick="switchTab(this,'t-stage')">AIの段階</button>
+        <button class="tab-btn" onclick="switchTab(this,'t-future')">未来の概念</button>
+      </div>
+      <div class="tab-panel active" id="t-limit">
+        <div class="cards c2">
+          <div class="mini-card acc-gold"><h4>ノーフリーランチ定理</h4><p>すべての問題に最強のアルゴリズムは存在しない。何かに最適化すれば、別の何かは苦手になる。だから用途に合ったAI選びが必要。</p></div>
+          <div class="mini-card acc-gold"><h4>ラプラスの悪魔</h4><p>全知があれば未来を計算できるという思想。だが量子力学・カオス理論・ゲーデルの定理によって、完全な予測は原理的に不可能と示された。</p></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="t-stage">
+        <div class="cards c3">
+          <div class="mini-card acc-blue"><div class="mc-label">現在ここ</div><h4>ANI（特化型）</h4><p>特定タスクだけ得意。ChatGPTもClaudeも実はこれ。</p></div>
+          <div class="mini-card acc-purple"><div class="mc-label">未実現</div><h4>AGI（汎用）</h4><p>人間のようにあらゆる分野をこなす知性。</p></div>
+          <div class="mini-card acc-pink"><div class="mc-label">SF的概念</div><h4>ASI（超知性）</h4><p>人間を圧倒的に超える知性。</p></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="t-future">
+        <div class="cards c3">
+          <div class="mini-card acc-gold"><h4>シンギュラリティ</h4><p>AIが人間を超え、予測・制御不能になる転換点。</p></div>
+          <div class="mini-card acc-gold"><h4>2045年問題</h4><p>カーツワイルが予測した到来年。収穫加速の法則による。</p></div>
+          <div class="mini-card acc-gold"><h4>AI効果</h4><p>AIができた途端、それはAIと呼ばれなくなる現象。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 試験ポイント -->
+  <div class="exam-box reveal">
+    <h3>&#127919; 1章の試験頻出ポイント</h3>
+    <ul class="exam-list">
+      <li>AIには得意・不得意がある（ノーフリーランチ定理）→ <strong>用途に合ったAI選択が必要</strong></li>
+      <li>学習データに偏りがあれば → <strong>AIの判断も偏る（バイアス）</strong></li>
+      <li>学習データにない知識は持てない → <strong>ハルシネーションの原因</strong></li>
+      <li>AIは原理的に完全ではない → <strong>人間がAIを監督・チェックする必要がある</strong></li>
+      <li>過学習の4対策：データ拡張・ドロップアウト・正則化・アーリーストッピング</li>
+      <li>レベル4 ＝ ディープラーニング ＝ 特徴量を自動学習</li>
+    </ul>
+  </div>
+
+  <!-- ページナビ -->
+  <div class="page-nav">
+    <a href="index.html" class="prev">
+      <div class="dir">&larr; HOME</div>
+      <div class="ttl">トップに戻る</div>
+    </a>
+    <a href="chapter2.html" class="next">
+      <div class="dir">NEXT &rarr;</div>
+      <div class="ttl">Chapter 2 ｜ 生成AIのアーキテクチャ</div>
+    </a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

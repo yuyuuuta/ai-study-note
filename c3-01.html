@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5種類の生成AI ｜ Chapter 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">Chapter 1</a>
+    <a href="chapter2.html">Chapter 2</a>
+    <a href="chapter3.html" class="active">Chapter 3</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">CHAPTER 3 ｜ 01</span>
+    <h1>5種類の生成AI</h1>
+    <div class="reading">テキスト・画像・音楽・動画・音声——前処理から代表モデルまで</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「生成AI」と一口に言っても、生み出すものの種類は大きく5つに分かれます。それぞれの生成AIは、入力データをどう処理するか（前処理）、どんな技術を使うか（アーキテクチャ）、何が得意で何が難しいか（限界）がまったく異なります。この記事では、5種類それぞれを「前処理」から丁寧に解説します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">生成AIの「モダリティ」とは</a></li>
+        <li><a href="#s2">① テキスト生成AI</a></li>
+        <li><a href="#s3">② 画像生成AI</a></li>
+        <li><a href="#s4">③ 音楽生成AI</a></li>
+        <li><a href="#s5">④ 動画生成AI</a></li>
+        <li><a href="#s6">⑤ 音声生成AI</a></li>
+        <li><a href="#s7">マルチモーダルAIの登場</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. 生成AIの「モダリティ」とは</h2>
+    <p>AIが扱う情報の「種類・形式」のことを<strong>モダリティ</strong>と呼びます。人間の感覚に対応させると、テキスト（読む）・画像（見る）・音楽・音声（聴く）・動画（見て聴く）の5種類です。</p>
+    <p>大切なのは、<strong>コンピュータはどのモダリティも「数字の列」としてしか扱えない</strong>という点です。音楽も画像も、最終的には数値の配列に変換されて初めてAIが処理できます。この「自然界の情報を数字に変える」作業が<strong>前処理</strong>であり、生成AIの品質を左右する重要なステップです。</p>
+
+    <!-- SVG図解：5種類の放射状マップ -->
+    <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:40px auto;font-family:'Noto Sans JP',sans-serif;">
+      <!-- 背景 -->
+      <rect width="700" height="420" rx="18" fill="#faf8f5"/>
+      <!-- タイトル -->
+      <text x="350" y="36" text-anchor="middle" font-size="15" fill="#6b665e" font-weight="600" letter-spacing="2">5種類の生成AI ─ モダリティマップ</text>
+      <!-- 中心円 -->
+      <circle cx="350" cy="225" r="58" fill="#2b2925"/>
+      <text x="350" y="220" text-anchor="middle" font-size="13" fill="#faf8f5" font-weight="600">生成AI</text>
+      <text x="350" y="238" text-anchor="middle" font-size="11" fill="#ddc88f">Generative AI</text>
+      <!-- ライン -->
+      <line x1="350" y1="167" x2="350" y2="96" stroke="#e6e0d6" stroke-width="2"/>
+      <line x1="350" y1="283" x2="350" y2="354" stroke="#e6e0d6" stroke-width="2"/>
+      <line x1="292" y1="200" x2="188" y2="158" stroke="#e6e0d6" stroke-width="2"/>
+      <line x1="408" y1="200" x2="512" y2="158" stroke="#e6e0d6" stroke-width="2"/>
+      <line x1="408" y1="250" x2="512" y2="292" stroke="#e6e0d6" stroke-width="2"/>
+      <!-- テキスト -->
+      <rect x="270" y="52" width="160" height="44" rx="10" fill="#6bae9a"/>
+      <text x="350" y="72" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">① テキスト</text>
+      <text x="350" y="89" text-anchor="middle" font-size="11" fill="#d4f0e8">ChatGPT / Claude / Gemini</text>
+      <!-- 画像 -->
+      <rect x="80" y="118" width="160" height="44" rx="10" fill="#7a9bc4"/>
+      <text x="160" y="138" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">② 画像</text>
+      <text x="160" y="155" text-anchor="middle" font-size="11" fill="#d4e6f5">Stable Diffusion / DALL-E</text>
+      <!-- 音楽 -->
+      <rect x="460" y="118" width="160" height="44" rx="10" fill="#9a8fc4"/>
+      <text x="540" y="138" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">③ 音楽</text>
+      <text x="540" y="155" text-anchor="middle" font-size="11" fill="#e8e4f5">Suno / Udio</text>
+      <!-- 動画 -->
+      <rect x="270" y="354" width="160" height="44" rx="10" fill="#d98a8a"/>
+      <text x="350" y="374" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">④ 動画</text>
+      <text x="350" y="391" text-anchor="middle" font-size="11" fill="#fce8e8">Sora / Runway / Kling</text>
+      <!-- 音声 -->
+      <rect x="460" y="252" width="160" height="44" rx="10" fill="#c9a14a"/>
+      <text x="540" y="272" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">⑤ 音声</text>
+      <text x="540" y="289" text-anchor="middle" font-size="11" fill="#fdf0d0">ElevenLabs / VALL-E</text>
+    </svg>
+
+    <h2 id="s2">2. ① テキスト生成AI</h2>
+    <h3>前処理：トークン化</h3>
+    <p>テキスト生成AIへの入力文（プロンプト）は、そのまま渡されるわけではありません。まず<strong>トークン化（Tokenization）</strong>という前処理が行われます。文章を単語や文字の断片に切り刻み、それぞれに番号（トークンID）を割り当てる作業です。</p>
+    <p>たとえば「ChatGPTはすごい」という文章は、「Chat」「G」「PT」「は」「すごい」のように分割され、それぞれ「9126」「38」「2898」…といった数字に変換されます。日本語は英語より分割単位が細かくなりやすく、同じ内容でも英語より多くのトークンを使います。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>トークン化は「文章を暗号に変換する作業」。AIは日本語の文字を直接読んでいるのではなく、すべて数字のIDに翻訳してから処理しています。「ChatGPTの料金が高い」という文章も、AIには「9126・38・12・403・29・7…」という数字の列として届いています。</p>
+    </div>
+
+    <h3>アーキテクチャと特徴</h3>
+    <p>2章で学んだ<strong>Transformer（Decoderベース）</strong>が中核です。トークン化されたIDをEmbedding（埋め込み）層で高次元ベクトルに変換し、Self-Attentionで文脈を捉えながら次のトークンを予測します。これを繰り返すことで文章を生成します。</p>
+
+    <div class="cards c3">
+      <div class="mini-card acc-teal">
+        <div class="mc-label">代表モデル</div>
+        <h4>ChatGPT（OpenAI）</h4>
+        <p>GPT-4ベース。RLHFで人間の好みに調整。2022年11月リリース後、史上最速で1億ユーザーを突破。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">代表モデル</div>
+        <h4>Claude（Anthropic）</h4>
+        <p>Constitutional AIで安全性を重視。長文処理と文章の誠実さが強み。このノートの執筆者でもある。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">代表モデル</div>
+        <h4>Gemini（Google）</h4>
+        <p>マルチモーダルを最初から設計。Google検索と統合され、最新情報へのアクセスが強み。</p>
+      </div>
+    </div>
+
+    <h2 id="s3">3. ② 画像生成AI</h2>
+    <h3>前処理：ノイズスケジューリングとパッチ分割</h3>
+    <p>画像生成AIの前処理は、テキストとは大きく異なります。現在主流の<strong>拡散モデル（Diffusion Model）</strong>では、学習時に「きれいな画像に少しずつノイズを加えていく」という<strong>ノイズスケジューリング</strong>が行われます。</p>
+    <p>具体的には、元の画像に対して決められたスケジュール（タイムステップ）に沿って少しずつランダムノイズを足し、最終的に完全なランダムノイズにします。AIはこの逆過程——「ノイズだらけの画像から元の画像を復元する」——を学ぶことで、テキストの指示からゼロベースでノイズを画像に変える能力を獲得します。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>コーヒーにミルクを少しずつ加えていき、最終的に完全に混ざった状態にする。AIはこの「混ざった状態から元のコーヒーを復元する」逆手順を学習します。生成時は「完全に混ざった状態（純粋なノイズ）」から始めて、徐々にノイズを取り除き、指定した画像を浮かび上がらせます。</p>
+    </div>
+
+    <p>また、Transformerベースの画像生成（Vision Transformer）では、画像を小さな<strong>パッチ（断片）</strong>に分割し、各パッチをトークンとして扱います。これにより2章で学んだAttention機構をそのまま画像に適用できます。</p>
+
+    <div class="cards c3">
+      <div class="mini-card acc-blue">
+        <div class="mc-label">代表モデル</div>
+        <h4>Stable Diffusion</h4>
+        <p>オープンソース。潜在空間で拡散を行う「潜在拡散モデル」。ローカル実行も可能で研究用途にも普及。</p>
+      </div>
+      <div class="mini-card acc-blue">
+        <div class="mc-label">代表モデル</div>
+        <h4>Midjourney</h4>
+        <p>芸術的な品質に特化。プロンプトエンジニアリングの巧みさが品質を左右する。Discord経由で利用。</p>
+      </div>
+      <div class="mini-card acc-blue">
+        <div class="mc-label">代表モデル</div>
+        <h4>DALL-E（OpenAI）</h4>
+        <p>ChatGPTと統合。自然な日本語プロンプトにも対応し、編集（インペインティング）機能も充実。</p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>2章で学んだVAEの「ふわっとした潜在空間」と、GANの「競争による精度向上」——どちらも画像生成AIの先祖です。拡散モデルはVAEの潜在空間でノイズ除去を行うことで両者の弱点を克服しました。技術の「改善の連鎖」がここでも続いています。</p>
+    </div>
+
+    <h2 id="s4">4. ③ 音楽生成AI</h2>
+    <h3>前処理：スペクトログラムへの変換・MIDI化</h3>
+    <p>音楽は時間の流れを持つ「音の列」です。AIが扱うには、まず音楽を数値データに変換する必要があります。主な前処理アプローチは2つです。</p>
+
+    <!-- SVG：音楽前処理の流れ -->
+    <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="160" rx="14" fill="#f3efe9"/>
+      <text x="340" y="26" text-anchor="middle" font-size="13" fill="#6b665e" font-weight="600">音楽の前処理 2ルート</text>
+      <!-- 音声波形 -->
+      <rect x="20" y="50" width="130" height="50" rx="8" fill="#2b2925"/>
+      <text x="85" y="73" text-anchor="middle" font-size="12" fill="#faf8f5" font-weight="600">音声波形</text>
+      <text x="85" y="89" text-anchor="middle" font-size="10" fill="#ddc88f">（生の音データ）</text>
+      <!-- 矢印分岐 -->
+      <line x1="150" y1="75" x2="200" y2="75" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="200" y1="75" x2="200" y2="52" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="200" y1="75" x2="200" y2="98" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="200" y1="52" x2="250" y2="52" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="200" y1="98" x2="250" y2="98" stroke="#c9a14a" stroke-width="2"/>
+      <!-- スペクトログラム -->
+      <rect x="250" y="30" width="150" height="44" rx="8" fill="#9a8fc4"/>
+      <text x="325" y="51" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">スペクトログラム</text>
+      <text x="325" y="67" text-anchor="middle" font-size="10" fill="#e8e4f5">周波数×時間の2D画像</text>
+      <!-- MIDI -->
+      <rect x="250" y="76" width="150" height="44" rx="8" fill="#6bae9a"/>
+      <text x="325" y="97" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">MIDI化</text>
+      <text x="325" y="113" text-anchor="middle" font-size="10" fill="#d4f0e8">音符・音量・タイミング</text>
+      <!-- 矢印 -->
+      <line x1="400" y1="52" x2="450" y2="75" stroke="#c9a14a" stroke-width="2"/>
+      <line x1="400" y1="98" x2="450" y2="75" stroke="#c9a14a" stroke-width="2"/>
+      <!-- AIモデルへ -->
+      <rect x="450" y="50" width="150" height="50" rx="8" fill="#c9a14a"/>
+      <text x="525" y="73" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">生成AIモデル</text>
+      <text x="525" y="89" text-anchor="middle" font-size="10" fill="#fdf0d0">学習・生成</text>
+    </svg>
+
+    <p><strong>スペクトログラム変換</strong>は、音の波形を「周波数×時間」の2次元画像に変換します。こうすることで画像生成AIと同じ手法（拡散モデルなど）が適用できます。<strong>MIDI化</strong>は、音楽を音符・音量・タイミングの記号データに変換する方法で、楽譜に近い形式です。音楽理論に沿ったコード進行の学習に向いています。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-purple">
+        <div class="mc-label">代表モデル</div>
+        <h4>Suno</h4>
+        <p>日本語プロンプトにも対応。歌詞・メロディ・ボーカル・伴奏まで一気に生成。2分程度の楽曲を数秒で出力できる。</p>
+      </div>
+      <div class="mini-card acc-purple">
+        <div class="mc-label">代表モデル</div>
+        <h4>Udio</h4>
+        <p>音楽の細部の制御性が高い。ジャンル・楽器・テンポなどを細かく指定可能。プロ用途にも注目されている。</p>
+      </div>
+    </div>
+
+    <h2 id="s5">5. ④ 動画生成AI</h2>
+    <h3>前処理：フレーム分割と時間軸の整合</h3>
+    <p>動画は「時間方向に並んだ画像の連続」です。そのため前処理は画像よりさらに複雑になります。まず動画を<strong>フレーム</strong>（静止画）に分割し、それを時系列データとして扱います。しかし画像の独立した生成と違い、動画ではフレーム間の<strong>時間的整合性</strong>を保つことが最大の課題です。</p>
+    <p>先進的なアプローチでは、3次元の畳み込み（時間軸＋空間軸）や、Transformerに時間方向のAttentionを追加する方法が取られています。OpenAIのSoraは動画を「時空間パッチ」に分割し、Transformerで処理する手法をとっています。</p>
+
+    <div class="point">
+      <div class="label">&#9888; 動画生成の難しさ</div>
+      <p>「犬が走る」動画を生成するとき、各フレームで犬の位置・形・光の当たり方が物理法則に従って変化しなければなりません。静止画の「きれいさ」より、フレーム間の「連続性・物理的整合性」の担保がはるかに難しく、現在でも長尺動画では破綻が起きやすいです。</p>
+    </div>
+
+    <div class="cards c3">
+      <div class="mini-card acc-pink">
+        <div class="mc-label">代表モデル</div>
+        <h4>Sora（OpenAI）</h4>
+        <p>最大60秒の高品質動画を生成。時空間パッチのTransformer処理で物理的整合性が向上。2024年公開。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">代表モデル</div>
+        <h4>Runway Gen-3</h4>
+        <p>映像制作の現場での利用が進む。既存映像の編集・スタイル変換・インペインティングにも対応。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">代表モデル</div>
+        <h4>Kling（Kuaishou）</h4>
+        <p>中国発。2分超の動画生成に対応し、カメラワーク制御が可能。コストパフォーマンスが高い。</p>
+      </div>
+    </div>
+
+    <h2 id="s6">6. ⑤ 音声生成AI</h2>
+    <h3>前処理：波形のスペクトル変換と音素への分解</h3>
+    <p>音声生成AIの前処理は大きく2段階に分かれます。まず入力となるテキストを<strong>音素（フォネーム）</strong>に分解します。音素とは言語の最小単位の音で、日本語なら「あ」「い」「か」「し」といった単位です。次に、出力の音声波形を機械が扱いやすい<strong>メル周波数スペクトログラム</strong>に変換し、このスペクトログラムを生成してから最終的に波形に戻します（ボコーダーと呼ばれる処理）。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-gold">
+        <div class="mc-label">代表モデル</div>
+        <h4>ElevenLabs</h4>
+        <p>声のクローンが可能。数秒の音声サンプルから話者の声質・抑揚・感情を学習し、任意のテキストを読み上げる。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <div class="mc-label">代表モデル</div>
+        <h4>VALL-E（Microsoft）</h4>
+        <p>3秒のサンプルだけで声のクローンを実現。感情・アクセント・雑音環境まで再現する精度が話題に。</p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="label">✨ あなたの気づき</div>
+      <p>音声生成AIの倫理問題は深刻です。VALL-Eは3秒で誰かの声を模倣できますが、これは同時に「誰でも他人の声を偽造できる」ことを意味します。次の記事（c3-02：ディープフェイクとリスク）で詳しく扱いますが、「声は個人を証明できる」という前提が崩れつつあります。</p>
+    </div>
+
+    <h2 id="s7">7. マルチモーダルAIの登場</h2>
+    <p>最近の潮流は、複数のモダリティをまたいで処理できる<strong>マルチモーダルAI</strong>の台頭です。GeminiはテキストだけでなくPDF・画像・音声・動画を一つのモデルで処理します。GPT-4oは音声を直接入力し音声で返答できます。</p>
+    <p>これは、各モダリティのEmbedding（数値化）を統一的な「意味空間」に射影する技術によって実現されています。「画像を見て文章で答える」「音声を聞いて楽譜を出力する」といった横断的な処理が、1つのモデルで完結しつつあります。</p>
+
+    <table class="cmp-table">
+      <tr><th>モダリティ</th><th>主な前処理</th><th>ベース技術（2章より）</th><th>最大の難点</th></tr>
+      <tr><td>テキスト</td><td>トークン化 → ID変換</td><td>Transformer（Decoder）</td><td>幻覚・知識カットオフ</td></tr>
+      <tr><td>画像</td><td>ノイズスケジューリング・パッチ分割</td><td>拡散モデル / GAN</td><td>著作権・精度ばらつき</td></tr>
+      <tr><td>音楽</td><td>スペクトログラム / MIDI化</td><td>Transformer / 拡散モデル</td><td>著作権・音楽理論との整合</td></tr>
+      <tr><td>動画</td><td>フレーム分割・時間軸整合処理</td><td>3D CNN / 時間Attention</td><td>物理的整合性・高計算コスト</td></tr>
+      <tr><td>音声</td><td>音素分解・メルスペクトログラム</td><td>Transformer / ボコーダー</td><td>声のなりすまし・倫理問題</td></tr>
+    </table>
+
+    <div class="exam-box">
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>モダリティ</strong> ＝ AIが扱う情報の種類・形式（テキスト・画像・音楽・動画・音声）</li>
+        <li>テキスト生成の前処理 ＝ <strong>トークン化</strong>（文章を数値IDに変換）</li>
+        <li>画像生成の前処理 ＝ <strong>ノイズスケジューリング</strong>（ノイズを加えて除去を学習）</li>
+        <li>音楽生成の前処理 ＝ <strong>スペクトログラム変換</strong>または<strong>MIDI化</strong></li>
+        <li>動画生成の最大の難点 ＝ <strong>フレーム間の時間的整合性</strong></li>
+        <li>音声生成の前処理 ＝ <strong>音素分解</strong> ＋ <strong>メルスペクトログラム</strong></li>
+        <li><strong>マルチモーダルAI</strong> ＝ 複数モダリティを1モデルで横断処理</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        お疲れさまでした！5種類すべてに「前処理」があることが分かりましたね。次は、これらの生成AIが生み出す「偽物」の問題——ディープフェイクを見ていきましょう。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="chapter3.html" class="prev"><div class="dir">&larr; 章トップ</div><div class="ttl">Chapter 3 目次</div></a>
+      <a href="c3-02.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">02 ｜ ディープフェイクとリスク</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
