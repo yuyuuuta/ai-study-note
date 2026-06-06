@@ -186,63 +186,72 @@
     <h2 id="s5">5. マルチエージェント ── 複数のAIが協働する</h2>
     <p>マルチエージェントシステムでは、複数のAIが役割を分担し、互いに通信しながら協働します。重要なのが<strong>オーケストレーター</strong>（指揮者）と<strong>サブエージェント</strong>（専門家）の関係です。</p>
 
-    <!-- SVG：マルチエージェント構成図 -->
-    <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
-      <rect width="680" height="320" rx="14" fill="#faf8f5"/>
+    <!-- SVG：マルチエージェント構成図（修正版） -->
+    <!-- 5ボックスの幅: 各108px、ギャップ10px → 計(108×5)+(10×4)=580 → 余白50px(各辺25px) -->
+    <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="340" rx="14" fill="#faf8f5"/>
       <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">マルチエージェントシステムの構成</text>
 
-      <!-- ユーザー -->
-      <rect x="280" y="45" width="120" height="46" rx="10" fill="#9a948a"/>
-      <text x="340" y="66" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">ユーザー</text>
-      <text x="340" y="82" text-anchor="middle" font-size="10" fill="#e6e0d6">「リサーチレポートを書いて」</text>
+      <!-- ユーザー（中央上段） -->
+      <rect x="280" y="42" width="120" height="46" rx="10" fill="#9a948a"/>
+      <text x="340" y="63" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">ユーザー</text>
+      <text x="340" y="79" text-anchor="middle" font-size="10" fill="#e6e0d6">「リサーチレポートを書いて」</text>
 
-      <!-- 矢印↓ -->
-      <line x1="340" y1="91" x2="340" y2="118" stroke="#c9a14a" stroke-width="2"/>
-      <polygon points="335,118 345,118 340,128" fill="#c9a14a"/>
+      <!-- ↓矢印 -->
+      <line x1="340" y1="88" x2="340" y2="116" stroke="#c9a14a" stroke-width="2"/>
+      <polygon points="335,116 345,116 340,126" fill="#c9a14a"/>
 
-      <!-- オーケストレーター -->
-      <rect x="220" y="128" width="240" height="56" rx="10" fill="#2b2925"/>
-      <text x="340" y="152" text-anchor="middle" font-size="13" fill="#faf8f5" font-weight="600">オーケストレーター</text>
-      <text x="340" y="170" text-anchor="middle" font-size="11" fill="#ddc88f">タスク分解・指示・統合・最終出力</text>
+      <!-- オーケストレーター（指揮者） -->
+      <rect x="200" y="126" width="280" height="58" rx="10" fill="#2b2925"/>
+      <text x="340" y="151" text-anchor="middle" font-size="14" fill="#faf8f5" font-weight="700">オーケストレーター</text>
+      <text x="340" y="170" text-anchor="middle" font-size="10" fill="#ddc88f">タスク分解・指示・統合・最終出力</text>
 
-      <!-- 矢印 →サブエージェント -->
-      <line x1="220" y1="162" x2="148" y2="210" stroke="#c9a14a" stroke-width="1.5"/>
-      <line x1="280" y1="184" x2="260" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
-      <line x1="340" y1="184" x2="340" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
-      <line x1="400" y1="184" x2="420" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
-      <line x1="460" y1="162" x2="532" y2="210" stroke="#c9a14a" stroke-width="1.5"/>
+      <!-- オーケストレーター → 各サブエージェントへの矢印 -->
+      <!-- 検索担当(center x=79) -->
+      <line x1="215" y1="160" x2="79" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
+      <!-- 分析担当(center x=197) -->
+      <line x1="280" y1="184" x2="197" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
+      <!-- 執筆担当(center x=315) -->
+      <line x1="330" y1="184" x2="315" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
+      <!-- コード担当(center x=433) -->
+      <line x1="350" y1="184" x2="433" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
+      <!-- レビュー担当(center x=551) -->
+      <line x1="460" y1="160" x2="551" y2="218" stroke="#c9a14a" stroke-width="1.5"/>
 
-      <!-- 検索エージェント -->
-      <rect x="60" y="218" width="120" height="56" rx="8" fill="#7a9bc4"/>
-      <text x="120" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">検索担当</text>
-      <text x="120" y="258" text-anchor="middle" font-size="10" fill="#d4e6f5">Web・DB検索</text>
-      <text x="120" y="270" text-anchor="middle" font-size="10" fill="#d4e6f5">情報収集</text>
+      <!-- ━━ サブエージェント 5ボックス ━━ -->
+      <!-- 位置: x=25, 143, 261, 379, 497 (幅108, ギャップ10) -->
 
-      <!-- 分析エージェント -->
-      <rect x="200" y="218" width="120" height="56" rx="8" fill="#6bae9a"/>
-      <text x="260" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">分析担当</text>
-      <text x="260" y="258" text-anchor="middle" font-size="10" fill="#d4f0e8">データ処理</text>
-      <text x="260" y="270" text-anchor="middle" font-size="10" fill="#d4f0e8">グラフ作成</text>
+      <!-- ① 検索担当 -->
+      <rect x="25" y="218" width="108" height="66" rx="8" fill="#7a9bc4"/>
+      <text x="79" y="244" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">🔍 検索担当</text>
+      <text x="79" y="260" text-anchor="middle" font-size="10" fill="#d4e6f5">Web・DB検索</text>
+      <text x="79" y="274" text-anchor="middle" font-size="10" fill="#d4e6f5">情報収集</text>
 
-      <!-- 執筆エージェント -->
-      <rect x="280" y="218" width="120" height="56" rx="8" fill="#9a8fc4"/>
-      <text x="340" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">執筆担当</text>
-      <text x="340" y="258" text-anchor="middle" font-size="10" fill="#e8e4f5">文章生成</text>
-      <text x="340" y="270" text-anchor="middle" font-size="10" fill="#e8e4f5">要約・編集</text>
+      <!-- ② 分析担当 -->
+      <rect x="143" y="218" width="108" height="66" rx="8" fill="#6bae9a"/>
+      <text x="197" y="244" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">📊 分析担当</text>
+      <text x="197" y="260" text-anchor="middle" font-size="10" fill="#d4f0e8">データ処理</text>
+      <text x="197" y="274" text-anchor="middle" font-size="10" fill="#d4f0e8">グラフ作成</text>
 
-      <!-- コード担当 -->
-      <rect x="360" y="218" width="120" height="56" rx="8" fill="#c9a14a"/>
-      <text x="420" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">コード担当</text>
-      <text x="420" y="258" text-anchor="middle" font-size="10" fill="#fdf0d0">コード生成</text>
-      <text x="420" y="270" text-anchor="middle" font-size="10" fill="#fdf0d0">テスト実行</text>
+      <!-- ③ 執筆担当 -->
+      <rect x="261" y="218" width="108" height="66" rx="8" fill="#9a8fc4"/>
+      <text x="315" y="244" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">✍️ 執筆担当</text>
+      <text x="315" y="260" text-anchor="middle" font-size="10" fill="#e8e4f5">文章生成</text>
+      <text x="315" y="274" text-anchor="middle" font-size="10" fill="#e8e4f5">要約・編集</text>
 
-      <!-- レビュー担当 -->
-      <rect x="500" y="218" width="120" height="56" rx="8" fill="#d98a8a"/>
-      <text x="560" y="242" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">レビュー担当</text>
-      <text x="560" y="258" text-anchor="middle" font-size="10" fill="#fce8e8">品質確認</text>
-      <text x="560" y="270" text-anchor="middle" font-size="10" fill="#fce8e8">フィードバック</text>
+      <!-- ④ コード担当 -->
+      <rect x="379" y="218" width="108" height="66" rx="8" fill="#c9a14a"/>
+      <text x="433" y="244" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">💻 コード担当</text>
+      <text x="433" y="260" text-anchor="middle" font-size="10" fill="#fdf0d0">コード生成</text>
+      <text x="433" y="274" text-anchor="middle" font-size="10" fill="#fdf0d0">テスト実行</text>
 
-      <text x="340" y="310" text-anchor="middle" font-size="11" fill="#9a948a">各エージェントが並列・分業→ オーケストレーターが統合して最終成果物を出力</text>
+      <!-- ⑤ レビュー担当 -->
+      <rect x="497" y="218" width="108" height="66" rx="8" fill="#d98a8a"/>
+      <text x="551" y="244" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">✅ レビュー担当</text>
+      <text x="551" y="260" text-anchor="middle" font-size="10" fill="#fce8e8">品質確認</text>
+      <text x="551" y="274" text-anchor="middle" font-size="10" fill="#fce8e8">フィードバック</text>
+
+      <text x="340" y="322" text-anchor="middle" font-size="11" fill="#9a948a">各エージェントが並列・分業 → オーケストレーターが統合して最終成果物を出力</text>
     </svg>
 
     <div class="insight-box">
