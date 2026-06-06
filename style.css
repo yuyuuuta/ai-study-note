@@ -221,6 +221,14 @@ body {
   max-width: 100%;
   max-height: 160px;
 }
+/* 左配置のキャラは右向き（吹き出し方向）に反転 */
+.chara-block:not(.right) .chara-img img {
+  transform: scaleX(-1);
+}
+/* 右配置のキャラはそのまま（左向きで吹き出しを向く） */
+.chara-block.right .chara-img img {
+  transform: scaleX(1);
+}
 .speech {
   position: relative;
   background: var(--bg-card);
