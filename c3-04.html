@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAG（検索拡張生成） ｜ Chapter 3</title>
+<title>なぜAIは知らないことでも正確に答えられるのか？｜第3章｜「なぜ？」からわかる！生成AIパスポート学習</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,17 +16,17 @@
   <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
   <nav class="site-nav">
     <a href="index.html">Home</a>
-    <a href="chapter1.html">Chapter 1</a>
-    <a href="chapter2.html">Chapter 2</a>
-    <a href="chapter3.html" class="active">Chapter 3</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html" class="active">3章</a>
     <a href="index.html#about">About</a>
   </nav>
 </header>
 
 <article class="article">
   <div class="article-header">
-    <span class="cat">CHAPTER 3 ｜ 04</span>
-    <h1>RAG（検索拡張生成）</h1>
+    <span class="cat">第3章 ｜ 04</span>
+    <h1>なぜAIは知らないことでも正確に答えられるのか？</h1>
     <div class="reading">AIが「知らないこと」を補う仕組み——答える前に調べてから返す</div>
   </div>
 
@@ -229,19 +229,25 @@
     </div>
 
     <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>RAGは<strong>2026年新シラバスで追加</strong>された重要トピック。流れ・用語・FTとの違いをセットで覚えよう！</div>
+      </div>
       <h3>&#127919; この記事の試験ポイント</h3>
       <ul class="exam-list">
-        <li><strong>RAG</strong>＝ Retrieval-Augmented Generation（検索拡張生成）。2020年・Meta発表</li>
-        <li>解決する課題：LLMの<strong>知識カットオフ</strong>と<strong>幻覚（ハルシネーション）</strong></li>
-        <li>処理の流れ：文書収集 → チャンク分割 → <strong>ベクトル化</strong> → ベクトルDB格納 → 質問時に近傍検索 → プロンプト挿入 → LLM回答</li>
-        <li>心臓部は<strong>ベクトルDB</strong>（意味の近さで高速検索）</li>
-        <li>RAG vs ファインチューニング：RAGは<strong>モデルを変えず文書で補完</strong>、ファインチューニングはモデルの重みを更新</li>
-        <li>用途：社内ナレッジ検索・法律医療の専門参照・カスタマーサポート</li>
+        <li><strong>RAG</strong>＝ Retrieval-Augmented Generation（検索拡張生成）。2020年・Meta（Facebook）発表</li>
+        <li>解決する課題：LLMの<strong>知識カットオフ（学習時点以降を知らない）</strong>と<strong>幻覚（ハルシネーション）</strong></li>
+        <li>処理の流れ（7ステップ）：文書収集 → チャンク分割 → ベクトル化 → DB格納 → 質問ベクトル化 → 近傍検索 → プロンプト挿入 → LLM回答</li>
+        <li><strong>チャンク</strong>＝ 文書を検索しやすい適切なサイズに分割した単位（500〜1000トークン目安）</li>
+        <li>心臓部は<strong>ベクトルDB</strong>（Pinecone, Weaviate, Chromaなど。意味の近さで高速検索）</li>
+        <li>RAG vs ファインチューニング：RAGは<strong>モデルを変えず外部文書で補完（リアルタイム更新可）</strong>、FTはモデルの重みを更新（コスト大）</li>
+        <li>用途：社内ナレッジ検索・法律医療の専門参照・カスタマーサポートボット</li>
+        <li>限界：検索精度・文書の質・マルチホップ推論の苦手さ → GraphRAG等で補完</li>
       </ul>
     </div>
 
     <div class="chara-block right">
-      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="chara-img"><img src="assets/character-float.png" alt="ユピテル先生"></div>
       <div class="speech">
         <div class="name">ユピテル先生</div>
         RAGが分かると、AIが「調べながら答える」仕組みが見えてきましたね。最後の記事は、AIがさらに一歩進んで「自分で考えて行動する」エージェントです。じぶん会社との意外な共通点も出てきますよ。
@@ -258,7 +264,7 @@
 
 <footer class="site-footer">
   <div class="logo">AI<span>.</span>note</div>
-  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
   <p class="copy">&copy; 2026 My AI Study Note</p>
 </footer>
 <script src="script.js"></script>

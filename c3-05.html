@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIエージェントとMCP ｜ Chapter 3</title>
+<title>なぜAIは自分で考えて動けるようになったのか？｜第3章｜「なぜ？」からわかる！生成AIパスポート学習</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,17 +16,17 @@
   <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
   <nav class="site-nav">
     <a href="index.html">Home</a>
-    <a href="chapter1.html">Chapter 1</a>
-    <a href="chapter2.html">Chapter 2</a>
-    <a href="chapter3.html" class="active">Chapter 3</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html" class="active">3章</a>
     <a href="index.html#about">About</a>
   </nav>
 </header>
 
 <article class="article">
   <div class="article-header">
-    <span class="cat">CHAPTER 3 ｜ 05</span>
-    <h1>AIエージェントとMCP</h1>
+    <span class="cat">第3章 ｜ 05</span>
+    <h1>なぜAIは自分で考えて動けるようになったのか？</h1>
     <div class="reading">チャットするAIから、自律的に動くAIへ——ワークフロー型・自律型・マルチエージェント・AI界のUSB-C</div>
   </div>
 
@@ -394,21 +394,27 @@
     </div>
 
     <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>AIエージェントとMCPは<strong>2026年新シラバス追加の最重要トピック</strong>！用語と概念の定義をセットで押さえよう。</div>
+      </div>
       <h3>&#127919; この記事の試験ポイント</h3>
       <ul class="exam-list">
         <li><strong>AIエージェント</strong> ＝ 目標を与えると自律的にタスク分解・ツール使用・実行・評価を繰り返すAI</li>
-        <li>4要素：<strong>知覚・記憶・推論/計画・行動</strong></li>
-        <li><strong>ワークフロー型</strong>＝ 手順を人間が事前設計・予測可能・安定。<strong>自律型</strong>＝ 手順をAIが動的決定・柔軟・リスクあり</li>
-        <li>その他の対立軸：シングル vs マルチ / リアクティブ vs プロアクティブ / ツール使用型 vs 純粋生成型 / ReAct型 vs Plan-then-Execute型</li>
-        <li><strong>マルチエージェント</strong>＝ オーケストレーター（指揮者）＋複数のサブエージェント（専門家）が協働</li>
-        <li><strong>MCP</strong>（Model Context Protocol）＝ 2024年11月・Anthropic発表。AI界のUSB-C。Tools・Resources・Promptsの3要素を提供</li>
-        <li>リスク：エラー連鎖・ゴールのずれ・コスト暴走・<strong>プロンプトインジェクション</strong></li>
-        <li><strong>Human-in-the-Loop</strong>＝ エージェントの重要操作前に人間の確認を挟む設計</li>
+        <li>4要素：<strong>知覚（Perception）・記憶（Memory）・推論/計画（Reasoning）・行動（Action）</strong></li>
+        <li><strong>ワークフロー型</strong>＝ 手順を人間が事前設計・予測可能・安定・低コスト。<strong>自律型</strong>＝ LLMが手順を動的決定・柔軟・高コスト・リスクあり</li>
+        <li>対立軸一覧：ワークフロー型 vs 自律型 / シングル vs <strong>マルチ</strong> / リアクティブ vs プロアクティブ / ツール使用型 vs 純粋生成型 / <strong>ReAct型</strong> vs Plan-then-Execute型</li>
+        <li><strong>ReAct</strong>＝ Reasoning（推論）＋ Acting（行動）を交互に繰り返す手法</li>
+        <li><strong>マルチエージェント</strong>＝ オーケストレーター（指揮者・司令塔）＋複数のサブエージェント（専門家）が協働</li>
+        <li><strong>MCP</strong>（Model Context Protocol）＝ 2024年11月・Anthropic発表。AI界のUSB-C。<strong>Tools・Resources・Prompts</strong>の3要素</li>
+        <li>MCPの意義：各AIと各ツールをN×M個別接続 → 標準規格で<strong>どのAIでも同じツールに接続可能</strong>に</li>
+        <li>リスク：エラー連鎖（カスケード障害）・ゴールのずれ・コスト暴走・<strong>プロンプトインジェクション</strong></li>
+        <li><strong>Human-in-the-Loop</strong>＝ エージェントの重要操作前に人間の確認を挟む安全設計</li>
       </ul>
     </div>
 
     <div class="chara-block right">
-      <div class="chara-img"><img src="assets/character-bust.png" alt="ユピテル先生"></div>
+      <div class="chara-img"><img src="assets/character-float.png" alt="ユピテル先生"></div>
       <div class="speech">
         <div class="name">ユピテル先生</div>
         3章が完成しました！5種類の生成AI、ディープフェイク、ベクトル化、RAG、そしてエージェントとMCP。点だった知識が線になったはずです。受験、応援しています！
@@ -417,7 +423,7 @@
 
     <div class="page-nav">
       <a href="c3-04.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">04 ｜ RAG（検索拡張生成）</div></a>
-      <a href="chapter3.html" class="next"><div class="dir">章トップ &rarr;</div><div class="ttl">Chapter 3 目次に戻る</div></a>
+      <a href="chapter3.html" class="next"><div class="dir">章トップ &rarr;</div><div class="ttl">第3章 目次に戻る</div></a>
     </div>
 
   </div>
@@ -425,7 +431,7 @@
 
 <footer class="site-footer">
   <div class="logo">AI<span>.</span>note</div>
-  <p>生成AIパスポート試験対策｜本質を理解するための学習ノート</p>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
   <p class="copy">&copy; 2026 My AI Study Note</p>
 </footer>
 <script src="script.js"></script>
