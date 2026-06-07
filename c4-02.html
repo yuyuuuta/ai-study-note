@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜセキュリティの最大の弱点は「人間」なのか？｜第4章｜「なぜ？」からわかる！生成AIパスポート学習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html">3章</a>
+    <a href="chapter4.html" class="active">4章</a>
+    <a href="chapter5.html">5章</a>
+    <a href="chapter6.html">6章</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">第4章 ｜ 02</span>
+    <h1>なぜセキュリティの最大の弱点は「人間」なのか？</h1>
+    <div class="reading">フィッシング詐欺・QRコード罠・Free Wi-Fiリスク・ソーシャルエンジニアリング——技術より心理が狙われる理由</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「セキュリティ対策はITの担当者がやること」と思っていませんか？現実は逆です。どれほど強固なシステムを構築しても、それを使う人間が騙されれば一瞬で崩れます。フィッシング詐欺・QRコードの罠・Free Wi-Fi・ソーシャルエンジニアリング——この記事では、技術より「心理」が狙われる理由を徹底解剖します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">セキュリティとは何か</a></li>
+        <li><a href="#s2">フィッシング詐欺の手口と種類</a></li>
+        <li><a href="#s3">QRコードを使ったフィッシング</a></li>
+        <li><a href="#s4">Free Wi-Fiに潜む中間者攻撃</a></li>
+        <li><a href="#s5">ソーシャルエンジニアリング——最大の弱点は人間の心理</a></li>
+        <li><a href="#s6">生成AI時代の新たなプライバシーリスク</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. セキュリティとは何か</h2>
+    <p><strong>セキュリティ</strong>とは「情報資産を守るための技術・運用・制度の総体」です。単に暗号化や認証の仕組みを指す言葉ではなく、それを運用する人間の行動や組織の制度まで含む広い概念です。</p>
+    <p>本章で押さえるべきテーマは5つ——フィッシング詐欺・不正アクセス・マルウェア・ソーシャルエンジニアリング・プライバシー侵害です。これらに共通するメッセージがあります。</p>
+
+    <div class="point">
+      <div class="label">&#9888; セキュリティの本質</div>
+      <p>「セキュリティは技術だけでは完結しない。最終的な弱点は、システムを使う人間の判断ミスや心理的な隙にある」</p>
+    </div>
+
+    <h2 id="s2">2. フィッシング詐欺の手口と種類</h2>
+    <p><strong>フィッシング詐欺（Phishing）</strong>とは、正規のサービスや企業に見せかけた偽のメール・SMS・Webサイトで、個人情報や認証情報（ID・パスワード）を騙し取る詐欺手口です。</p>
+
+    <table class="cmp-table">
+      <tr><th>種類</th><th>特徴</th></tr>
+      <tr><td><strong>フィッシング（Phishing）</strong></td><td>広範囲に偽メールを送付。Webサイトへ誘導し情報窃取</td></tr>
+      <tr><td><strong>スピアフィッシング（Spear Phishing）</strong></td><td>特定の個人・企業を標的に、個人情報を使ったリアルな偽メール</td></tr>
+      <tr><td><strong>スミッシング（Smishing）</strong></td><td>SMSで偽リンクを送付する手口</td></tr>
+      <tr><td><strong>ビジネスメール詐欺（BEC）</strong></td><td>経営者・取引先になりすまし、送金を指示する詐欺</td></tr>
+      <tr><td><strong>ブラックメール（Blackmail）</strong></td><td>脅迫・恐喝メール。「個人情報を持っている」と偽る場合も</td></tr>
+    </table>
+
+    <div class="chara-block">
+      <div class="chara-img"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">知ってた？</div>
+        フィッシングの「Ph」は『Phone』からきています。電話でのなりすまし詐欺から進化した言葉です。今ではメール・SMS・QRコード・SNSと手口が多様化。共通点は「正規に見せかける」こと。
+      </div>
+    </div>
+
+    <h3>対策</h3>
+    <ul>
+      <li>メール・SMSのリンクを直接クリックしない（URLを確認してから公式サイトへ）</li>
+      <li>「緊急」「アカウント停止」などを煽る文面は詐欺の定番文句</li>
+      <li>SMSで送られてきたリンクへのアクセスは原則NG</li>
+      <li>差出人のメールアドレスのドメインをよく確認する</li>
+    </ul>
+
+    <h2 id="s3">3. QRコードを使ったフィッシング（クイッシング）</h2>
+    <p><strong>QRコード（Quick Response code）</strong>はその性質上、読み取った先のURLが事前に確認しにくい——これが攻撃者に悪用されます。「クイッシング（Quishing）」とも呼ばれます。</p>
+
+    <h3>主な手口</h3>
+    <ul>
+      <li>正規のQRコードを貼り替えて偽サイトへ誘導する</li>
+      <li>メールに添付したQRコードで偽サイトへ誘導する</li>
+      <li>非常に多くのQRコードに偽物が混じっており、外見では判別が困難</li>
+    </ul>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>QRコードは「玄関の鍵穴」。中身が見えないまま開けてしまうのは危険。読み取った瞬間に何が起きるか確認する習慣を持ちましょう。</p>
+    </div>
+
+    <h3>対策</h3>
+    <ul>
+      <li>QRコードを読み取ったら、アクセスする前にURLを確認する</li>
+      <li>公共の場所（駅・飲食店など）に貼られたQRコードは特に注意</li>
+      <li>「QRコードを読み取るだけ」という安易な操作を習慣にしない</li>
+    </ul>
+
+    <h2 id="s4">4. Free Wi-Fiに潜む中間者攻撃</h2>
+    <p>カフェや駅のFree Wi-Fi（Wireless Fidelity）は便利ですが、接続先が本当に正規のものかどうか確認する手段がほとんどありません。</p>
+    <p><strong>中間者攻撃（Man-in-the-Middle Attack、MitM）</strong>では、攻撃者が正規のWi-Fiに見せかけた偽のアクセスポイントを設置し、そこに接続させた上で通信を傍受・改ざんします。本物と同じSSID（ネットワーク名）を使うため、見分けがほぼつきません。</p>
+
+    <!-- SVG：中間者攻撃の図解 -->
+    <svg viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="180" rx="14" fill="#f3efe9"/>
+      <text x="340" y="26" text-anchor="middle" font-size="13" fill="#6b665e" font-weight="600">中間者攻撃（MitM）のしくみ</text>
+      <!-- あなた -->
+      <rect x="20" y="60" width="120" height="52" rx="8" fill="#2b2925"/>
+      <text x="80" y="84" text-anchor="middle" font-size="12" fill="#faf8f5" font-weight="600">あなた</text>
+      <text x="80" y="100" text-anchor="middle" font-size="10" fill="#ddc88f">スマホ・PC</text>
+      <!-- 矢印（あなた→攻撃者） -->
+      <line x1="140" y1="86" x2="240" y2="86" stroke="#d98a8a" stroke-width="2.5" stroke-dasharray="6,3"/>
+      <polygon points="238,80 250,86 238,92" fill="#d98a8a"/>
+      <text x="195" y="78" text-anchor="middle" font-size="10" fill="#d98a8a">通信を傍受</text>
+      <!-- 攻撃者 -->
+      <rect x="250" y="50" width="160" height="72" rx="8" fill="#d98a8a"/>
+      <text x="330" y="79" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">攻撃者の</text>
+      <text x="330" y="96" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">偽アクセスポイント</text>
+      <text x="330" y="112" text-anchor="middle" font-size="10" fill="#fce8e8">Free Wi-Fi に見せかける</text>
+      <!-- 矢印（攻撃者→サーバ） -->
+      <line x1="410" y1="86" x2="510" y2="86" stroke="#c9a14a" stroke-width="2.5" stroke-dasharray="6,3"/>
+      <polygon points="508,80 520,86 508,92" fill="#c9a14a"/>
+      <text x="465" y="78" text-anchor="middle" font-size="10" fill="#c9a14a">改ざん・盗聴</text>
+      <!-- サーバ -->
+      <rect x="520" y="60" width="140" height="52" rx="8" fill="#6bae9a"/>
+      <text x="590" y="84" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">正規サーバ</text>
+      <text x="590" y="100" text-anchor="middle" font-size="10" fill="#d4f0e8">銀行・メール 等</text>
+      <!-- 注釈 -->
+      <text x="340" y="155" text-anchor="middle" font-size="11" fill="#8c8680">VPN を使うと通信が暗号化され、傍受されても内容が読めなくなる</text>
+    </svg>
+
+    <h3>対策</h3>
+    <ul>
+      <li>Free Wi-Fiで重要な操作（ネットバンキング・パスワード入力等）はしない</li>
+      <li><strong>VPN（Virtual Private Network）を使う</strong>：通信を暗号化し、傍受されても内容が解読できなくなる</li>
+      <li>「パスワードなし」のFree Wi-Fiは原則使わない</li>
+    </ul>
+
+    <h2 id="s5">5. ソーシャルエンジニアリング——最大の弱点は人間の心理</h2>
+    <p><strong>ソーシャルエンジニアリング</strong>とは、技術的な手段ではなく、<strong>人間の心理・行動の隙を突いて</strong>情報を不正に入手する攻撃手法です。コードは1行も書かず、会話・電話・メールだけで機密情報を引き出せることがあります。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-pink">
+        <div class="mc-label">手口①</div>
+        <h4>なりすまし</h4>
+        <p>IT部門・上司・銀行員などのフリをして、電話やメールで情報を引き出す。権威ある立場を装うのが常套手段。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">手口②</div>
+        <h4>ショルダーハッキング</h4>
+        <p>後ろから画面や入力を覗き見る。電車・カフェでのPC作業中に特に注意。プライバシーフィルターが有効。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">手口③</div>
+        <h4>ごみ箱漁り（スカベンジング）</h4>
+        <p>廃棄した書類・印刷物から機密情報を入手する。重要書類はシュレッダー処理が必須。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">手口④</div>
+        <h4>テールゲーティング</h4>
+        <p>入館者に続いてセキュリティエリアに不正侵入する。「親切心」を悪用した物理的な手口。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9888; セキュリティの核心</div>
+      <p>セキュリティの最大の弱点は技術ではなく<strong>人間の心理</strong>。どんな強固なシステムも、人間が騙されれば無力化される。「確認する」という一手間が最大の防御。</p>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-float.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">あなたの気づき</div>
+        ソーシャルエンジニアリングは"ハッキングしない不正アクセス"。コードは1行も書かず、電話やメールだけで企業の機密情報を手に入れる。AIが高度化するほど、なりすましの完成度も上がる。
+      </div>
+    </div>
+
+    <h2 id="s6">6. 生成AI時代の新たなプライバシーリスク</h2>
+    <p>生成AIの進化は、セキュリティリスクをさらに高度化させています。特に注目すべきは<strong>ディープフェイク（Deepfake）</strong>です。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; ディープフェイクとは</div>
+      <p>人物の顔・声を高精度で合成し、実在しない映像や音声を作り出す技術。フィッシング詐欺の高度化・なりすまし詐欺に悪用されます。「あの人がこう言っていた」という映像・音声が偽造できる時代になりました。</p>
+    </div>
+
+    <p>また、プライバシー設定をせずにインターネットやアプリを使い続けると、知らぬ間に個人情報が漏洩するリスクがあります。SNSへの投稿・位置情報・検索履歴——これらはすべて攻撃者にとっての「スピアフィッシングの材料」になります。</p>
+
+    <h3>対策の3原則</h3>
+    <ol>
+      <li><strong>不審なリンクや添付ファイルは開かない</strong></li>
+      <li><strong>知人を装った連絡は、別の手段で本人確認する</strong>（電話・対面など）</li>
+      <li><strong>SNSでの個人情報の公開は最小限にとどめる</strong></li>
+    </ol>
+
+    <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>この記事のキーワードを確認しよう！</div>
+      </div>
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>フィッシング</strong> ＝ 偽サイト・偽メールで<strong>個人情報・認証情報を騙し取る</strong>詐欺</li>
+        <li><strong>スピアフィッシング</strong> ＝ <strong>特定の個人・企業</strong>を狙い打ちにするフィッシング</li>
+        <li><strong>スミッシング</strong> ＝ <strong>SMSを使った</strong>フィッシング</li>
+        <li><strong>ソーシャルエンジニアリング</strong> ＝ 技術でなく<strong>人間の心理・行動の隙</strong>を突く攻撃</li>
+        <li><strong>中間者攻撃</strong> ＝ 攻撃者が通信の間に割り込み<strong>盗聴・改ざん</strong>する</li>
+        <li><strong>VPN</strong> ＝ 通信を暗号化し、<strong>傍受されても解読できない</strong>ようにする技術</li>
+        <li><strong>ディープフェイク</strong> ＝ <strong>顔・声の合成</strong>でなりすましを可能にするAI技術</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/yupiteru_nemuri.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        セキュリティは"他人事"ではありません。フィッシング・ソーシャルエンジニアリング・ディープフェイク——これらはすべて、あなたの日常に今すでに存在する脅威です。次の記事では、もう1段階深い脅威"マルウェア"を徹底解剖します。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c4-01.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">第4章 01 ｜ インターネットリテラシーの5つの柱</div></a>
+      <a href="c4-03.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">第4章 03 ｜ マルウェア完全ガイド</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

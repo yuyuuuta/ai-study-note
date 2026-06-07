@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜマルウェアはなくならないのか？｜第4章｜「なぜ？」からわかる！生成AIパスポート学習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html">3章</a>
+    <a href="chapter4.html" class="active">4章</a>
+    <a href="chapter5.html">5章</a>
+    <a href="chapter6.html">6章</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">第4章 ｜ 03</span>
+    <h1>なぜマルウェアはなくならないのか？</h1>
+    <div class="reading">ウイルス・ランサムウェア・スパイウェア——種類・感染経路・最強の対策「3-2-1ルール」</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>コンピュータウイルス、ランサムウェア、スパイウェア……マルウェアはなぜ何十年経っても消えないのでしょうか。その答えは「攻撃側と防御側のいたちごっこ」と、「生成AIの登場によるコスト激減」にあります。この記事では、マルウェアの種類・感染経路・対策を整理し、最後にGANと同じ構造を持つ「軍拡競争」のメカニズムを解説します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">マルウェアとは何か</a></li>
+        <li><a href="#s2">マルウェアの主な種類</a></li>
+        <li><a href="#s3">ランサムウェアの脅威と3-2-1バックアップルール</a></li>
+        <li><a href="#s4">マルウェアの感染経路</a></li>
+        <li><a href="#s5">マルウェア生成AI vs 検出AI——GAN的軍拡競争の構造</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. マルウェアとは何か</h2>
+    <p><strong>マルウェア（Malware）</strong> は <strong>Malicious software（悪意のあるソフトウェア）</strong> の略です。コンピュータに不正に侵入し、データを破壊・盗取・暗号化する悪意あるソフトウェアの総称を指します。</p>
+
+    <div class="chara-block">
+      <div class="chara-img"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">あなたの気づき</div>
+        マルウェアが"なくならない"理由は2つ。①作る側（攻撃者）と守る側（セキュリティ）のいたちごっこが続くから。②生成AIの登場で、高度なマルウェアを作るコストが激減したから。これはGANの軍拡競争と構造が同じです。
+      </div>
+    </div>
+
+    <h2 id="s2">2. マルウェアの主な種類</h2>
+    <p>マルウェアには多くの種類があります。試験では各種類の「定義と特徴」が問われます。混同しないよう整理して覚えましょう。</p>
+
+    <table class="cmp-table">
+      <tr><th>種類</th><th>説明</th></tr>
+      <tr>
+        <td><strong>コンピュータウイルス</strong></td>
+        <td>正常なファイルやプログラムに寄生して感染を広げる。ファイルが実行されると活性化する。</td>
+      </tr>
+      <tr>
+        <td><strong>ランサムウェア<br><small>Ransomware</small></strong></td>
+        <td>データを暗号化（人質化）して解除のための身代金を要求する。企業・病院への攻撃が多発している。</td>
+      </tr>
+      <tr>
+        <td><strong>スパイウェア</strong></td>
+        <td>利用者のキー入力・ブラウザ履歴・パスワードを盗み、攻撃者へ送信する。</td>
+      </tr>
+      <tr>
+        <td><strong>トロイの木馬</strong></td>
+        <td>正規ソフトウェアに見せかけて侵入する。バックドア（裏口）を開けて遠隔操作を可能にする。</td>
+      </tr>
+      <tr>
+        <td><strong>ワーム</strong></td>
+        <td>自己複製してネットワーク全体に急速拡散する。ホストプログラムが不要なのが特徴。</td>
+      </tr>
+      <tr>
+        <td><strong>アドウェア</strong></td>
+        <td>強制的に広告を表示させ、クリックデータを収集する。</td>
+      </tr>
+    </table>
+
+    <h2 id="s3">3. ランサムウェアの脅威と3-2-1バックアップルール</h2>
+    <h3>ランサムウェアの仕組み</h3>
+    <p>ランサムウェアは現在、最も被害の大きいマルウェアの一種です。その仕組みは以下の通りです。</p>
+    <ol>
+      <li>フィッシングメールの添付ファイルや不正サイト経由でコンピュータに侵入する</li>
+      <li>ファイルを暗号化し、解除キーと引き換えに「身代金（Ransom）」を要求する</li>
+      <li><strong>身代金を払っても復元される保証はない</strong></li>
+      <li>近年は「二重恐喝（データを暗号化＋外部に公開すると脅す）」も増加している</li>
+    </ol>
+
+    <div class="point">
+      <div class="label">&#9888; ランサムウェアの正解</div>
+      <p>ランサムウェアへの正解は<strong>「身代金を払わない＋バックアップから復元」</strong>。払っても解除されない可能性が高く、支払いが次の攻撃を呼ぶ悪循環になる。</p>
+    </div>
+
+    <h3>3-2-1バックアップルール</h3>
+    <p>ランサムウェア対策の最強手段が <strong>3-2-1バックアップルール</strong> です。</p>
+
+    <!-- SVG：3-2-1ルール視覚化 -->
+    <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="200" rx="14" fill="#faf8f5"/>
+      <text x="340" y="30" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600" letter-spacing="2">3-2-1 バックアップルール</text>
+
+      <!-- 3 -->
+      <rect x="30" y="50" width="190" height="120" rx="12" fill="#d98a8a"/>
+      <text x="125" y="95" text-anchor="middle" font-size="44" fill="#fff" font-weight="700">3</text>
+      <text x="125" y="120" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">コピーを3つ持つ</text>
+      <text x="125" y="140" text-anchor="middle" font-size="11" fill="#fce8e8">本体＋バックアップ2つ</text>
+      <text x="125" y="158" text-anchor="middle" font-size="10" fill="#fce8e8">データをひとつに頼らない</text>
+
+      <!-- 2 -->
+      <rect x="245" y="50" width="190" height="120" rx="12" fill="#7a9bc4"/>
+      <text x="340" y="95" text-anchor="middle" font-size="44" fill="#fff" font-weight="700">2</text>
+      <text x="340" y="120" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">2種類のメディアに保存</text>
+      <text x="340" y="140" text-anchor="middle" font-size="11" fill="#d4e6f5">HDD＋クラウド など</text>
+      <text x="340" y="158" text-anchor="middle" font-size="10" fill="#d4e6f5">異なる媒体で二重化</text>
+
+      <!-- 1 -->
+      <rect x="460" y="50" width="190" height="120" rx="12" fill="#6bae9a"/>
+      <text x="555" y="95" text-anchor="middle" font-size="44" fill="#fff" font-weight="700">1</text>
+      <text x="555" y="120" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">1つはオフサイト保管</text>
+      <text x="555" y="140" text-anchor="middle" font-size="11" fill="#d4f0e8">別の場所に保管</text>
+      <text x="555" y="158" text-anchor="middle" font-size="10" fill="#d4f0e8">ネットワーク外に隔離</text>
+    </svg>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>3-2-1ルールは"デジタルの防火対策"。家が火事になっても、別の場所に保管した書類は残る。ランサムウェアが1台を乗っ取っても、オフサイトのバックアップには届かない。</p>
+    </div>
+
+    <h2 id="s4">4. マルウェアの感染経路</h2>
+    <p>マルウェアはさまざまな経路でコンピュータに侵入します。主な感染経路と対策を合わせて把握しておきましょう。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-pink">
+        <div class="mc-label">感染経路 ①</div>
+        <h4>メールの添付ファイル・URL</h4>
+        <p>フィッシングメールに仕込まれた添付ファイルを開いたり、偽URLをクリックすることで感染する。最も多い感染経路のひとつ。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">感染経路 ②</div>
+        <h4>Webブラウザの脆弱性</h4>
+        <p>悪意あるWebサイトを閲覧するだけで感染する<strong>ドライブバイダウンロード</strong>。ブラウザやプラグインの更新漏れが狙われる。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">感染経路 ③</div>
+        <h4>OSやアプリの未更新</h4>
+        <p>既知の脆弱性が修正されず放置されると侵入口になる。アップデートを怠ることが最大のリスク要因のひとつ。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">感染経路 ④</div>
+        <h4>USBメモリ等の外部メディア</h4>
+        <p>感染したUSBを接続することで拡散する。「拾ったUSBを試しに差してみる」行為が危険。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">感染経路 ⑤</div>
+        <h4>ソフトウェアの偽インストーラ</h4>
+        <p>無料ソフトに見せかけたマルウェア。非公式サイトからのダウンロードは特に注意が必要。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9888; 対策のまとめ</div>
+      <ul>
+        <li>OSとアプリを常に最新状態に保つ（アップデートは即実行）</li>
+        <li>メールの添付ファイルは差出人を確認してから開く</li>
+        <li>怪しいWebサイトにはアクセスしない</li>
+        <li>信頼できるセキュリティソフトを導入する</li>
+        <li>定期的な3-2-1バックアップを実施する</li>
+      </ul>
+    </div>
+
+    <h2 id="s5">5. マルウェア生成AI vs 検出AI——GAN的軍拡競争の構造</h2>
+    <h3>生成AIがマルウェア開発に悪用されている現実</h3>
+    <p>生成AIを使えば、<strong>プログラミング知識なしで高度なマルウェアのコードを生成することが可能</strong>になりました。その結果、毎日何万もの新種マルウェアが作られるようになっています。</p>
+
+    <h3>検出AIとの軍拡競争</h3>
+    <p>セキュリティ側もAIを使って異常パターンを検出するAIを開発しています。一方で、マルウェア側はAIを回避するために自己変異するものも登場し、攻守が激しくぶつかり合っています。</p>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/character-float.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">あなたの気づき</div>
+        これはGANの構造そのもの。マルウェア生成AI（生成器）と検出AI（識別器）が競い合う。生成器が検出器をだますために進化し、検出器がまた生成器を見破るために進化する。この軍拡競争に終わりはない——だからマルウェアはなくならない。
+      </div>
+    </div>
+
+    <!-- SVG：軍拡競争の構造 -->
+    <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="160" rx="14" fill="#f3efe9"/>
+      <text x="340" y="26" text-anchor="middle" font-size="13" fill="#6b665e" font-weight="600">GAN的軍拡競争——終わりなきいたちごっこ</text>
+
+      <!-- 攻撃側 -->
+      <rect x="30" y="45" width="200" height="80" rx="10" fill="#d98a8a"/>
+      <text x="130" y="80" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">マルウェア生成AI</text>
+      <text x="130" y="98" text-anchor="middle" font-size="11" fill="#fce8e8">（生成器）</text>
+      <text x="130" y="115" text-anchor="middle" font-size="10" fill="#fce8e8">新種を生成・検出を回避</text>
+
+      <!-- 矢印 右 -->
+      <polygon points="270,85 310,75 310,95" fill="#c9a14a"/>
+      <line x1="230" y1="85" x2="310" y2="85" stroke="#c9a14a" stroke-width="2"/>
+      <text x="270" y="68" text-anchor="middle" font-size="10" fill="#8a7a4e">対抗</text>
+
+      <!-- 防御側 -->
+      <rect x="310" y="45" width="200" height="80" rx="10" fill="#6bae9a"/>
+      <text x="410" y="80" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">マルウェア検出AI</text>
+      <text x="410" y="98" text-anchor="middle" font-size="11" fill="#d4f0e8">（識別器）</text>
+      <text x="410" y="115" text-anchor="middle" font-size="10" fill="#d4f0e8">異常パターンを検出・防御</text>
+
+      <!-- 矢印 右 -->
+      <polygon points="550,85 590,75 590,95" fill="#c9a14a"/>
+      <line x1="510" y1="85" x2="590" y2="85" stroke="#c9a14a" stroke-width="2"/>
+      <text x="550" y="68" text-anchor="middle" font-size="10" fill="#8a7a4e">繰り返す</text>
+
+      <!-- 無限 -->
+      <rect x="600" y="60" width="60" height="50" rx="10" fill="#2b2925"/>
+      <text x="630" y="92" text-anchor="middle" font-size="24" fill="#ddc88f">∞</text>
+    </svg>
+
+    <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>この記事のキーワードを確認しよう！</div>
+      </div>
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>マルウェア</strong> ＝ Malicious software。<strong>悪意ある目的を持つソフトウェアの総称</strong></li>
+        <li><strong>ランサムウェア</strong> ＝ データを暗号化（人質化）して<strong>身代金（Ransom）を要求</strong>するマルウェア</li>
+        <li><strong>スパイウェア</strong> ＝ <strong>キー入力・パスワードを盗み</strong>、攻撃者に送信するマルウェア</li>
+        <li><strong>トロイの木馬</strong> ＝ <strong>正規ソフトに偽装</strong>して侵入し、バックドアを開けるマルウェア</li>
+        <li><strong>3-2-1バックアップルール</strong> ＝ <strong>3つのコピー・2種類のメディア・1つはオフサイト</strong></li>
+        <li><strong>ドライブバイダウンロード</strong> ＝ <strong>閲覧するだけ</strong>でマルウェアが自動ダウンロードされる攻撃</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/yupiteru_nemuri.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        マルウェアは"技術の問題"ではなく"習慣の問題"。アップデートする・開かない・バックアップする——この3つを徹底するだけで、感染リスクを大幅に下げられます。次の記事では、AIに個人情報を入力するリスクを学びます。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c4-02.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">第4章 02 ｜ セキュリティとプライバシーの基礎</div></a>
+      <a href="c4-04.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">第4章 04 ｜ AIと個人情報・プライバシー</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

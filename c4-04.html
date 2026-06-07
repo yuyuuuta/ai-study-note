@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜAIに個人情報を入れてはいけないのか？｜第4章｜「なぜ？」からわかる！生成AIパスポート学習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html">3章</a>
+    <a href="chapter4.html" class="active">4章</a>
+    <a href="chapter5.html">5章</a>
+    <a href="chapter6.html">6章</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">第4章 ｜ 04</span>
+    <h1>なぜAIに個人情報を入れてはいけないのか？</h1>
+    <div class="reading">個人情報保護法の基礎・要配慮個人情報・生成AIへの入力リスクと職場での機密管理</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>生成AIが職場や日常に普及するにつれ、「AIに個人情報を入力してしまう」ケースが急増しています。しかし、なぜそれが問題なのか——法律の仕組みから、実際のリスクの中身まで、この記事で体系的に理解しましょう。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">個人情報保護法の基本</a></li>
+        <li><a href="#s2">個人情報の種類——「要配慮個人情報」とは</a></li>
+        <li><a href="#s3">個人情報の漏洩はどう起きるのか</a></li>
+        <li><a href="#s4">生成AIに個人情報を入力する3つのリスク</a></li>
+        <li><a href="#s5">職場での機密情報管理——Claudeへの入力ルール</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. 個人情報保護法の基本</h2>
+    <p><strong>個人情報保護法</strong>は2005年に全面施行された、個人情報の適切な取り扱いを規定する法律です。デジタル社会の進展とともに改正を重ね、現在はAI時代の個人情報管理における中核的な法律として機能しています。</p>
+
+    <p>この法律の目的は、大きく4つに整理できます。</p>
+
+    <!-- SVG図解：個人情報保護法の4つの目的 -->
+    <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="200" rx="14" fill="#faf8f5"/>
+      <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">個人情報保護法の4つの目的</text>
+      <!-- 目的1 -->
+      <rect x="20" y="46" width="148" height="136" rx="10" fill="#6bae9a"/>
+      <text x="94" y="70" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">① 基本方針・施策の</text>
+      <text x="94" y="86" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">策定</text>
+      <text x="94" y="108" text-anchor="middle" font-size="10" fill="#d4f0e8">個人情報の適正な</text>
+      <text x="94" y="122" text-anchor="middle" font-size="10" fill="#d4f0e8">取扱いの方針を</text>
+      <text x="94" y="136" text-anchor="middle" font-size="10" fill="#d4f0e8">国・地方が定める</text>
+      <!-- 目的2 -->
+      <rect x="178" y="46" width="148" height="136" rx="10" fill="#7a9bc4"/>
+      <text x="252" y="70" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">② 責務の明確化</text>
+      <text x="252" y="108" text-anchor="middle" font-size="10" fill="#d4e6f5">個人・地方公共団体</text>
+      <text x="252" y="122" text-anchor="middle" font-size="10" fill="#d4e6f5">それぞれの責務を</text>
+      <text x="252" y="136" text-anchor="middle" font-size="10" fill="#d4e6f5">明らかにする</text>
+      <!-- 目的3 -->
+      <rect x="336" y="46" width="148" height="136" rx="10" fill="#9a8fc4"/>
+      <text x="410" y="70" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">③ 事業者の義務</text>
+      <text x="410" y="86" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">を定める</text>
+      <text x="410" y="108" text-anchor="middle" font-size="10" fill="#e8e4f5">個人情報を扱う</text>
+      <text x="410" y="122" text-anchor="middle" font-size="10" fill="#e8e4f5">事業者が守るべき</text>
+      <text x="410" y="136" text-anchor="middle" font-size="10" fill="#e8e4f5">ルールを規定</text>
+      <!-- 目的4 -->
+      <rect x="494" y="46" width="168" height="136" rx="10" fill="#c9a14a"/>
+      <text x="578" y="70" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">④ 権利・利益の</text>
+      <text x="578" y="86" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">保護</text>
+      <text x="578" y="108" text-anchor="middle" font-size="10" fill="#fdf0d0">情報の有用性を</text>
+      <text x="578" y="122" text-anchor="middle" font-size="10" fill="#fdf0d0">保ちながら個人の</text>
+      <text x="578" y="136" text-anchor="middle" font-size="10" fill="#fdf0d0">権利・利益を守る</text>
+    </svg>
+
+    <h3>重要な改正——2017年改正と個人情報保護委員会</h3>
+    <p>法律の歴史において、特に試験に出やすい2つのポイントがあります。</p>
+    <p><strong>2017年の改正</strong>では、従来「5,000人以下の個人情報しか扱わない中小企業は規制対象外」というルールが廃止されました。この改正により、<strong>全事業者が規制対象</strong>になりました。個人情報を1件でも扱う事業者であれば、例外なく法律の適用を受けます。</p>
+    <p>また<strong>2016年</strong>には、内閣府の外局として<strong>個人情報保護委員会</strong>が設置されました。個人情報の管理を監督・監視する専門的な行政機関です。</p>
+
+    <div class="point">
+      <div class="label">&#9888; 試験ポイント</div>
+      <p>「2017年改正で"5,000人以下は対象外"というルールが廃止され、中小企業も小規模事業者も全て対象に。個人情報を扱う全事業者が守るべき法律になった」</p>
+    </div>
+
+    <h2 id="s2">2. 個人情報の種類——「要配慮個人情報」とは</h2>
+    <p><strong>個人情報の定義</strong>は「生存する個人に関する情報で、特定の個人を識別できるもの」です。氏名・住所・電話番号・メールアドレス・顔写真・マイナンバーなどが代表例ですが、単体では特定できなくても「組み合わせることで個人が特定できるもの」も個人情報に含まれます。</p>
+
+    <p>個人情報のなかでも、特に厳重な取り扱いが必要な情報のカテゴリを<strong>要配慮個人情報</strong>と呼びます。</p>
+
+    <div class="cards c3">
+      <div class="mini-card acc-pink">
+        <div class="mc-label">要配慮個人情報</div>
+        <h4>人種・民族・信条</h4>
+        <p>人種・民族的出自、思想・宗教上の信念（信条）など、差別につながりうる情報。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">要配慮個人情報</div>
+        <h4>病歴・障害・健康情報</h4>
+        <p>病歴・障害の有無・健康診断の結果など、医療に関わる特に慎重な取り扱いが必要な情報。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">要配慮個人情報</div>
+        <h4>犯罪歴・被害情報</h4>
+        <p>過去の犯罪歴や犯罪被害の記録。社会的身分も含まれる。</p>
+      </div>
+    </div>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>個人情報は「住所が書かれた荷物」。受け取った人（事業者）は適切に扱い、無断で転送（第三者提供）してはいけない。要配慮個人情報は「壊れ物扱い」——より厳重な梱包と手順が必要です。</p>
+    </div>
+
+    <h3>匿名加工情報とは</h3>
+    <p>特定の個人を識別できないように加工し、復元できないようにした情報を<strong>匿名加工情報</strong>と呼びます。AI学習データなどに活用されるケースが増えていますが、加工方法の基準が法律で定められており、要件を満たさない「なんとなく匿名化した情報」は匿名加工情報として扱われません。</p>
+
+    <h2 id="s3">3. 個人情報の漏洩はどう起きるのか</h2>
+    <p>個人情報の漏洩は「特別なハッキング」だけで起きるわけではありません。主な原因パターンは4つに分類できます。</p>
+
+    <!-- SVG図解：漏洩の4パターン -->
+    <svg viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="180" rx="14" fill="#faf8f5"/>
+      <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">個人情報漏洩の主な4パターン</text>
+      <!-- パターン1 -->
+      <rect x="20" y="46" width="148" height="116" rx="10" fill="#d98a8a"/>
+      <text x="94" y="76" text-anchor="middle" font-size="22" fill="#fff">🔓</text>
+      <text x="94" y="100" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">① 不正アクセス</text>
+      <text x="94" y="118" text-anchor="middle" font-size="10" fill="#fce8e8">外部からシステムに</text>
+      <text x="94" y="132" text-anchor="middle" font-size="10" fill="#fce8e8">侵入してデータを盗む</text>
+      <!-- パターン2 -->
+      <rect x="178" y="46" width="148" height="116" rx="10" fill="#c9a14a"/>
+      <text x="252" y="76" text-anchor="middle" font-size="22" fill="#fff">😤</text>
+      <text x="252" y="100" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">② 内部不正</text>
+      <text x="252" y="118" text-anchor="middle" font-size="10" fill="#fdf0d0">従業員・元従業員</text>
+      <text x="252" y="132" text-anchor="middle" font-size="10" fill="#fdf0d0">による故意の持ち出し</text>
+      <!-- パターン3 -->
+      <rect x="336" y="46" width="148" height="116" rx="10" fill="#9a8fc4"/>
+      <text x="410" y="76" text-anchor="middle" font-size="22" fill="#fff">💼</text>
+      <text x="410" y="100" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">③ 紛失・盗難</text>
+      <text x="410" y="118" text-anchor="middle" font-size="10" fill="#e8e4f5">USB・ノートPC・</text>
+      <text x="410" y="132" text-anchor="middle" font-size="10" fill="#e8e4f5">書類などの紛失</text>
+      <!-- パターン4 -->
+      <rect x="494" y="46" width="168" height="116" rx="10" fill="#7a9bc4"/>
+      <text x="578" y="76" text-anchor="middle" font-size="22" fill="#fff">📧</text>
+      <text x="578" y="100" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">④ 誤配信・誤送信</text>
+      <text x="578" y="118" text-anchor="middle" font-size="10" fill="#d4e6f5">メールの宛先間違い・</text>
+      <text x="578" y="132" text-anchor="middle" font-size="10" fill="#d4e6f5">PDF添付ミスなど</text>
+    </svg>
+
+    <div class="chara-block">
+      <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        情報漏洩は「特別なハッキング」だけで起きるわけではありません。「誰かに間違えてメールを送った」という日常的なミスが、個人情報保護法違反になることも。件数・内容によっては報告義務が発生します。
+      </div>
+    </div>
+
+    <h2 id="s4">4. 生成AIに個人情報を入力する3つのリスク</h2>
+    <p>生成AIの普及で、個人情報を意図せずAIに入力してしまうケースが急増しています。「便利だから使ってみた」という行動が、知らないうちに個人情報保護法違反につながる可能性があります。</p>
+
+    <div class="cards c3">
+      <div class="mini-card acc-teal">
+        <div class="mc-label">リスク 1</div>
+        <h4>データ学習への取り込み</h4>
+        <p>入力した情報がAIの学習データに組み込まれ、他のユーザーへの回答に混入する可能性がある。サービスによって異なるため、プライバシーポリシーの確認が必須。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">リスク 2</div>
+        <h4>データ流出のリスク</h4>
+        <p>AIサービス提供会社がセキュリティ侵害を受けた場合、入力したデータが外部に流出する可能性がある。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">リスク 3</div>
+        <h4>データの悪用リスク</h4>
+        <p>収集・分析された個人情報が広告ターゲティングや第三者に提供されることも。規約に記載されている場合がある。</p>
+      </div>
+    </div>
+
+    <h2 id="s5">5. 職場での機密情報管理——Claudeへの入力ルール</h2>
+    <p>「AIに入力してはいけない情報」は、職場・個人を問わず明確に存在します。以下のような情報は、どんな状況でもAIへの入力を避けるべきです。</p>
+
+    <table class="cmp-table">
+      <tr><th>カテゴリ</th><th>具体例</th></tr>
+      <tr><td>顧客情報</td><td>氏名・住所・連絡先・契約情報</td></tr>
+      <tr><td>社内機密</td><td>未公開の事業計画・財務データ</td></tr>
+      <tr><td>NDA対象情報</td><td>取引先との秘密保持契約の対象となる情報</td></tr>
+      <tr><td>医療情報</td><td>患者情報・医療記録</td></tr>
+      <tr><td>認証情報</td><td>マイナンバー・パスワード（自分・他者を問わず）</td></tr>
+    </table>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>Claudeに機密情報を入れることは「社外の賢い人に相談する」のに似ている。賢くて役立つが、その会話が記録され、何かの形で残る可能性がある。重要な判断は「入力する前に立ち止まる」習慣を持つこと。</p>
+    </div>
+
+    <h3>対策——4原則</h3>
+    <p>生成AIを安全に活用するための基本的な対策は、次の4原則にまとめられます。</p>
+
+    <!-- SVG図解：対策4原則 -->
+    <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="160" rx="14" fill="#faf8f5"/>
+      <text x="340" y="28" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">生成AI利用の安全対策 4原則</text>
+      <!-- 原則1 -->
+      <rect x="20" y="44" width="148" height="100" rx="10" fill="#6bae9a"/>
+      <text x="94" y="72" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">① 最小化</text>
+      <text x="94" y="90" text-anchor="middle" font-size="10" fill="#d4f0e8">AIに渡す情報を</text>
+      <text x="94" y="104" text-anchor="middle" font-size="10" fill="#d4f0e8">必要最小限に絞る</text>
+      <text x="94" y="118" text-anchor="middle" font-size="10" fill="#d4f0e8">（データ収集の最小化）</text>
+      <!-- 原則2 -->
+      <rect x="178" y="44" width="148" height="100" rx="10" fill="#7a9bc4"/>
+      <text x="252" y="72" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">② 規約確認</text>
+      <text x="252" y="90" text-anchor="middle" font-size="10" fill="#d4e6f5">AIサービスの</text>
+      <text x="252" y="104" text-anchor="middle" font-size="10" fill="#d4e6f5">プライバシーポリシー・</text>
+      <text x="252" y="118" text-anchor="middle" font-size="10" fill="#d4e6f5">学習利用の有無を確認</text>
+      <!-- 原則3 -->
+      <rect x="336" y="44" width="148" height="100" rx="10" fill="#9a8fc4"/>
+      <text x="410" y="72" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">③ 匿名化</text>
+      <text x="410" y="90" text-anchor="middle" font-size="10" fill="#e8e4f5">固有名詞・数値を</text>
+      <text x="410" y="104" text-anchor="middle" font-size="10" fill="#e8e4f5">「Aさん」「XX社」など</text>
+      <text x="410" y="118" text-anchor="middle" font-size="10" fill="#e8e4f5">に置き換えてから入力</text>
+      <!-- 原則4 -->
+      <rect x="494" y="44" width="168" height="100" rx="10" fill="#c9a14a"/>
+      <text x="578" y="72" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">④ ルール遵守</text>
+      <text x="578" y="90" text-anchor="middle" font-size="10" fill="#fdf0d0">会社・職場が定める</text>
+      <text x="578" y="104" text-anchor="middle" font-size="10" fill="#fdf0d0">AIポリシーに</text>
+      <text x="578" y="118" text-anchor="middle" font-size="10" fill="#fdf0d0">従う</text>
+    </svg>
+
+    <div class="point">
+      <div class="label">&#9888; 最重要</div>
+      <p>Claudeへの入力鉄則：<strong>職場の機密情報は絶対に入れない</strong>。個人名・顧客情報・社外秘資料は入力前に匿名化するか、AIを使わない判断をする。</p>
+    </div>
+
+    <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>この記事のキーワードを確認しよう！</div>
+      </div>
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>個人情報保護法</strong> ＝ 2005年全面施行。<strong>生存する個人</strong>を特定できる情報の取り扱いを規定</li>
+        <li>2017年改正 ＝ <strong>全事業者</strong>（中小企業を含む）が規制対象に（5,000人以下の例外廃止）</li>
+        <li>2016年 ＝ <strong>個人情報保護委員会</strong>の設置（内閣府の外局）</li>
+        <li>要配慮個人情報 ＝ <strong>人種・病歴・障害・犯罪歴</strong>など特に厳重な取り扱いが必要な情報</li>
+        <li>匿名加工情報 ＝ 個人を特定できないよう加工し<strong>復元できない</strong>ようにした情報</li>
+        <li>生成AIへの入力リスク3つ：<strong>学習への取り込み・データ流出・悪用リスク</strong></li>
+        <li>対策4原則：<strong>最小化・プライバシーポリシー確認・匿名化・職場ルール遵守</strong></li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/yupiteru_nemuri.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        第4章、お疲れさまでした！インターネットリテラシー→セキュリティ→マルウェア→個人情報と、デジタル社会を生き抜く知識を体系的に学びました。第5章では、AIが社会全体に広がるなかで生まれる倫理・権利・法律の問題を学びます。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c4-03.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">第4章 03 ｜ マルウェア完全ガイド</div></a>
+      <a href="chapter5.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">第5章 ｜ AIの権利・倫理・法律</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo">AI<span>.</span>note</div>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
