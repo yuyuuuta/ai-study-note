@@ -113,32 +113,32 @@
     <p><strong>中間者攻撃（Man-in-the-Middle Attack、MitM）</strong>では、攻撃者が正規のWi-Fiに見せかけた偽のアクセスポイントを設置し、そこに接続させた上で通信を傍受・改ざんします。本物と同じSSID（ネットワーク名）を使うため、見分けがほぼつきません。</p>
 
     <!-- SVG：中間者攻撃の図解 -->
-    <svg viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
-      <rect width="680" height="180" rx="14" fill="#f3efe9"/>
-      <text x="340" y="26" text-anchor="middle" font-size="13" fill="#6b665e" font-weight="600">中間者攻撃（MitM）のしくみ</text>
+    <svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="230" rx="14" fill="#f3efe9"/>
+      <text x="340" y="32" text-anchor="middle" font-size="14" fill="#6b665e" font-weight="600">中間者攻撃（MitM）のしくみ</text>
       <!-- あなた -->
-      <rect x="20" y="60" width="120" height="52" rx="8" fill="#2b2925"/>
-      <text x="80" y="84" text-anchor="middle" font-size="12" fill="#faf8f5" font-weight="600">あなた</text>
-      <text x="80" y="100" text-anchor="middle" font-size="10" fill="#ddc88f">スマホ・PC</text>
+      <rect x="20" y="68" width="130" height="70" rx="8" fill="#2b2925"/>
+      <text x="85" y="100" text-anchor="middle" font-size="14" fill="#faf8f5" font-weight="600">あなた</text>
+      <text x="85" y="120" text-anchor="middle" font-size="12" fill="#ddc88f">スマホ・PC</text>
       <!-- 矢印（あなた→攻撃者） -->
-      <line x1="140" y1="86" x2="240" y2="86" stroke="#d98a8a" stroke-width="2.5" stroke-dasharray="6,3"/>
-      <polygon points="238,80 250,86 238,92" fill="#d98a8a"/>
-      <text x="195" y="78" text-anchor="middle" font-size="10" fill="#d98a8a">通信を傍受</text>
+      <line x1="150" y1="103" x2="235" y2="103" stroke="#d98a8a" stroke-width="2.5" stroke-dasharray="6,3"/>
+      <polygon points="233,97 245,103 233,109" fill="#d98a8a"/>
+      <text x="197" y="93" text-anchor="middle" font-size="11" fill="#d98a8a">通信を傍受</text>
       <!-- 攻撃者 -->
-      <rect x="250" y="50" width="160" height="72" rx="8" fill="#d98a8a"/>
-      <text x="330" y="79" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">攻撃者の</text>
-      <text x="330" y="96" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">偽アクセスポイント</text>
-      <text x="330" y="112" text-anchor="middle" font-size="10" fill="#fce8e8">Free Wi-Fi に見せかける</text>
+      <rect x="245" y="58" width="180" height="90" rx="8" fill="#d98a8a"/>
+      <text x="335" y="96" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">攻撃者の</text>
+      <text x="335" y="114" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">偽アクセスポイント</text>
+      <text x="335" y="136" text-anchor="middle" font-size="11" fill="#fce8e8">Free Wi-Fi に見せかける</text>
       <!-- 矢印（攻撃者→サーバ） -->
-      <line x1="410" y1="86" x2="510" y2="86" stroke="#c9a14a" stroke-width="2.5" stroke-dasharray="6,3"/>
-      <polygon points="508,80 520,86 508,92" fill="#c9a14a"/>
-      <text x="465" y="78" text-anchor="middle" font-size="10" fill="#c9a14a">改ざん・盗聴</text>
+      <line x1="425" y1="103" x2="510" y2="103" stroke="#c9a14a" stroke-width="2.5" stroke-dasharray="6,3"/>
+      <polygon points="508,97 520,103 508,109" fill="#c9a14a"/>
+      <text x="467" y="93" text-anchor="middle" font-size="11" fill="#c9a14a">改ざん・盗聴</text>
       <!-- サーバ -->
-      <rect x="520" y="60" width="140" height="52" rx="8" fill="#6bae9a"/>
-      <text x="590" y="84" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">正規サーバ</text>
-      <text x="590" y="100" text-anchor="middle" font-size="10" fill="#d4f0e8">銀行・メール 等</text>
+      <rect x="520" y="68" width="140" height="70" rx="8" fill="#6bae9a"/>
+      <text x="590" y="100" text-anchor="middle" font-size="14" fill="#fff" font-weight="600">正規サーバ</text>
+      <text x="590" y="120" text-anchor="middle" font-size="12" fill="#d4f0e8">銀行・メール 等</text>
       <!-- 注釈 -->
-      <text x="340" y="155" text-anchor="middle" font-size="11" fill="#8c8680">VPN を使うと通信が暗号化され、傍受されても内容が読めなくなる</text>
+      <text x="340" y="200" text-anchor="middle" font-size="12" fill="#8c8680">VPN を使うと通信が暗号化され、傍受されても内容が読めなくなる</text>
     </svg>
 
     <h3>対策</h3>
