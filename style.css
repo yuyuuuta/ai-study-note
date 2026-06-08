@@ -50,6 +50,9 @@ body {
   border-bottom: 1px solid var(--line);
 }
 .site-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--serif);
   font-size: 18px;
   letter-spacing: 0.15em;
@@ -57,6 +60,7 @@ body {
   color: var(--ink);
   text-decoration: none;
 }
+.site-header .logo img { width: 32px; height: 32px; display: block; }
 .site-header .logo span { color: var(--accent); }
 .site-nav { display: flex; gap: 28px; }
 .site-nav a {
@@ -457,7 +461,8 @@ body {
   text-align: center;
   margin-top: 80px;
 }
-.site-footer .logo { font-family: var(--serif); font-size: 20px; letter-spacing: 0.15em; margin-bottom: 16px; }
+.site-footer .logo { display: flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--serif); font-size: 20px; letter-spacing: 0.15em; margin-bottom: 16px; }
+.site-footer .logo img { width: 30px; height: 30px; display: block; }
 .site-footer .logo span { color: var(--accent-soft); }
 .site-footer p { font-size: 13px; color: rgba(250,248,245,0.6); line-height: 1.9; }
 .site-footer .copy { margin-top: 30px; font-size: 11px; color: rgba(250,248,245,0.4); letter-spacing: 0.1em; }
