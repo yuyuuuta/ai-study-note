@@ -88,102 +88,102 @@
 
       <!-- ━━ 事前準備フェーズ ━━ -->
       <rect x="16" y="14" width="648" height="150" rx="10" fill="#f3efe9" stroke="#e6e0d6" stroke-width="1.2"/>
-      <text x="36" y="38" font-size="12" fill="#9a948a" font-weight="600" letter-spacing="1">事前準備フェーズ（一度だけ実行）</text>
+      <text x="36" y="38" font-size="13" fill="#9a948a" font-weight="600" letter-spacing="1">事前準備フェーズ（一度だけ実行）</text>
 
       <!-- ① 文書の収集 -->
       <rect x="36" y="50" width="136" height="90" rx="8" fill="#2b2925"/>
-      <text x="104" y="82" text-anchor="middle" font-size="12" fill="#faf8f5" font-weight="700">① 文書の収集</text>
-      <text x="104" y="100" text-anchor="middle" font-size="10" fill="#ddc88f">社内マニュアル</text>
-      <text x="104" y="116" text-anchor="middle" font-size="10" fill="#ddc88f">PDF・Web・DB</text>
+      <text x="104" y="82" text-anchor="middle" font-size="13" fill="#faf8f5" font-weight="700">① 文書の収集</text>
+      <text x="104" y="100" text-anchor="middle" font-size="11.5" fill="#ddc88f">社内マニュアル</text>
+      <text x="104" y="116" text-anchor="middle" font-size="11.5" fill="#ddc88f">PDF・Web・DB</text>
 
       <line x1="172" y1="95" x2="204" y2="95" stroke="#c9a14a" stroke-width="2"/>
       <polygon points="204,90 214,95 204,100" fill="#c9a14a"/>
 
       <!-- ② チャンク分割 -->
       <rect x="214" y="50" width="136" height="90" rx="8" fill="#6bae9a"/>
-      <text x="282" y="82" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">② チャンク分割</text>
-      <text x="282" y="100" text-anchor="middle" font-size="10" fill="#d4f0e8">適切なサイズに</text>
-      <text x="282" y="116" text-anchor="middle" font-size="10" fill="#d4f0e8">テキストを分割</text>
+      <text x="282" y="82" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">② チャンク分割</text>
+      <text x="282" y="100" text-anchor="middle" font-size="11.5" fill="#d4f0e8">適切なサイズに</text>
+      <text x="282" y="116" text-anchor="middle" font-size="11.5" fill="#d4f0e8">テキストを分割</text>
 
       <line x1="350" y1="95" x2="382" y2="95" stroke="#c9a14a" stroke-width="2"/>
       <polygon points="382,90 392,95 382,100" fill="#c9a14a"/>
 
       <!-- ③ ベクトル化 -->
       <rect x="392" y="50" width="154" height="90" rx="8" fill="#9a8fc4"/>
-      <text x="469" y="82" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">③ ベクトル化</text>
-      <text x="469" y="100" text-anchor="middle" font-size="10" fill="#e8e4f5">Embeddingモデルで</text>
-      <text x="469" y="116" text-anchor="middle" font-size="10" fill="#e8e4f5">数値ベクトルに変換</text>
+      <text x="469" y="82" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">③ ベクトル化</text>
+      <text x="469" y="100" text-anchor="middle" font-size="11.5" fill="#e8e4f5">Embeddingモデルで</text>
+      <text x="469" y="116" text-anchor="middle" font-size="11.5" fill="#e8e4f5">数値ベクトルに変換</text>
 
       <line x1="546" y1="95" x2="578" y2="95" stroke="#c9a14a" stroke-width="2"/>
       <polygon points="578,90 588,95 578,100" fill="#c9a14a"/>
 
       <!-- ベクトルDB -->
       <rect x="588" y="50" width="68" height="90" rx="8" fill="#c9a14a"/>
-      <text x="622" y="88" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">ベクトル</text>
-      <text x="622" y="106" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">DB</text>
-      <text x="622" y="126" text-anchor="middle" font-size="9" fill="#fdf0d0">格納</text>
+      <text x="622" y="88" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">ベクトル</text>
+      <text x="622" y="106" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">DB</text>
+      <text x="622" y="126" text-anchor="middle" font-size="11" fill="#fdf0d0">格納</text>
 
       <!-- ━━ フェーズ間の接続矢印（ベクトルDB → 近傍検索） ━━ -->
       <line x1="622" y1="140" x2="622" y2="175" stroke="#c9a14a" stroke-width="1.5" stroke-dasharray="5,3"/>
       <line x1="622" y1="175" x2="262" y2="175" stroke="#c9a14a" stroke-width="1.5" stroke-dasharray="5,3"/>
       <line x1="262" y1="175" x2="262" y2="195" stroke="#c9a14a" stroke-width="1.5" stroke-dasharray="5,3"/>
       <polygon points="257,195 262,205 267,195" fill="#c9a14a"/>
-      <text x="430" y="170" text-anchor="middle" font-size="10" fill="#c9a14a" font-weight="600">格納済みベクトルを検索に使用</text>
+      <text x="430" y="170" text-anchor="middle" font-size="11.5" fill="#c9a14a" font-weight="600">格納済みベクトルを検索に使用</text>
 
       <!-- ━━ 回答フェーズ ━━ -->
       <rect x="16" y="190" width="648" height="268" rx="10" fill="#fdf6f6" stroke="#e6e0d6" stroke-width="1.2"/>
-      <text x="36" y="212" font-size="12" fill="#9a948a" font-weight="600" letter-spacing="1">回答フェーズ（質問のたびに実行）</text>
+      <text x="36" y="212" font-size="13" fill="#9a948a" font-weight="600" letter-spacing="1">回答フェーズ（質問のたびに実行）</text>
 
       <!-- ④ 質問入力 -->
       <rect x="36" y="222" width="110" height="86" rx="8" fill="#d98a8a"/>
-      <text x="91" y="253" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">④ 質問入力</text>
-      <text x="91" y="270" text-anchor="middle" font-size="10" fill="#fce8e8">ユーザーの</text>
-      <text x="91" y="284" text-anchor="middle" font-size="10" fill="#fce8e8">質問をベクトル化</text>
+      <text x="91" y="253" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">④ 質問入力</text>
+      <text x="91" y="270" text-anchor="middle" font-size="11.5" fill="#fce8e8">ユーザーの</text>
+      <text x="91" y="284" text-anchor="middle" font-size="11.5" fill="#fce8e8">質問をベクトル化</text>
 
       <line x1="146" y1="265" x2="176" y2="265" stroke="#c9a14a" stroke-width="2"/>
       <polygon points="176,260 186,265 176,270" fill="#c9a14a"/>
 
       <!-- ⑤ 近傍検索 -->
       <rect x="186" y="222" width="150" height="86" rx="8" fill="#7a9bc4"/>
-      <text x="261" y="253" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">⑤ 近傍検索</text>
-      <text x="261" y="270" text-anchor="middle" font-size="10" fill="#d4e6f5">ベクトルDBから</text>
-      <text x="261" y="284" text-anchor="middle" font-size="10" fill="#d4e6f5">類似文書を取得</text>
+      <text x="261" y="253" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">⑤ 近傍検索</text>
+      <text x="261" y="270" text-anchor="middle" font-size="11.5" fill="#d4e6f5">ベクトルDBから</text>
+      <text x="261" y="284" text-anchor="middle" font-size="11.5" fill="#d4e6f5">類似文書を取得</text>
 
       <line x1="336" y1="265" x2="366" y2="265" stroke="#c9a14a" stroke-width="2"/>
       <polygon points="366,260 376,265 366,270" fill="#c9a14a"/>
 
       <!-- ⑥ プロンプトに挿入 -->
       <rect x="376" y="222" width="146" height="86" rx="8" fill="#6bae9a"/>
-      <text x="449" y="248" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">⑥ プロンプトに挿入</text>
-      <text x="449" y="265" text-anchor="middle" font-size="10" fill="#d4f0e8">質問＋関連文書を</text>
-      <text x="449" y="280" text-anchor="middle" font-size="10" fill="#d4f0e8">LLMに渡す</text>
-      <text x="449" y="298" text-anchor="middle" font-size="9" fill="#b8e0d4">（コンテキスト注入）</text>
+      <text x="449" y="248" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">⑥ プロンプトに挿入</text>
+      <text x="449" y="265" text-anchor="middle" font-size="11.5" fill="#d4f0e8">質問＋関連文書を</text>
+      <text x="449" y="280" text-anchor="middle" font-size="11.5" fill="#d4f0e8">LLMに渡す</text>
+      <text x="449" y="298" text-anchor="middle" font-size="11" fill="#b8e0d4">（コンテキスト注入）</text>
 
       <line x1="522" y1="265" x2="552" y2="265" stroke="#c9a14a" stroke-width="2"/>
       <polygon points="552,260 562,265 552,270" fill="#c9a14a"/>
 
       <!-- ⑦ LLMが回答生成 -->
       <rect x="562" y="222" width="100" height="86" rx="8" fill="#2b2925"/>
-      <text x="612" y="248" text-anchor="middle" font-size="11" fill="#faf8f5" font-weight="700">⑦ LLMが</text>
-      <text x="612" y="264" text-anchor="middle" font-size="11" fill="#faf8f5" font-weight="700">回答生成</text>
-      <text x="612" y="284" text-anchor="middle" font-size="10" fill="#ddc88f">根拠ある回答</text>
+      <text x="612" y="248" text-anchor="middle" font-size="12" fill="#faf8f5" font-weight="700">⑦ LLMが</text>
+      <text x="612" y="264" text-anchor="middle" font-size="12" fill="#faf8f5" font-weight="700">回答生成</text>
+      <text x="612" y="284" text-anchor="middle" font-size="11.5" fill="#ddc88f">根拠ある回答</text>
 
       <!-- プロンプトのイメージ（スタイルボックス） -->
       <rect x="36" y="330" width="608" height="58" rx="8" fill="#f8f3eb" stroke="#ddc88f" stroke-width="1"/>
-      <text x="340" y="352" text-anchor="middle" font-size="11" fill="#6b665e" font-weight="600">「この文書を参考に答えてください：〔関連文書〕　質問：〔ユーザーの質問〕」</text>
-      <text x="340" y="372" text-anchor="middle" font-size="10" fill="#9a948a">↑ LLMに渡すプロンプトのイメージ（文書をコンテキストとして埋め込む）</text>
+      <text x="340" y="352" text-anchor="middle" font-size="12" fill="#6b665e" font-weight="600">「この文書を参考に答えてください：〔関連文書〕　質問：〔ユーザーの質問〕」</text>
+      <text x="340" y="372" text-anchor="middle" font-size="11.5" fill="#9a948a">↑ LLMに渡すプロンプトのイメージ（文書をコンテキストとして埋め込む）</text>
 
       <!-- 凡例 -->
-      <text x="36" y="414" font-size="10" fill="#9a948a">📥 入力</text>
-      <rect x="72" y="404" width="12" height="12" rx="2" fill="#d98a8a"/>
-      <text x="90" y="414" font-size="10" fill="#9a948a">検索</text>
-      <rect x="112" y="404" width="12" height="12" rx="2" fill="#7a9bc4"/>
-      <text x="130" y="414" font-size="10" fill="#9a948a">加工</text>
-      <rect x="152" y="404" width="12" height="12" rx="2" fill="#6bae9a"/>
-      <text x="170" y="414" font-size="10" fill="#9a948a">生成</text>
-      <rect x="192" y="404" width="12" height="12" rx="2" fill="#2b2925"/>
-      <text x="210" y="414" font-size="10" fill="#9a948a">DB</text>
-      <rect x="224" y="404" width="12" height="12" rx="2" fill="#c9a14a"/>
+      <rect x="36" y="403" width="13" height="13" rx="3" fill="#d98a8a"/>
+      <text x="55" y="414" font-size="11.5" fill="#9a948a">入力</text>
+      <rect x="104" y="403" width="13" height="13" rx="3" fill="#7a9bc4"/>
+      <text x="123" y="414" font-size="11.5" fill="#9a948a">検索</text>
+      <rect x="172" y="403" width="13" height="13" rx="3" fill="#6bae9a"/>
+      <text x="191" y="414" font-size="11.5" fill="#9a948a">加工</text>
+      <rect x="240" y="403" width="13" height="13" rx="3" fill="#2b2925"/>
+      <text x="259" y="414" font-size="11.5" fill="#9a948a">生成</text>
+      <rect x="308" y="403" width="13" height="13" rx="3" fill="#c9a14a"/>
+      <text x="327" y="414" font-size="11.5" fill="#9a948a">DB（格納）</text>
     </svg>
 
     <h3>各ステップの詳細</h3>
