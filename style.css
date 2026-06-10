@@ -359,6 +359,7 @@ body {
 
 /* ===== インタラクティブ：アコーディオン ===== */
 .accordion { margin: 28px 0; }
+.content-block .accordion:last-child { margin-bottom: 0; }
 .acc-item { border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; background: var(--bg-card); }
 .acc-head {
   padding: 20px 24px;
@@ -400,6 +401,7 @@ body {
 
 /* ===== 比較表 ===== */
 .cmp-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); }
+.cmp-table table { width: 100%; border-collapse: collapse; }
 .cmp-table th, .cmp-table td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--line); }
 .cmp-table th { background: var(--bg-soft); font-weight: 600; font-size: 13px; letter-spacing: 0.03em; }
 .cmp-table tr:last-child td { border-bottom: none; }
