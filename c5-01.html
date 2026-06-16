@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜAIの画風マネはOKで、丸コピーはダメなのか？｜第5章｜「なぜ？」からわかる！生成AIパスポート学習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo"><img src="assets/logo-mark.svg" alt="AI.note ロゴ">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html">3章</a>
+    <a href="chapter4.html">4章</a>
+    <a href="chapter5.html" class="active">5章</a>
+    <a href="chapter6.html">6章</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">第5章 ｜ 01</span>
+    <h1>なぜAIの画風マネはOKで、丸コピーはダメなのか？</h1>
+    <div class="reading">知的財産権の全体像と、著作権・特許権・意匠権・商標権 × 生成AI</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「このイラスト、有名作家の画風にそっくり……これって違法？」——生成AIが普及した今、誰もが一度はこの疑問にぶつかります。答えのカギは「<strong>知的財産権が何を守って、何を守らないのか</strong>」を正しく知ることです。この記事では、知的財産権の全体像を整理し、著作権・特許権・意匠権・商標権それぞれが生成AIとどう関わるのかを、できるだけ噛み砕いて解説します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">知的財産権の全体像 ── 4つの柱</a></li>
+        <li><a href="#s2">著作権と生成AI ── アイデア・表現二分論</a></li>
+        <li><a href="#s3">AIと著作権の「3つの場面」</a></li>
+        <li><a href="#s4">AI生成物に著作権はあるのか</a></li>
+        <li><a href="#s5">特許権・意匠権・商標権と生成AI</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. 知的財産権の全体像 ── 4つの柱</h2>
+    <p><strong>知的財産権（知財）</strong>とは、人間の知的な創作活動から生まれた「形のない財産」を保護する権利の総称です。土地や車のような「目に見える財産」と違い、アイデアやデザイン、ブランドといった「目に見えない価値」を守ります。</p>
+    <p>知財は大きく、<strong>創作物を守る権利</strong>（著作権・特許権・意匠権など）と、<strong>営業上の信用を守る権利</strong>（商標権など）に分かれます。試験では、この4つの違いと「何を・どれくらいの期間守るか」が頻出です。まずは家系図で全体像をつかみましょう。</p>
+
+    <!-- SVG①：知的財産権の家系図 -->
+    <svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="360" rx="14" fill="#faf8f5"/>
+      <text x="340" y="34" text-anchor="middle" font-size="15" fill="#6b665e" font-weight="600">知的財産権の家系図</text>
+
+      <!-- 頂点：知的財産権 -->
+      <rect x="260" y="50" width="160" height="50" rx="10" fill="#2b2925"/>
+      <text x="340" y="72" text-anchor="middle" font-size="14" fill="#faf8f5" font-weight="700">知的財産権</text>
+      <text x="340" y="90" text-anchor="middle" font-size="11" fill="#ddc88f">知的な創作・信用を守る</text>
+
+      <!-- 分岐線 -->
+      <line x1="340" y1="100" x2="340" y2="118" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="170" y1="118" x2="510" y2="118" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="170" y1="118" x2="170" y2="136" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="510" y1="118" x2="510" y2="136" stroke="#c9a14a" stroke-width="1.5"/>
+
+      <!-- 左：著作権（創作と同時・登録不要） -->
+      <rect x="40" y="136" width="260" height="90" rx="10" fill="#6bae9a"/>
+      <text x="170" y="164" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">著作権</text>
+      <text x="170" y="186" text-anchor="middle" font-size="11.5" fill="#d4f0e8">小説・音楽・絵・プログラム等</text>
+      <text x="170" y="206" text-anchor="middle" font-size="11" fill="#d4f0e8">創作と同時に発生・登録不要</text>
+
+      <!-- 右：産業財産権（特許庁に登録） -->
+      <rect x="380" y="136" width="260" height="90" rx="10" fill="#7a9bc4"/>
+      <text x="510" y="164" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">産業財産権</text>
+      <text x="510" y="186" text-anchor="middle" font-size="11.5" fill="#d4e6f5">特許庁に出願・登録して発生</text>
+      <text x="510" y="206" text-anchor="middle" font-size="11" fill="#d4e6f5">下記の3つに分かれる</text>
+
+      <!-- 産業財産権の枝 -->
+      <line x1="510" y1="226" x2="510" y2="244" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="430" y1="244" x2="610" y2="244" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="430" y1="244" x2="430" y2="262" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="510" y1="244" x2="510" y2="262" stroke="#c9a14a" stroke-width="1.5"/>
+      <line x1="610" y1="244" x2="610" y2="262" stroke="#c9a14a" stroke-width="1.5"/>
+
+      <!-- 特許権 -->
+      <rect x="372" y="262" width="116" height="78" rx="9" fill="#9a8fc4"/>
+      <text x="430" y="288" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">特許権</text>
+      <text x="430" y="307" text-anchor="middle" font-size="10.5" fill="#e8e4f5">発明（技術）</text>
+      <text x="430" y="324" text-anchor="middle" font-size="10.5" fill="#e8e4f5">出願から20年</text>
+
+      <!-- 意匠権 -->
+      <rect x="496" y="262" width="28" height="78" rx="6" fill="#c9a14a" opacity="0"/>
+      <rect x="492" y="262" width="44" height="78" rx="9" fill="#c9a14a"/>
+      <text x="514" y="288" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">意匠</text>
+      <text x="514" y="305" text-anchor="middle" font-size="10" fill="#fdf0d0">デザイン</text>
+      <text x="514" y="321" text-anchor="middle" font-size="10" fill="#fdf0d0">25年</text>
+
+      <!-- 商標権 -->
+      <rect x="552" y="262" width="86" height="78" rx="9" fill="#d98a8a"/>
+      <text x="595" y="288" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">商標権</text>
+      <text x="595" y="305" text-anchor="middle" font-size="10.5" fill="#fce8e8">ブランド</text>
+      <text x="595" y="321" text-anchor="middle" font-size="10.5" fill="#fce8e8">更新で半永久</text>
+
+      <!-- 著作権の特徴メモ -->
+      <text x="170" y="262" text-anchor="middle" font-size="11" fill="#9a948a">＝ 文化を守る権利</text>
+      <text x="170" y="282" text-anchor="middle" font-size="10.5" fill="#9a948a">保護期間：原則 著作者の死後70年</text>
+      <text x="170" y="312" text-anchor="middle" font-size="11" fill="#9a948a">産業財産権 ＝ 産業の発展を守る権利</text>
+    </svg>
+
+    <div class="cards c2">
+      <div class="mini-card acc-teal">
+        <div class="mc-label">著作権</div>
+        <h4>表現を守る・登録不要</h4>
+        <p>小説・音楽・絵画・写真・プログラムなど「思想や感情を創作的に表現したもの」を保護。創作した瞬間に自動で発生し、申請は不要。保護期間は原則、著作者の死後70年。</p>
+      </div>
+      <div class="mini-card acc-purple">
+        <div class="mc-label">特許権</div>
+        <h4>発明（技術）を守る</h4>
+        <p>高度な技術的アイデア（発明）を保護。特許庁への出願・審査・登録が必要。保護期間は出願から20年。早い者勝ち（先願主義）が原則。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <div class="mc-label">意匠権</div>
+        <h4>デザインを守る</h4>
+        <p>製品の形・模様・色などの「見た目のデザイン」を保護。特許庁への登録が必要。保護期間は出願から25年。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">商標権</div>
+        <h4>ブランドを守る</h4>
+        <p>商品やサービスの名前・ロゴマークなど「営業上の目印」を保護。更新を続ければ半永久的に保護される。消費者の信用を守るのが目的。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9888; 試験ポイント</div>
+      <p>知財は「<strong>著作権</strong>（登録不要・文化）」と「<strong>産業財産権＝特許・意匠・商標</strong>（特許庁に登録・産業）」の2系統に分かれる。<strong>登録が要るか要らないか</strong>、<strong>保護期間</strong>が混同しやすいので、家系図でセットで覚えよう。</p>
+    </div>
+
+    <h2 id="s2">2. 著作権と生成AI ── アイデア・表現二分論</h2>
+    <p>生成AIで最も問題になるのが<strong>著作権</strong>です。ここで絶対に外せない原則が<strong>アイデア・表現二分論</strong>。著作権は「<strong>具体的な表現</strong>」を守りますが、「<strong>アイデア・作風・画風</strong>」そのものは守りません。</p>
+    <p>たとえば「水玉模様を全面に使う作風」や「淡い色彩で少女を描くタッチ」といったアイデア・画風は、誰でも自由に使えます。一方で、特定の作品の構図・キャラクター・具体的な絵柄を<strong>そっくりそのまま再現</strong>すれば、それは「表現の複製」として著作権侵害になりえます。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>料理にたとえると、「和風だしを効かせた優しい味付け」という<strong>コンセプト（アイデア）</strong>は誰でもマネしてOK。でも、ある店の<strong>秘伝のレシピを丸写し</strong>して同じ料理を出せばアウト。著作権が守るのは「レシピという具体的表現」であって、「和風という方向性」ではないのです。</p>
+    </div>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>著作権はアイデアではなく表現を守る（アイデア・表現二分論）。だからAIの画風模倣は原則問題ないが、丸コピーはアウト。「○○風」を狙うのは自由でも、特定作品とそっくりな具体的表現を吐き出させてそれを使えば、侵害のリスクが一気に高まる——この線引きが全ての出発点です。</p>
+    </div>
+
+    <h2 id="s3">3. AIと著作権の「3つの場面」</h2>
+    <p>「AIと著作権」はひとくくりに語られがちですが、実は<strong>3つの場面</strong>に分けて考える必要があります。場面ごとに、誰の・どんな権利が関わるかが変わるからです。</p>
+
+    <!-- SVG②：AI×著作権の3場面 -->
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="300" rx="14" fill="#faf8f5"/>
+      <text x="340" y="34" text-anchor="middle" font-size="15" fill="#6b665e" font-weight="600">AI × 著作権の3場面</text>
+
+      <!-- ① 学習時 -->
+      <rect x="24" y="58" width="196" height="180" rx="12" fill="#6bae9a"/>
+      <text x="122" y="90" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">① 学習時</text>
+      <text x="122" y="112" text-anchor="middle" font-size="11.5" fill="#d4f0e8">既存の作品を</text>
+      <text x="122" y="130" text-anchor="middle" font-size="11.5" fill="#d4f0e8">大量に読み込ませる</text>
+      <line x1="44" y1="146" x2="200" y2="146" stroke="#fff" stroke-width="0.8" opacity="0.4"/>
+      <text x="122" y="170" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">日本：原則OK</text>
+      <text x="122" y="190" text-anchor="middle" font-size="10.5" fill="#d4f0e8">著作権法30条の4</text>
+      <text x="122" y="212" text-anchor="middle" font-size="10.5" fill="#d4f0e8">（情報解析のための利用）</text>
+
+      <!-- 矢印 -->
+      <polygon points="226,148 244,140 244,156" fill="#c9a14a"/>
+      <line x1="220" y1="148" x2="240" y2="148" stroke="#c9a14a" stroke-width="2.5"/>
+
+      <!-- ② 生成時 -->
+      <rect x="242" y="58" width="196" height="180" rx="12" fill="#9a8fc4"/>
+      <text x="340" y="90" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">② 生成時</text>
+      <text x="340" y="112" text-anchor="middle" font-size="11.5" fill="#e8e4f5">AIが新しい</text>
+      <text x="340" y="130" text-anchor="middle" font-size="11.5" fill="#e8e4f5">コンテンツを作る</text>
+      <line x1="262" y1="146" x2="418" y2="146" stroke="#fff" stroke-width="0.8" opacity="0.4"/>
+      <text x="340" y="170" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">既存作品に酷似なら</text>
+      <text x="340" y="190" text-anchor="middle" font-size="10.5" fill="#e8e4f5">類似性＋依拠性で</text>
+      <text x="340" y="212" text-anchor="middle" font-size="10.5" fill="#e8e4f5">侵害になりうる</text>
+
+      <!-- 矢印 -->
+      <polygon points="444,148 462,140 462,156" fill="#c9a14a"/>
+      <line x1="438" y1="148" x2="458" y2="148" stroke="#c9a14a" stroke-width="2.5"/>
+
+      <!-- ③ 使用時 -->
+      <rect x="460" y="58" width="196" height="180" rx="12" fill="#d98a8a"/>
+      <text x="558" y="90" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">③ 使用時</text>
+      <text x="558" y="112" text-anchor="middle" font-size="11.5" fill="#fce8e8">生成物を公開・</text>
+      <text x="558" y="130" text-anchor="middle" font-size="11.5" fill="#fce8e8">販売・配布する</text>
+      <line x1="480" y1="146" x2="636" y2="146" stroke="#fff" stroke-width="0.8" opacity="0.4"/>
+      <text x="558" y="170" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">使った人間が責任</text>
+      <text x="558" y="190" text-anchor="middle" font-size="10.5" fill="#fce8e8">侵害物の利用・販売は</text>
+      <text x="558" y="212" text-anchor="middle" font-size="10.5" fill="#fce8e8">利用者の責任になる</text>
+
+      <text x="340" y="272" text-anchor="middle" font-size="11.5" fill="#9a948a">学習は緩やか／生成と使用ほど責任が重くなる ── 同じ「AIと著作権」でも場面で全く違う</text>
+    </svg>
+
+    <h3>① 学習時 ── 日本は世界一寛容</h3>
+    <p>AIに既存の作品を読み込ませる「学習」の場面です。日本では<strong>著作権法30条の4</strong>により、「情報解析のための利用」は原則として著作権者の許諾なしに認められています。これは世界的に見てもかなり寛容なルールで、日本がAI開発に向いていると言われる理由のひとつです。</p>
+    <p>ただし「著作権者の利益を不当に害する場合」は例外で認められません。たとえば、特定の作家の作品だけを集中的に学習させて、その作家の作品を代替する目的で使う、といったケースは問題になりえます。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>日本はAI学習に世界一寛容な国（著作権法30条の4）。でもEUはオプトアウト（権利者が「使わないで」と拒否表明できる仕組み）で拒否できる。同じ「AI学習」でも国によってルールが正反対——日本で合法でも、EU向けサービスでは権利者の意思を尊重しなければならない、という非対称が生まれています。</p>
+    </div>
+
+    <h3>② 生成時 ── 類似性と依拠性</h3>
+    <p>AIが実際にコンテンツを生み出す場面です。生成物が既存の著作物と「<strong>類似性</strong>（そっくりであること）」かつ「<strong>依拠性</strong>（元の作品を下敷きにしていること）」の両方を満たすと、著作権侵害と判断されえます。AIは大量の学習データを下敷きにしているため、特定作品に酷似した出力には注意が必要です。</p>
+
+    <h3>③ 使用時 ── 責任は人間に</h3>
+    <p>生成したものを公開・販売・配布する場面です。ここで重要なのは、<strong>「AIが作った」は言い訳にならない</strong>ということ。侵害物を世に出した責任は、それを使った人間が負います。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>AIは道具。使った人間が責任を持つ。これが知的財産権全体に共通する原則。カメラが勝手に他人の作品を盗作しないのと同じで、AIも「使い方」次第。便利な道具ほど、握っている人間の責任が問われる——著作権も特許も商標も、この一点で貫かれています。</p>
+    </div>
+
+    <h2 id="s4">4. AI生成物に著作権はあるのか</h2>
+    <p>「AIが作ったイラストや文章に、著作権は発生するのか？」——結論から言うと、<strong>原則として著作権は発生しません</strong>。著作権は「人間の思想・感情を創作的に表現したもの」を守る権利であり、AIが自動生成しただけのものは「人間の創作物」と言えないからです。</p>
+    <p>ただし、人間が<strong>創作的な関与</strong>をしていれば話は変わります。たとえば、詳細な指示を練り上げ、何度も生成し直し、出力を取捨選択・加筆修正して仕上げた——といった創作的なプロセスがあれば、その人間の著作物として認められる可能性があります。逆に「一言プロンプトを入れて出てきたものをそのまま使う」だけの<strong>丸投げ</strong>では、著作者にはなれません。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>AI生成物は原則著作権なし。「丸投げ」は著作者になれない。人間の創作的関与が鍵。つまり「AIに任せきり」だと、出てきた作品は誰のものでもない＝他人に勝手に使われても文句が言いづらい。逆に深く関わるほど「自分の作品」として守られる。関与の深さが、そのまま権利の有無に直結します。</p>
+    </div>
+
+    <h2 id="s5">5. 特許権・意匠権・商標権と生成AI</h2>
+    <p>著作権以外の知財も、生成AIと無関係ではありません。</p>
+    <div class="cards c3">
+      <div class="mini-card acc-purple">
+        <div class="mc-label">特許権</div>
+        <h4>AIは「発明者」になれない</h4>
+        <p>各国の判断はほぼ一致しており、特許の発明者は<strong>自然人（人間）</strong>に限られる。AIが生み出した技術でも、出願人・発明者として記載できるのは人間。AIはあくまで発明を支援する道具という位置づけ。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <div class="mc-label">意匠権</div>
+        <h4>AIデザインの権利化</h4>
+        <p>AIが生成した製品デザインも、人間が出願すれば意匠登録を目指せる。ただし既存の登録意匠と類似すると登録できず、他社の意匠権を侵害するリスクもある。</p>
+      </div>
+      <div class="mini-card acc-pink">
+        <div class="mc-label">商標権</div>
+        <h4>ロゴ生成の落とし穴</h4>
+        <p>AIでロゴやブランド名を作る際、既存の登録商標と似ていると<strong>商標権侵害</strong>になる。生成して終わりではなく、特許庁の商標検索で先行登録を確認することが欠かせない。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9888; 共通する考え方</div>
+      <p>特許・意匠・商標いずれも、<strong>権利を持てるのは人間</strong>で、<strong>既存の登録権利を侵害しないか確認する責任も人間</strong>にある。AIは「作る」を手伝うが、「権利」と「責任」は人間に帰属する——知財全体に一貫した原則です。</p>
+    </div>
+
+    <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>この記事のキーワードを確認しよう！</div>
+      </div>
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li>知的財産権 ＝ <strong>著作権</strong>（登録不要・死後70年）＋<strong>産業財産権</strong>（特許・意匠・商標／特許庁に登録）</li>
+        <li><strong>アイデア・表現二分論</strong> ＝ 著作権は表現を守り、アイデア・画風は守らない</li>
+        <li><strong>著作権法30条の4</strong> ＝ AI学習のための利用は原則OK（日本の特徴）。EUはオプトアウト可</li>
+        <li>生成時の侵害判断 ＝ <strong>類似性＋依拠性</strong>の両方を満たすか</li>
+        <li>AI生成物 ＝ <strong>原則著作権なし</strong>。人間の創作的関与があれば認められうる</li>
+        <li>特許・意匠・商標 ＝ 権利者になれるのは<strong>人間（自然人）</strong>。AIは発明者になれない</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/yupiteru_nemuri.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        知財は「何を守って何を守らないか」が分かれば、ぐっと整理できます。<strong>画風はマネOK・丸コピーはNG・責任は人間</strong>——この3点を軸に覚えましょう。次は、人の「顔」と「声」をめぐる権利を見ていきます。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="chapter5.html" class="prev"><div class="dir">&larr; 章トップ</div><div class="ttl">第5章 ｜ AIの権利・倫理・法律</div></a>
+      <a href="c5-02.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">第5章 02 ｜ 肖像権・パブリシティ権と生成AI</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo"><img src="assets/logo-mark.svg" alt="AI.note ロゴ">AI<span>.</span>note</div>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜAIに会社の秘密を入力してはいけないのか？｜第5章｜「なぜ？」からわかる！生成AIパスポート学習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo"><img src="assets/logo-mark.svg" alt="AI.note ロゴ">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html">3章</a>
+    <a href="chapter4.html">4章</a>
+    <a href="chapter5.html" class="active">5章</a>
+    <a href="chapter6.html">6章</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <div class="article-header">
+    <span class="cat">第5章 ｜ 03</span>
+    <h1>なぜAIに会社の秘密を入力してはいけないのか？</h1>
+    <div class="reading">不正競争防止法・営業秘密の3条件・限定提供データと、AI入力のリスク</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「便利だから」と、職場の資料をそのままChatGPTに貼り付けていませんか？——その一手が、会社の大切な「営業秘密」を法的に無防備な状態にしてしまうかもしれません。この記事では、<strong>不正競争防止法</strong>が守る営業秘密の仕組みを整理し、AIへの秘密情報入力がなぜ危険なのか、そして「混同惹起」という落とし穴を解説します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">不正競争防止法とは何か</a></li>
+        <li><a href="#s2">営業秘密の3条件</a></li>
+        <li><a href="#s3">限定提供データという新しい保護</a></li>
+        <li><a href="#s4">AIへの秘密情報入力のリスク</a></li>
+        <li><a href="#s5">混同惹起行為 ── AIでもアウト</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. 不正競争防止法とは何か</h2>
+    <p><strong>不正競争防止法</strong>は、事業者間の「公正な競争」を守るための法律です。著作権や特許のように「権利を登録して独占する」のではなく、<strong>不正な行為そのものを禁止する</strong>というアプローチをとります。代表的な規制対象が、<strong>営業秘密の侵害</strong>と<strong>混同惹起行為（ブランドのただ乗り）</strong>です。</p>
+    <p>知財の世界では、特許や著作権が「正面の門（登録して守る）」だとすれば、不正競争防止法は「裏口の見張り（ずるい手口を取り締まる）」のような存在。登録していない情報やブランドでも、一定の条件を満たせば守られます。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>特許が「土地に塀を立てて登記する」守り方なら、営業秘密は「金庫にしまって鍵をかける」守り方。塀（登録）がなくても、きちんと金庫管理していれば「勝手に持ち出すのは泥棒だ」と主張できる——それが不正競争防止法の発想です。</p>
+    </div>
+
+    <h2 id="s2">2. 営業秘密の3条件</h2>
+    <p>会社の情報が法律で守られる「<strong>営業秘密</strong>」と認められるには、<strong>3つの条件をすべて満たす</strong>必要があります。ひとつでも欠けると、たとえ大切な情報でも法的には「営業秘密」として保護されません。</p>
+
+    <!-- SVG①：営業秘密保護の3条件 -->
+    <svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="330" rx="14" fill="#faf8f5"/>
+      <text x="340" y="34" text-anchor="middle" font-size="15" fill="#6b665e" font-weight="600">営業秘密の3条件 ── 3つ揃って初めて成立</text>
+
+      <!-- 3つの円（ベン図風） -->
+      <circle cx="265" cy="150" r="86" fill="#6bae9a" fill-opacity="0.78"/>
+      <circle cx="415" cy="150" r="86" fill="#7a9bc4" fill-opacity="0.78"/>
+      <circle cx="340" cy="222" r="86" fill="#c9a14a" fill-opacity="0.78"/>
+
+      <!-- ラベル：秘密管理性 -->
+      <text x="225" y="128" text-anchor="middle" font-size="13.5" fill="#fff" font-weight="700">秘密管理性</text>
+      <text x="225" y="148" text-anchor="middle" font-size="10.5" fill="#eafaf4">秘密として</text>
+      <text x="225" y="163" text-anchor="middle" font-size="10.5" fill="#eafaf4">管理されている</text>
+
+      <!-- ラベル：有用性 -->
+      <text x="455" y="128" text-anchor="middle" font-size="13.5" fill="#fff" font-weight="700">有用性</text>
+      <text x="455" y="148" text-anchor="middle" font-size="10.5" fill="#eaf1fa">事業に役立つ</text>
+      <text x="455" y="163" text-anchor="middle" font-size="10.5" fill="#eaf1fa">価値がある</text>
+
+      <!-- ラベル：非公知性 -->
+      <text x="340" y="250" text-anchor="middle" font-size="13.5" fill="#fff" font-weight="700">非公知性</text>
+      <text x="340" y="270" text-anchor="middle" font-size="10.5" fill="#fdf3da">一般には</text>
+      <text x="340" y="285" text-anchor="middle" font-size="10.5" fill="#fdf3da">知られていない</text>
+
+      <!-- 中央：営業秘密 -->
+      <text x="340" y="180" text-anchor="middle" font-size="13" fill="#2b2925" font-weight="700">営業秘密</text>
+    </svg>
+
+    <div class="cards c3">
+      <div class="mini-card acc-teal">
+        <div class="mc-label">条件 ①</div>
+        <h4>秘密管理性</h4>
+        <p>情報が「秘密」として管理されていること。アクセス制限・パスワード・「社外秘」表示など、客観的に秘密だと分かる管理が必要。<strong>最も争点になりやすい条件</strong>。</p>
+      </div>
+      <div class="mini-card acc-blue">
+        <div class="mc-label">条件 ②</div>
+        <h4>有用性</h4>
+        <p>事業活動に役立つ、財産的価値のある情報であること。製造ノウハウ・顧客リスト・設計図など。違法行為の情報などは有用性が認められない。</p>
+      </div>
+      <div class="mini-card acc-gold">
+        <div class="mc-label">条件 ③</div>
+        <h4>非公知性</h4>
+        <p>一般に知られておらず、容易には入手できない状態であること。すでに公開・出版されている情報は非公知性を失い、営業秘密にならない。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9888; 試験ポイント</div>
+      <p>営業秘密の3条件 ＝ <strong>秘密管理性・有用性・非公知性</strong>。3つすべてを満たして初めて成立する点が頻出。特に<strong>秘密管理性</strong>は、企業が「秘密にする意思」を客観的に示せているかが問われ、裁判でも最大の争点になりやすい。</p>
+    </div>
+
+    <h2 id="s3">3. 限定提供データという新しい保護</h2>
+    <p>ビッグデータの時代に対応するため、不正競争防止法には<strong>限定提供データ</strong>という保護の枠組みが加わりました。これは「<strong>特定の相手に・限定して提供される、商業的価値のあるデータ</strong>」を守るものです。</p>
+    <p>営業秘密との違いは、<strong>「非公知性」が要件でない</strong>点。会員企業に有料で提供される統計データや地図データのように、<strong>一定範囲には公開されているが、無断で大量に複製・転売されては困る</strong>——そんなデータを保護対象にしています。AIの学習データやデータ取引が広がるなかで、ますます重要になる概念です。</p>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>営業秘密が「金庫の中の秘伝レシピ（誰にも見せない）」なら、限定提供データは「有料会員だけに配るデータ集（会員には見せるが、転売は禁止）」。完全な秘密ではないけれど、勝手にコピーして売られたら困る——その中間地帯を守る仕組みです。</p>
+    </div>
+
+    <h2 id="s4">4. AIへの秘密情報入力のリスク</h2>
+    <p>ここが本記事の核心です。生成AIに会社の秘密情報を入力する行為には、<strong>営業秘密を失わせる重大なリスク</strong>があります。</p>
+    <p>思い出してください。営業秘密の条件のひとつは「<strong>秘密管理性</strong>」でした。社員が個人で使うChatGPTのようなサービスに機密情報を入力すると、その情報が会社の管理外に流出したとみなされ、「秘密として管理されていた」とは言えなくなる可能性があります。入力した情報がAIの学習に使われれば、<strong>非公知性</strong>も損なわれかねません。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>ChatGPT（個人版）に会社の秘密を入力した瞬間、営業秘密でなくなる可能性。入力＝使用とみなされる。「ちょっと相談しただけ」のつもりでも、法的には「秘密を社外のサービスに渡した」と評価されうる。一度くずれた秘密管理性は元に戻らない——だから入力する前に立ち止まる習慣が、何よりの防御になります。</p>
+    </div>
+
+    <p>では、職場でAIを使うにはどうすればいいのでしょうか。鍵は<strong>サービスの種類と利用規約</strong>にあります。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-pink">
+        <div class="mc-label">注意</div>
+        <h4>個人向けAIサービス</h4>
+        <p>入力内容が学習に使われる設定の場合がある。会社の機密情報を入れると、外部に流出・他ユーザーの回答に混入するリスク。職場での無断利用は危険。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">比較的安全</div>
+        <h4>企業向けAIサービス</h4>
+        <p>入力データを学習に使わない設定（オプトアウト）を備えたものが多い。組織の管理下で導入すれば、秘密管理性を保ちやすい。ただし規約の確認は必須。</p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>Copilot（企業版）は学習に使わない設定があるので職場での利用は比較的安全。でも利用規約は必ず確認。「企業版だから絶対安全」ではなく、「学習に使わない設定になっているか」を自分の目で確かめることが大事。同じ名前のサービスでも、個人版と企業版でデータの扱いがまるで違うのです。</p>
+    </div>
+
+    <h2 id="s5">5. 混同惹起行為 ── AIでもアウト</h2>
+    <p>不正競争防止法のもうひとつの柱が<strong>混同惹起行為</strong>です。これは、他社の有名な商品名・ロゴ・パッケージなどと紛らわしいものを使い、消費者に「あの会社の商品だ」と<strong>勘違い（混同）させる</strong>行為を指します。いわゆる「ブランドのただ乗り」です。</p>
+    <p>生成AIでロゴやパッケージ、商品名を作るとき、既存の有名ブランドと紛らわしいものを生み出してしまえば、混同惹起行為に該当しえます。そして重要なのは——<strong>「AIが勝手に作った」は免責の理由にならない</strong>ということ。生成物を選び、世に出したのは人間だからです。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>AIが生成しても混同が起きれば不正競争防止法違反。「AIがやった」は免責にならない。これは前の記事の「AIは道具、責任は人間」と同じ原則。便利な生成機能ほど、出てきたものをそのまま使う前に「これ、どこかの有名ブランドに似ていないか？」と確認する一手間が、自分を守ります。</p>
+    </div>
+
+    <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>この記事のキーワードを確認しよう！</div>
+      </div>
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li><strong>不正競争防止法</strong> ＝ 公正な競争を守る。登録ではなく<strong>不正行為を禁止</strong>する法律</li>
+        <li>営業秘密の3条件 ＝ <strong>秘密管理性・有用性・非公知性</strong>（3つすべて必要）</li>
+        <li><strong>限定提供データ</strong> ＝ 特定の相手に限定提供される商業的データ。<strong>非公知性は不要</strong></li>
+        <li>個人版AIへの秘密入力 ＝ <strong>秘密管理性を失い、営業秘密でなくなる</strong>リスク</li>
+        <li>企業版AI ＝ 学習に使わない設定があり比較的安全。<strong>利用規約の確認は必須</strong></li>
+        <li><strong>混同惹起行為</strong> ＝ 有名ブランドと紛らわしい表示で消費者を勘違いさせる行為。AIでも違反</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/yupiteru_nemuri.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        第5章おつかれさまでした！知財・肖像権・営業秘密——どれも根っこは「他人の権利を勝手に奪わない」という同じ原則です。<strong>AIは道具、責任は人間</strong>。この一本の軸が通れば、法律分野はもう怖くありません。次の第6章では、いよいよAIを使いこなす「プロンプト制作」の実践に入ります！
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c5-02.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">第5章 02 ｜ 肖像権・パブリシティ権と生成AI</div></a>
+      <a href="chapter6.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">第6章 ｜ プロンプト制作と実例</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo"><img src="assets/logo-mark.svg" alt="AI.note ロゴ">AI<span>.</span>note</div>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
