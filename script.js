@@ -3,6 +3,16 @@ function toggleNav() {
   document.querySelector('.site-nav').classList.toggle('open');
 }
 
+// ===== 戻るボタン（1ページ前に戻る） =====
+// 直前に見ていたページがあれば戻る。直接アクセスなどで履歴がない場合は、
+// リンク先（その章の目次）にフォールバックする。
+function goBack(e) {
+  if (window.history.length > 1 && document.referrer) {
+    e.preventDefault();
+    window.history.back();
+  }
+}
+
 // ===== アコーディオン =====
 function toggleAcc(el) {
   el.closest('.acc-item').classList.toggle('open');

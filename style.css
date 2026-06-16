@@ -491,16 +491,19 @@ body {
 
 /* ===== 記事ページ専用スタイル ===== */
 .article { max-width: 820px; margin: 0 auto; padding: 0 40px; }
-/* 章目次へ戻るパンくず */
+/* 1ページ戻るボタン */
 .article .crumb {
   display: inline-flex; align-items: center; gap: 7px;
-  margin-top: 100px; margin-bottom: 4px;
+  margin-top: 96px; margin-bottom: 4px;
+  padding: 8px 18px 8px 14px;
   font-size: 13px; letter-spacing: 0.04em; font-weight: 500;
   color: var(--ink-soft); text-decoration: none;
-  transition: color 0.2s, gap 0.2s;
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: 100px; box-shadow: var(--shadow-soft);
+  transition: color 0.2s, gap 0.2s, border-color 0.2s, background 0.2s;
 }
-.article .crumb:hover { color: var(--accent); gap: 11px; }
-.article .crumb + .article-header { padding-top: 28px; }
+.article .crumb:hover { color: var(--accent); border-color: var(--accent-soft); gap: 11px; }
+.article .crumb + .article-header { padding-top: 24px; }
 .article-header { padding: 120px 0 50px; text-align: center; }
 .article-header .cat {
   display: inline-block; font-size: 12px; letter-spacing: 0.15em;
