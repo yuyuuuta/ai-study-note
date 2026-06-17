@@ -13,6 +13,20 @@ function goBack(e) {
   }
 }
 
+// ===== 用語ツールチップ（タップ対応） =====
+// PCはCSSのhoverで表示。スマホ等タップ環境では、用語をタップで開閉する。
+document.addEventListener('click', (e) => {
+  const term = e.target.closest('.term');
+  // 開いている他の用語を閉じる
+  document.querySelectorAll('.term.open').forEach(t => {
+    if (t !== term) t.classList.remove('open');
+  });
+  if (term) {
+    term.classList.toggle('open');
+    e.stopPropagation();
+  }
+});
+
 // ===== アコーディオン =====
 function toggleAcc(el) {
   el.closest('.acc-item').classList.toggle('open');

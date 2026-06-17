@@ -311,7 +311,10 @@ body {
   border: 6px solid transparent;
   border-top-color: var(--ink);
 }
-.term:hover .tip { visibility: visible; opacity: 1; }
+.term:hover .tip,
+.term:focus .tip,
+.term.open .tip { visibility: visible; opacity: 1; }
+.term:focus { outline: none; }
 
 /* ===== カードグリッド ===== */
 .cards { display: grid; gap: 18px; margin: 28px 0; }
