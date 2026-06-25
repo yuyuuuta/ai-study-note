@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜAIのルールは「3階層」で考えると分かるのか？｜第5章｜「なぜ？」からわかる！生成AIパスポート学習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo"><img src="assets/logo-mark.svg" alt="AI.note ロゴ">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html">3章</a>
+    <a href="chapter4.html">4章</a>
+    <a href="chapter5.html" class="active">5章</a>
+    <a href="chapter6.html">6章</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <a href="chapter5.html" class="crumb" onclick="goBack(event)">&larr; 戻る</a>
+  <div class="article-header">
+    <span class="cat">第5章 ｜ 04</span>
+    <h1>なぜAIのルールは「3階層」で考えると分かるのか？</h1>
+    <div class="reading">AI原則とガイドラインの全体像 ── 国際・日本の理念・実務をつなぐ地図</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>「人間中心のAI社会原則」「OECD AI原則」「広島AIプロセス」「AI事業者ガイドライン」——AIの倫理ルールには、似たような名前がたくさん登場します。バラバラに暗記しようとすると混乱しますが、実は<strong>3つの階層</strong>に整理すると、すべてが一本につながります。この記事では、その地図を描きながら、各ルールの中身を解説します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">AI原則・ガイドラインの3階層構造</a></li>
+        <li><a href="#s2">国際レベル ── OECD AI原則と広島AIプロセス</a></li>
+        <li><a href="#s3">日本の理念 ── 人間中心のAI社会原則</a></li>
+        <li><a href="#s4">実務レベル ── AI事業者ガイドラインの3主体</a></li>
+        <li><a href="#s5">10指針 ── 学んできたことの集大成</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. AI原則・ガイドラインの3階層構造</h2>
+    <p>AIのルールが分かりにくいのは、「国際的な合意」「国の理念」「企業向けの実務指針」が、同じ"原則"という言葉で語られるからです。これらは<strong>抽象から具体へと降りていく3つの階層</strong>になっています。</p>
+
+    <!-- SVG①：AI原則の3階層構造 -->
+    <svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="360" rx="14" fill="#faf8f5"/>
+      <text x="340" y="34" text-anchor="middle" font-size="16" fill="#6b665e" font-weight="600">AI原則・ガイドラインの3階層</text>
+
+      <!-- 第1層：国際 -->
+      <rect x="120" y="56" width="440" height="78" rx="12" fill="#7a9bc4"/>
+      <text x="340" y="84" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">① 国際レベル ── 世界の共通認識</text>
+      <text x="340" y="106" text-anchor="middle" font-size="11.5" fill="#eaf1fa">OECD AI原則（2019）／広島AIプロセス（2023）</text>
+      <text x="340" y="124" text-anchor="middle" font-size="11" fill="#eaf1fa">各国が共有する「あるべき姿」の合意</text>
+
+      <!-- 矢印 -->
+      <polygon points="332,142 348,142 340,156" fill="#c9a14a"/>
+      <line x1="340" y1="134" x2="340" y2="150" stroke="#c9a14a" stroke-width="2"/>
+      <text x="430" y="151" font-size="10.5" fill="#9a948a">理念に落とす</text>
+
+      <!-- 第2層：日本の理念 -->
+      <rect x="155" y="160" width="370" height="78" rx="12" fill="#6bae9a"/>
+      <text x="340" y="188" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">② 日本の理念 ── 国としての方針</text>
+      <text x="340" y="210" text-anchor="middle" font-size="11.5" fill="#eafaf4">人間中心のAI社会原則（2019・内閣府）</text>
+      <text x="340" y="228" text-anchor="middle" font-size="11" fill="#eafaf4">Society 5.0 を支える3つの基本理念</text>
+
+      <!-- 矢印 -->
+      <polygon points="332,246 348,246 340,260" fill="#c9a14a"/>
+      <line x1="340" y1="238" x2="340" y2="254" stroke="#c9a14a" stroke-width="2"/>
+      <text x="430" y="255" font-size="10.5" fill="#9a948a">実務に落とす</text>
+
+      <!-- 第3層：実務 -->
+      <rect x="190" y="264" width="300" height="80" rx="12" fill="#c9a14a"/>
+      <text x="340" y="292" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">③ 実務レベル ── 現場の手引き</text>
+      <text x="340" y="314" text-anchor="middle" font-size="11.5" fill="#fdf3da">AI事業者ガイドライン（2024）</text>
+      <text x="340" y="332" text-anchor="middle" font-size="11" fill="#fdf3da">3主体が守る「10指針」</text>
+
+      <!-- 横の注釈 -->
+      <text x="58" y="100" text-anchor="middle" font-size="11" fill="#9a948a" transform="rotate(-90,58,150)">抽象的 ←　　　→ 具体的</text>
+    </svg>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>AI原則は3階層で理解する。国際（広島AIプロセス・OECD）→日本の理念（人間中心のAI社会原則）→実務（AI事業者ガイドライン）。バラバラの用語が一本につながる。「どれがどれだっけ？」と迷ったら、この上から下への流れを思い出せば、それぞれの位置が一発で分かります。</p>
+    </div>
+
+    <h2 id="s2">2. 国際レベル ── OECD AI原則と広島AIプロセス</h2>
+    <p>いちばん上の階層は、国境を越えた「世界の共通認識」です。代表的なものが2つあります。</p>
+
+    <div class="cards c2">
+      <div class="mini-card acc-blue">
+        <div class="mc-label">2019年</div>
+        <h4>OECD AI原則</h4>
+        <p>OECD（経済協力開発機構）が定めた、世界初の政府間によるAI原則。「人間中心の価値観」「透明性」「説明責任」などを掲げ、その後の各国ルールの土台になった。G20でも支持された国際的な出発点。</p>
+      </div>
+      <div class="mini-card acc-blue">
+        <div class="mc-label">2023年</div>
+        <h4>広島AIプロセス</h4>
+        <p>2023年のG7広島サミットで立ち上がった、生成AIの国際ルール作りの枠組み。日本が<strong>議長国</strong>として主導し、開発者向けの国際的な指針・行動規範をまとめた。</p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>広島AIプロセスは日本が議長国として世界をリードした。ルール作りでは日本は強い。生成AIの「開発力」では海外勢が先行したけれど、「どう使うべきか」という国際的なルールの土俵では、日本が議論をまとめる側に回った——ここは日本の存在感が光る分野です。</p>
+    </div>
+
+    <h2 id="s3">3. 日本の理念 ── 人間中心のAI社会原則</h2>
+    <p>真ん中の階層は、日本という国が掲げる理念です。2019年に内閣府が定めた<strong>人間中心のAI社会原則</strong>がそれにあたります。これは、AIを前提とした未来社会<strong>「Society 5.0」</strong>の実現を目指すうえでの、国の基本方針です。</p>
+    <p>この原則は、3つの基本理念を柱にしています。</p>
+
+    <div class="cards c3">
+      <div class="mini-card acc-teal">
+        <div class="mc-label">基本理念 ①</div>
+        <h4>人間の尊厳</h4>
+        <p>AIに使われるのではなく、人間がAIを道具として使いこなす社会。人間の尊厳が守られることを最優先する。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">基本理念 ②</div>
+        <h4>多様性と包摂</h4>
+        <p>さまざまな背景を持つ人々が、それぞれの幸福を追求できる社会。AIが誰かを排除するのではなく、多様性を支える。</p>
+      </div>
+      <div class="mini-card acc-teal">
+        <div class="mc-label">基本理念 ③</div>
+        <h4>持続可能性</h4>
+        <p>AIの力で、社会の格差を解消し、地球規模の課題にも対応できる持続可能な社会を目指す。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9888; 試験ポイント</div>
+      <p>人間中心のAI社会原則（2019・内閣府）の3基本理念 ＝ <strong>人間の尊厳・多様性と包摂・持続可能性</strong>。目指すのは<strong>Society 5.0</strong>（サイバー空間と現実空間を高度に融合させた人間中心の社会）。セットで覚えよう。</p>
+    </div>
+
+    <h2 id="s4">4. 実務レベル ── AI事業者ガイドラインの3主体</h2>
+    <p>いちばん下、もっとも具体的な階層が<strong>AI事業者ガイドライン</strong>（2024年・最新は第1.2版）です。これは総務省と経済産業省がまとめた、AIに関わる企業・組織向けの実務的な手引きです。理念を「現場でどう行動するか」に翻訳したもの、と考えると分かりやすいでしょう。</p>
+    <p>このガイドラインは、AIに関わる立場を<strong>3つの主体</strong>に分けて整理しているのが特徴です。</p>
+
+    <table class="cmp-table">
+      <tr><th>主体</th><th>役割</th><th>例</th></tr>
+      <tr><td><strong>AI開発者</strong></td><td>AIモデルやシステムを開発する</td><td>基盤モデルを作る企業・研究機関</td></tr>
+      <tr><td><strong>AI提供者</strong></td><td>開発されたAIを組み込み、サービスとして提供する</td><td>AIを使ったアプリ・サービス事業者</td></tr>
+      <tr><td><strong>AI利用者</strong></td><td>提供されたAIを業務などで利用する</td><td>AIを使う企業・組織・個人</td></tr>
+    </table>
+
+    <div class="analogy">
+      <div class="label">&#128161; たとえ</div>
+      <p>自動車にたとえると、<strong>AI開発者</strong>はエンジンや車体を作るメーカー、<strong>AI提供者</strong>はそれを車に仕立てて売るディーラー、<strong>AI利用者</strong>はその車を運転するドライバー。立場ごとに「気をつけるべきこと」が違うから、ルールも主体ごとに整理されているのです。</p>
+    </div>
+
+    <h2 id="s5">5. 10指針 ── 学んできたことの集大成</h2>
+    <p>AI事業者ガイドラインの中心が、3主体が共通して取り組むべき<strong>10の指針</strong>です。内訳は、各主体が取り組む<strong>7原則</strong>と、社会と連携する<strong>3原則</strong>。これらは、この学習ノートでここまで学んできたテーマがすべて流れ込む「集大成」になっています。</p>
+
+    <!-- SVG②：10指針のグループ分け -->
+    <svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="400" rx="14" fill="#faf8f5"/>
+      <text x="340" y="34" text-anchor="middle" font-size="16" fill="#6b665e" font-weight="600">AI事業者ガイドライン 10指針</text>
+      <text x="340" y="54" text-anchor="middle" font-size="11.5" fill="#9a948a">各主体が取り組む7原則 ＋ 社会と連携する3原則</text>
+
+      <!-- グループ1：守る系 -->
+      <rect x="24" y="74" width="206" height="230" rx="12" fill="#fdf0f0" stroke="#d98a8a" stroke-width="1.5"/>
+      <text x="127" y="100" text-anchor="middle" font-size="13.5" fill="#c0656a" font-weight="700">守る系</text>
+      <text x="127" y="118" text-anchor="middle" font-size="10.5" fill="#b07a7a">リスクから守る</text>
+      <rect x="40" y="132" width="174" height="46" rx="8" fill="#d98a8a"/>
+      <text x="127" y="153" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">安全性</text>
+      <text x="127" y="170" text-anchor="middle" font-size="10" fill="#fce8e8">危害を与えない</text>
+      <rect x="40" y="186" width="174" height="46" rx="8" fill="#d98a8a"/>
+      <text x="127" y="207" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">プライバシー保護</text>
+      <text x="127" y="224" text-anchor="middle" font-size="10" fill="#fce8e8">個人情報を守る</text>
+      <rect x="40" y="240" width="174" height="46" rx="8" fill="#d98a8a"/>
+      <text x="127" y="261" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">セキュリティ確保</text>
+      <text x="127" y="278" text-anchor="middle" font-size="10" fill="#fce8e8">攻撃・悪用を防ぐ</text>
+
+      <!-- グループ2：正しさ系 -->
+      <rect x="237" y="74" width="206" height="230" rx="12" fill="#eef2f9" stroke="#7a9bc4" stroke-width="1.5"/>
+      <text x="340" y="100" text-anchor="middle" font-size="13.5" fill="#4f74a3" font-weight="700">正しさ系</text>
+      <text x="340" y="118" text-anchor="middle" font-size="10.5" fill="#7a8ca8">信頼を担保する</text>
+      <rect x="253" y="132" width="174" height="46" rx="8" fill="#7a9bc4"/>
+      <text x="340" y="153" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">公平性</text>
+      <text x="340" y="170" text-anchor="middle" font-size="10" fill="#eaf1fa">差別・偏りを避ける</text>
+      <rect x="253" y="186" width="174" height="46" rx="8" fill="#7a9bc4"/>
+      <text x="340" y="207" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">透明性</text>
+      <text x="340" y="224" text-anchor="middle" font-size="10" fill="#eaf1fa">仕組みを開示する</text>
+      <rect x="253" y="240" width="174" height="46" rx="8" fill="#7a9bc4"/>
+      <text x="340" y="258" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">アカウンタ</text>
+      <text x="340" y="274" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="600">ビリティ</text>
+      <text x="340" y="290" text-anchor="middle" font-size="10" fill="#eaf1fa" opacity="0">　</text>
+
+      <!-- グループ3：人間と社会系 -->
+      <rect x="450" y="74" width="206" height="300" rx="12" fill="#eef6f3" stroke="#6bae9a" stroke-width="1.5"/>
+      <text x="553" y="100" text-anchor="middle" font-size="13.5" fill="#3f8c75" font-weight="700">人間と社会系</text>
+      <text x="553" y="118" text-anchor="middle" font-size="10.5" fill="#6a9d8d">人と社会を中心に</text>
+      <rect x="466" y="132" width="174" height="46" rx="8" fill="#2b2925"/>
+      <text x="553" y="153" text-anchor="middle" font-size="12.5" fill="#ddc88f" font-weight="600">人間中心</text>
+      <text x="553" y="170" text-anchor="middle" font-size="10" fill="#cfc6b4">最も根本の原則</text>
+      <rect x="466" y="186" width="174" height="42" rx="8" fill="#6bae9a"/>
+      <text x="553" y="212" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">教育・リテラシー</text>
+      <rect x="466" y="234" width="174" height="42" rx="8" fill="#6bae9a"/>
+      <text x="553" y="260" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">公正競争の確保</text>
+      <rect x="466" y="282" width="174" height="42" rx="8" fill="#6bae9a"/>
+      <text x="553" y="308" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">イノベーション</text>
+      <text x="553" y="346" text-anchor="middle" font-size="10" fill="#6a9d8d">下の3つ＝社会と連携する3原則</text>
+
+      <!-- 凡例 -->
+      <text x="127" y="330" text-anchor="middle" font-size="10.5" fill="#9a948a">7原則のうち3つ</text>
+      <text x="340" y="330" text-anchor="middle" font-size="10.5" fill="#9a948a">7原則のうち3つ</text>
+      <text x="340" y="360" text-anchor="middle" font-size="11" fill="#6b665e">人間中心 ＋ 守る系3 ＋ 正しさ系3 ＝ 7原則　／　連携3原則 ＝ 計10指針</text>
+    </svg>
+
+    <p>注目してほしいのは、この10指針が<strong>これまで学んだテーマの行き着く先</strong>になっていることです。</p>
+    <ul>
+      <li>第2章で学んだ<strong>AIバイアス</strong>（学習データの偏り）→ 「<strong>公平性</strong>」へ</li>
+      <li>第1章で学んだ<strong>ブラックボックス問題</strong>（中身が説明できない）→ 「<strong>透明性</strong>」へ</li>
+      <li>第4章で学んだ<strong>マルウェア・不正アクセス</strong>→ 「<strong>セキュリティ確保</strong>」へ</li>
+      <li>第4章で学んだ<strong>個人情報の保護</strong>→ 「<strong>プライバシー保護</strong>」へ</li>
+    </ul>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>10指針は今まで学んだことの集大成。バイアス→公平性、ブラックボックス→透明性、マルウェア→セキュリティ確保。全部ここに流れ込んでいる。バラバラに見えた各章のテーマが、最後に「AIをどう扱うべきか」という10の指針に合流する——この景色が見えると、学習全体が一枚の地図になります。</p>
+    </div>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>日本はソフトロー（自主性尊重）、EUはハードロー（法的強制）。法律で縛るとイノベーションが止まるという日本の判断。ガイドラインに罰則がないのは「ゆるい」のではなく、企業の自主性を信じて柔軟に対応してもらう戦略。この日本のスタンスは、次の記事の「AI新法」にもそのまま受け継がれます。</p>
+    </div>
+
+    <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>この記事のキーワードを確認しよう！</div>
+      </div>
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li>AIルールは<strong>3階層</strong>：国際（OECD・広島AIプロセス）→日本の理念（人間中心のAI社会原則）→実務（AI事業者ガイドライン）</li>
+        <li><strong>OECD AI原則</strong>（2019）＝世界初の政府間AI原則。<strong>広島AIプロセス</strong>（2023）＝日本が議長国として主導</li>
+        <li>人間中心のAI社会原則（2019・内閣府）の3理念 ＝ <strong>人間の尊厳・多様性と包摂・持続可能性</strong>。目指すは<strong>Society 5.0</strong></li>
+        <li>AI事業者ガイドライン（2024）の3主体 ＝ <strong>AI開発者・AI提供者・AI利用者</strong></li>
+        <li>10指針 ＝ 各主体の<strong>7原則</strong>（人間中心・安全性・公平性・プライバシー保護・セキュリティ確保・透明性・アカウンタビリティ）＋社会と連携する<strong>3原則</strong>（教育リテラシー・公正競争確保・イノベーション）</li>
+        <li>日本は<strong>ソフトロー</strong>（自主性尊重）、EUは<strong>ハードロー</strong>（法的強制）</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/yupiteru_nemuri.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        似た名前のルールも、<strong>「国際→理念→実務」の3階層</strong>に並べれば、もう迷いません。そして10指針は、これまでの全章のゴール地点。次は、この理念をついに<strong>法律</strong>にした「AI新法」を見ていきましょう。
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c5-03.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">第5章 03 ｜ 不正競争防止法と生成AI</div></a>
+      <a href="c5-05.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">第5章 05 ｜ AI新法（AI推進法）</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo"><img src="assets/logo-mark.svg" alt="AI.note ロゴ">AI<span>.</span>note</div>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

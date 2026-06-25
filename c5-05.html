@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜ日本のAI新法は「罰則なし」なのか？｜第5章｜「なぜ？」からわかる！生成AIパスポート学習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo"><img src="assets/logo-mark.svg" alt="AI.note ロゴ">AI<span>.</span>note</a>
+  <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="chapter1.html">1章</a>
+    <a href="chapter2.html">2章</a>
+    <a href="chapter3.html">3章</a>
+    <a href="chapter4.html">4章</a>
+    <a href="chapter5.html" class="active">5章</a>
+    <a href="chapter6.html">6章</a>
+    <a href="index.html#about">About</a>
+  </nav>
+</header>
+
+<article class="article">
+  <a href="chapter5.html" class="crumb" onclick="goBack(event)">&larr; 戻る</a>
+  <div class="article-header">
+    <span class="cat">第5章 ｜ 05</span>
+    <h1>なぜ日本のAI新法は「罰則なし」なのか？</h1>
+    <div class="reading">AI新法（AI推進法）── 規制ではなく「推進」を選んだ日本の戦略</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>2025年、日本で初めての「AIに特化した法律」が成立しました。ところが、この法律には罰則がほとんどありません。「法律なのに罰がない？」——一見ふしぎなこの設計には、日本ならではの戦略が込められています。この記事では、AI新法の正体と3つの柱、そしてEUのAI法との根本的な違いを解説します。</p>
+
+    <div class="toc">
+      <div class="toc-ttl">この記事の内容</div>
+      <ol>
+        <li><a href="#s1">AI新法とは ── 正式名称と成立の経緯</a></li>
+        <li><a href="#s2">なぜ今、AI新法が必要だったのか</a></li>
+        <li><a href="#s3">AI新法の3つの柱</a></li>
+        <li><a href="#s4">日本AI新法 vs EU AI法</a></li>
+        <li><a href="#s5">「罰則なし」が意味すること</a></li>
+      </ol>
+    </div>
+
+    <h2 id="s1">1. AI新法とは ── 正式名称と成立の経緯</h2>
+    <p><strong>AI新法（AI推進法）</strong>の正式名称は、<strong>「人工知能関連技術の研究開発及び活用の推進に関する法律」</strong>です。名前に注目してください。「規制」ではなく<strong>「推進」</strong>という言葉が入っています。これが、この法律の性格を物語っています。</p>
+    <p>成立の流れは以下のとおりです。これは<strong>日本初のAIに特化した法律</strong>です。</p>
+
+    <!-- SVG①：日本のAI政策の流れ 年表 -->
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="300" rx="14" fill="#faf8f5"/>
+      <text x="340" y="36" text-anchor="middle" font-size="16" fill="#6b665e" font-weight="600">日本のAI政策の流れ ── 理念から法律へ</text>
+
+      <!-- 縦の流れ線 -->
+      <line x1="80" y1="70" x2="80" y2="262" stroke="#ddc88f" stroke-width="2.5"/>
+
+      <!-- 2019 -->
+      <circle cx="80" cy="86" r="7" fill="#7a9bc4"/>
+      <text x="104" y="82" font-size="13" fill="#4f74a3" font-weight="700">2019年</text>
+      <text x="104" y="101" font-size="11.5" fill="#6b665e">人間中心のAI社会原則（内閣府）── 国の理念が定まる</text>
+
+      <!-- 2023 -->
+      <circle cx="80" cy="134" r="7" fill="#7a9bc4"/>
+      <text x="104" y="130" font-size="13" fill="#4f74a3" font-weight="700">2023年</text>
+      <text x="104" y="149" font-size="11.5" fill="#6b665e">広島AIプロセス（G7）── 日本が議長国で国際ルールを主導</text>
+
+      <!-- 2024 -->
+      <circle cx="80" cy="182" r="7" fill="#6bae9a"/>
+      <text x="104" y="178" font-size="13" fill="#3f8c75" font-weight="700">2024年</text>
+      <text x="104" y="197" font-size="11.5" fill="#6b665e">AI事業者ガイドライン ── 企業向けの実務指針（10指針）</text>
+
+      <!-- 2025 -->
+      <circle cx="80" cy="230" r="9" fill="#c9a14a"/>
+      <text x="104" y="226" font-size="13.5" fill="#a07d22" font-weight="700">2025年</text>
+      <text x="104" y="245" font-size="12" fill="#2b2925" font-weight="600">AI新法（AI推進法）成立 ── ついに「法律」になった</text>
+      <text x="104" y="263" font-size="10.5" fill="#9a948a">5/28成立・6/4公布・9/1全面施行　＝ 日本初のAI特化法</text>
+    </svg>
+
+    <table class="cmp-table">
+      <tr><th>項目</th><th>内容</th></tr>
+      <tr><td>正式名称</td><td>人工知能関連技術の研究開発及び活用の推進に関する法律</td></tr>
+      <tr><td>成立</td><td>2025年5月28日</td></tr>
+      <tr><td>公布</td><td>2025年6月4日</td></tr>
+      <tr><td>全面施行</td><td>2025年9月1日</td></tr>
+      <tr><td>位置づけ</td><td>日本初のAIに特化した法律。理念と方針を示す「基本法」</td></tr>
+    </table>
+
+    <div class="point">
+      <div class="label">&#9888; 「基本法」という性格</div>
+      <p>AI新法は<strong>基本法</strong>です。基本法とは、細かい禁止事項を並べて取り締まる法律ではなく、<strong>国の方針や理念・体制を定める"骨組み"の法律</strong>。だから具体的な罰則よりも「国としてAIをどう進めるか」を示すことに重点が置かれています。</p>
+    </div>
+
+    <h2 id="s2">2. なぜ今、AI新法が必要だったのか</h2>
+    <p>ここまで見てきたように、日本は<strong>ルール作りでは世界をリード</strong>してきました。広島AIプロセスで議長国を務め、ガイドラインも整備した。ところが——実際のAIの<strong>開発・投資・利用</strong>では、アメリカや中国に大きく後れを取ってしまいました。</p>
+    <p>「理念は立派だが、肝心の実力で負けている」。この危機感こそが、AI新法を生んだ原動力です。だからこの法律の目標は、はっきりしています。<strong>「世界で最もAIを開発・活用しやすい国」になること</strong>です。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>日本はルール作りでは世界をリードしたのに実際の開発・投資・利用では大きく出遅れた。その危機感から生まれたのがAI新法。「ルールは作れるのに、なぜ実力で負けるのか」——その悔しさが、規制で縛るより"後押しする"法律という選択につながっています。</p>
+    </div>
+
+    <h2 id="s3">3. AI新法の3つの柱</h2>
+    <p>AI新法は、大きく3つの仕組みで構成されています。</p>
+
+    <div class="cards c3">
+      <div class="mini-card acc-purple">
+        <div class="mc-label">柱 ①</div>
+        <h4>AI戦略本部の設置</h4>
+        <p>国を挙げてAIを推進する司令塔。<strong>本部長は内閣総理大臣</strong>、全閣僚がメンバーとなる。政府が一体でAI政策を進める体制をつくる。</p>
+      </div>
+      <div class="mini-card acc-purple">
+        <div class="mc-label">柱 ②</div>
+        <h4>AI基本計画の策定</h4>
+        <p>研究開発・人材育成・環境整備など、国としてのAI推進の方針をまとめた計画を定める。これに沿って各省庁が動く。</p>
+      </div>
+      <div class="mini-card acc-purple">
+        <div class="mc-label">柱 ③</div>
+        <h4>リスクへの対応</h4>
+        <p>AIの不適切な利用に対し、国が<strong>調査・指導</strong>を行う。悪質な場合は<strong>事業者名を公表</strong>することもある。ただし罰金や刑罰はない。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="label">&#9888; 企業への影響は「努力義務」</div>
+      <p>AI新法が企業に求めるのは、第7条の<strong>努力義務</strong>（＝「〜するよう努めなければならない」）にとどまります。違反しても罰則はありません。あくまで国が推進の旗を振り、企業には自主的な協力を求める——という設計です。</p>
+    </div>
+
+    <h2 id="s4">4. 日本AI新法 vs EU AI法</h2>
+    <p>同じ「AIの法律」でも、日本とEUでは哲学が正反対です。EUの<strong>AI法（EU AI Act）</strong>は、AIをリスクの高さで分類し、危険なものを厳しく規制・禁止する「ハードロー（法的強制）」型。一方、日本のAI新法は推進を重視する「ソフトロー」寄りの設計です。</p>
+
+    <!-- SVG②：日本 vs EU 比較図 -->
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:32px auto;font-family:'Noto Sans JP',sans-serif;">
+      <rect width="680" height="300" rx="14" fill="#faf8f5"/>
+      <text x="340" y="36" text-anchor="middle" font-size="16" fill="#6b665e" font-weight="600">日本 AI新法　vs　EU AI法</text>
+
+      <!-- 左：日本 -->
+      <rect x="30" y="58" width="290" height="214" rx="12" fill="#c9a14a"/>
+      <text x="175" y="88" text-anchor="middle" font-size="16" fill="#fff" font-weight="700">日本 ── AI新法</text>
+      <text x="175" y="108" text-anchor="middle" font-size="11.5" fill="#fdf3da">「推進」の法律</text>
+      <line x1="56" y1="122" x2="294" y2="122" stroke="#fff" stroke-width="0.8" opacity="0.4"/>
+      <text x="56" y="150" font-size="12" fill="#fff" font-weight="600">▸ 目的：開発・活用を後押し</text>
+      <text x="56" y="180" font-size="12" fill="#fff" font-weight="600">▸ 性格：ソフトロー（自主性）</text>
+      <text x="56" y="210" font-size="12" fill="#fff" font-weight="600">▸ 罰則：なし（努力義務）</text>
+      <text x="56" y="240" font-size="12" fill="#fff" font-weight="600">▸ 実効性：事業者名の公表</text>
+
+      <!-- 右：EU -->
+      <rect x="360" y="58" width="290" height="214" rx="12" fill="#7a9bc4"/>
+      <text x="505" y="88" text-anchor="middle" font-size="16" fill="#fff" font-weight="700">EU ── AI法</text>
+      <text x="505" y="108" text-anchor="middle" font-size="11.5" fill="#eaf1fa">「規制」の法律</text>
+      <line x1="386" y1="122" x2="624" y2="122" stroke="#fff" stroke-width="0.8" opacity="0.4"/>
+      <text x="386" y="150" font-size="12" fill="#fff" font-weight="600">▸ 目的：リスクを抑え込む</text>
+      <text x="386" y="180" font-size="12" fill="#fff" font-weight="600">▸ 性格：ハードロー（法的強制）</text>
+      <text x="386" y="210" font-size="12" fill="#fff" font-weight="600">▸ 罰則：あり（高額の制裁金）</text>
+      <text x="386" y="240" font-size="12" fill="#fff" font-weight="600">▸ 方式：リスク4段階で分類</text>
+
+      <!-- 中央の対比 -->
+      <circle cx="340" cy="165" r="24" fill="#2b2925"/>
+      <text x="340" y="171" text-anchor="middle" font-size="14" fill="#ddc88f" font-weight="700">VS</text>
+    </svg>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>AI新法の本質は「規制」ではなく「推進」。EUが規制で縛るのとは正反対の哲学。同じ「AIの法律」という言葉でも、EUは"危ないものを止める"ために、日本は"開発を後押しする"ために作った。出発点が真逆だから、罰則の有無も自然と分かれるのです。</p>
+    </div>
+
+    <h2 id="s5">5. 「罰則なし」が意味すること</h2>
+    <p>では、罰則がなければルールは守られないのでしょうか。AI新法は、別の方法で実効性を持たせています。それが、悪質なケースでの<strong>事業者名の公表</strong>です。</p>
+    <p>罰金や刑罰という「法的な強制力」ではなく、「あの会社は不適切なAIの使い方をした」と社会に知られることへの<strong>社会的な圧力（レピュテーションリスク）</strong>で、事業者に適切な行動を促す——という設計です。法律で縛りすぎるとイノベーションが止まる、だが野放しにもできない。そのバランスを取った日本らしい落としどころと言えます。</p>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>罰則はないが、悪質な場合は事業者名を公表。法的強制ではなく社会的圧力で実効性を持たせる。「罰金が怖いから守る」のではなく「名前を出されたら信用を失うから守る」。これは第4章で学んだ"レピュテーション"の発想そのもの。強制しなくても人や企業を動かす、もうひとつの力です。</p>
+    </div>
+
+    <div class="insight-box">
+      <div class="label">&#10024; あなたの気づき</div>
+      <p>学んできた人間中心の原則→広島AIプロセス→ガイドライン→AI新法が一本の物語でつながった。2019年の理念から始まり、国際ルールを主導し、実務指針を整え、ついに法律になる。第5章で学んだものは、別々の知識ではなく「日本がAIとどう向き合ってきたか」という一続きのストーリーだったのです。</p>
+    </div>
+
+    <div class="exam-box">
+      <div class="chara-block" style="margin-bottom:12px;">
+        <div class="chara-img" style="width:60px;"><img src="assets/character-surprise.png" alt="ユピテル先生"></div>
+        <div class="speech"><div class="name">試験に出ます！</div>この記事のキーワードを確認しよう！</div>
+      </div>
+      <h3>&#127919; この記事の試験ポイント</h3>
+      <ul class="exam-list">
+        <li>AI新法の正式名称 ＝ <strong>人工知能関連技術の研究開発及び活用の推進に関する法律</strong></li>
+        <li>2025年<strong>5/28成立・6/4公布・9/1全面施行</strong>。<strong>日本初のAI特化法</strong>で「基本法」の性格</li>
+        <li>本質は<strong>「規制」ではなく「推進」</strong>。目標は「世界で最もAIを開発・活用しやすい国」</li>
+        <li>3つの柱 ＝ <strong>AI戦略本部の設置</strong>（本部長＝内閣総理大臣・全閣僚）／<strong>AI基本計画の策定</strong>／<strong>リスク対応</strong>（調査・指導・悪質なら事業者名公表）</li>
+        <li>企業への影響は<strong>第7条の努力義務のみ・罰則なし</strong></li>
+        <li>EU AI法は<strong>ハードロー（規制・制裁金あり・リスク4段階）</strong>。日本はソフトロー寄りで正反対</li>
+      </ul>
+    </div>
+
+    <div class="chara-block right">
+      <div class="chara-img"><img src="assets/yupiteru_nemuri.png" alt="ユピテル先生"></div>
+      <div class="speech">
+        <div class="name">ユピテル先生</div>
+        第5章、本当におつかれさまでした！<strong>2019年の理念→広島AIプロセス→ガイドライン→2025年のAI新法</strong>。バラバラに見えた用語が、一本の物語につながりましたね。次の第6章では、いよいよAIを使いこなす「プロンプト制作」の実践に入ります！
+      </div>
+    </div>
+
+    <div class="page-nav">
+      <a href="c5-04.html" class="prev"><div class="dir">&larr; PREV</div><div class="ttl">第5章 04 ｜ AI原則とガイドラインの全体像</div></a>
+      <a href="chapter6.html" class="next"><div class="dir">NEXT &rarr;</div><div class="ttl">第6章 ｜ プロンプト制作と実例</div></a>
+    </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="logo"><img src="assets/logo-mark.svg" alt="AI.note ロゴ">AI<span>.</span>note</div>
+  <p>「なぜ？」からわかる！生成AIパスポート学習</p>
+  <p class="copy">&copy; 2026 My AI Study Note</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
