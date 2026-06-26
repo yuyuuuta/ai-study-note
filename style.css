@@ -278,10 +278,20 @@ body {
 
 /* 用語ハイライト（カタカナ補足） */
 .term {
-  border-bottom: 2px dotted var(--accent-soft);
+  border-bottom: 1px dashed #6f97c4;
+  color: #4f74a3;
+  font-weight: 500;
   cursor: help;
   position: relative;
 }
+/* 「説明が出る用語」と分かる ⓘ マーカー（太字＝金の下線と区別） */
+.term::after {
+  content: "ⓘ";
+  font-size: 0.72em;
+  margin-left: 2px;
+  vertical-align: 0.12em;
+}
+.term:hover, .term.open { color: #2b577f; border-bottom-color: #2b577f; }
 .term .tip {
   visibility: hidden;
   opacity: 0;
